@@ -18,3 +18,5 @@ versions/*/dist/*.properties -text
 
 # Runtime helper scripts are project-authored text.
 versions/*/runtime/*.groovy text eol=lf
+runtime/*.groovy text eol=lf
+runtime/*.ps1 text eol=lf

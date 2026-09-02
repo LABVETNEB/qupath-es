@@ -5,3 +5,4 @@ __pycache__/
 .DS_Store
 Thumbs.db
 versions/*/work/qupath-gui-strings_es.properties
+logs/

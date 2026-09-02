@@ -77,7 +77,23 @@ python tools/linguistic_audit.py \
 python -m unittest discover -s tests -p "test_*.py"
 ```
 
-## Instalación
+## Actualizar QuPath
+
+Cuando instales una versión nueva de QuPath, cierra QuPath y ejecuta:
+
+```bash
+.\runtime\update-qupath-es.ps1
+```
+
+Es un **diagnóstico que no escribe nada**. Detecta la versión instalada, indica
+si existe paquete español para ella y qué haría a continuación. Guía completa en
+[`docs/UPDATING_QUPATH_ES.md`](docs/UPDATING_QUPATH_ES.md).
+
+El actualizador nunca copia la traducción anterior sobre una versión nueva sin
+comparar claves, textos ingleses, *placeholders* y estructura, y nunca instala
+una traducción que no haya pasado el validador.
+
+## Instalación manual
 
 1. Copiar `versions/0.7.0/dist/qupath-gui-strings_es.properties` a
    `<inicio>/QuPath/localization/`.

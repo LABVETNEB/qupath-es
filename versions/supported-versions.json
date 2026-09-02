@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "note": "Advisory registry only. The updater always re-checks the real installation; this file is never the sole authority.",
+  "versions": {
+    "0.7.0": {
+      "status": "stable",
+      "base_bundle_sha256": "796EFC44FC23369E4D7BDFDE69C0FA2A702051BF2F9D71399157B505E8D45D2D",
+      "spanish_bundle_sha256": "E4A966C90D1CE1368DE9EA21DECC7D9DBB0180087B60D3724690AAD4C128FC19",
+      "translation_keys": 894,
+      "reviewed": 884,
+      "keep_en": 10,
+      "locale_mode": "startup_fallback",
+      "notes": "Runtime omits jdk.localedata; the Spanish display locale cannot persist, so the startup script is required."
+    }
+  }
+}
