@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Implementation-Vendor: QuPath developers
+Implementation-Version: 0.7.0
+QuPath-build-time: 2026-02-25 16:06
+Automatic-Module-Name: io.github.qupath.gui.fx
+QuPath-latest-commit: 04ccfa4
+
