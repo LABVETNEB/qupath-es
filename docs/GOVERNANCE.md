@@ -73,7 +73,6 @@ ruleset de tags    : 22130386  "Protected release tags"  target=tag  active
 colaboradores      : LABVETNEB (unico)
 ```
 
-
 ### Protección de la rama `main`
 
 | Ajuste | Valor | Qué impide |
@@ -84,8 +83,8 @@ colaboradores      : LABVETNEB (unico)
 | Pruebas obligatorias (`tests`, `canonical bundle integrity`) | Sí | Fusionar código que rompe la suite o el bundle canónico |
 | Ramas actualizadas antes de fusionar | Sí | Fusionar contra una base obsoleta |
 | Resolución de conversaciones | Obligatoria | Cerrar un PR con objeciones abiertas |
-| `force-push` | **Bloqueado** | Reescribir la historia publicada |
-| Borrado de la rama | **Bloqueado** | Eliminar `main` |
+| `force-push` | Bloqueado para no administradores | Reescribir la historia publicada |
+| Borrado de la rama | Bloqueado para no administradores | Eliminar `main` |
 | Aplicar también a administradores | **No** | *(ver más abajo)* |
 
 ### Protección de tags
