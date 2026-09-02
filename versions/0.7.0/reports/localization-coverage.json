@@ -1,0 +1,243 @@
+{
+  "generated": "2026-09-02T14:47:48+00:00",
+  "app_dir": "C:\\Users\\Nico\\AppData\\Local\\QuPath-0.7.0\\app",
+  "jars_scanned": 15,
+  "main_bundle": {
+    "path": "qupath/lib/gui/localization/qupath-gui-strings.properties",
+    "jar": "qupath-gui-fx-0.7.0.jar",
+    "keys": 894,
+    "translated": 894
+  },
+  "other_bundles": [
+    {
+      "jar": "qupath-extension-djl-0.4.2.jar",
+      "path": "qupath/ext/djl/ui/strings.properties",
+      "role": "resource_bundle"
+    },
+    {
+      "jar": "qupath-extension-openslide-0.7.0.jar",
+      "path": "qupath/ext/openslide/strings.properties",
+      "role": "resource_bundle"
+    },
+    {
+      "jar": "qupath-extension-openslide-0.7.0.jar",
+      "path": "qupath/ext/openslide/strings_en.properties",
+      "role": "english_marker"
+    },
+    {
+      "jar": "qupath-extension-processing-0.7.0.jar",
+      "path": "qupath/imagej/gui/scripts/strings.properties",
+      "role": "resource_bundle"
+    },
+    {
+      "jar": "qupath-extension-training-0.1.0.jar",
+      "path": "qupath/ext/training/ui/tour.properties",
+      "role": "resource_bundle"
+    },
+    {
+      "jar": "qupath-extension-training-0.1.0.jar",
+      "path": "qupath/ext/training/ui/strings.properties",
+      "role": "resource_bundle"
+    },
+    {
+      "jar": "qupath-fxtras-0.3.0.jar",
+      "path": "qupath/fx/localization/strings.properties",
+      "role": "resource_bundle"
+    },
+    {
+      "jar": "qupath-gui-fx-0.7.0.jar",
+      "path": "log4j.properties",
+      "role": "resource_bundle"
+    },
+    {
+      "jar": "qupath-gui-fx-0.7.0.jar",
+      "path": "qupath/lib/gui/localization/qupath-gui-strings_en.properties",
+      "role": "english_marker"
+    }
+  ],
+  "fxml": [
+    {
+      "jar": "qupath-extension-processing-0.7.0.jar",
+      "path": "qupath/imagej/gui/scripts/ij-script-runner.fxml",
+      "localized_refs": 60,
+      "literal_texts": 1
+    },
+    {
+      "jar": "qupath-gui-fx-0.7.0.jar",
+      "path": "qupath/lib/gui/update-manager-container.fxml",
+      "localized_refs": 5,
+      "literal_texts": 0
+    }
+  ],
+  "per_jar": [
+    {
+      "jar": "qupath-0.7.0.jar",
+      "bundles": [],
+      "fxml": [],
+      "classes": 0,
+      "prose_strings": 0,
+      "parameterlist_classes": 0,
+      "parameterlist_prose": 0
+    },
+    {
+      "jar": "qupath-app-0.7.0.jar",
+      "bundles": [],
+      "fxml": [],
+      "classes": 3,
+      "prose_strings": 42,
+      "parameterlist_classes": 0,
+      "parameterlist_prose": 0
+    },
+    {
+      "jar": "qupath-bioimageio-spec-0.2.0.jar",
+      "bundles": [],
+      "fxml": [],
+      "classes": 75,
+      "prose_strings": 30,
+      "parameterlist_classes": 0,
+      "parameterlist_prose": 0
+    },
+    {
+      "jar": "qupath-core-0.7.0.jar",
+      "bundles": [],
+      "fxml": [],
+      "classes": 459,
+      "prose_strings": 601,
+      "parameterlist_classes": 1,
+      "parameterlist_prose": 7
+    },
+    {
+      "jar": "qupath-core-processing-0.7.0.jar",
+      "bundles": [],
+      "fxml": [],
+      "classes": 389,
+      "prose_strings": 965,
+      "parameterlist_classes": 35,
+      "parameterlist_prose": 414
+    },
+    {
+      "jar": "qupath-extension-bioformats-0.7.0.jar",
+      "bundles": [],
+      "fxml": [],
+      "classes": 43,
+      "prose_strings": 253,
+      "parameterlist_classes": 2,
+      "parameterlist_prose": 18
+    },
+    {
+      "jar": "qupath-extension-djl-0.4.2.jar",
+      "bundles": [
+        "qupath/ext/djl/ui/strings.properties"
+      ],
+      "fxml": [],
+      "classes": 14,
+      "prose_strings": 62,
+      "parameterlist_classes": 0,
+      "parameterlist_prose": 0
+    },
+    {
+      "jar": "qupath-extension-openslide-0.7.0.jar",
+      "bundles": [
+        "qupath/ext/openslide/strings.properties",
+        "qupath/ext/openslide/strings_en.properties"
+      ],
+      "fxml": [],
+      "classes": 10,
+      "prose_strings": 44,
+      "parameterlist_classes": 0,
+      "parameterlist_prose": 0
+    },
+    {
+      "jar": "qupath-extension-processing-0.7.0.jar",
+      "bundles": [
+        "qupath/imagej/gui/scripts/strings.properties"
+      ],
+      "fxml": [
+        {
+          "path": "qupath/imagej/gui/scripts/ij-script-runner.fxml",
+          "localized_refs": 60,
+          "literal_texts": 1
+        }
+      ],
+      "classes": 107,
+      "prose_strings": 687,
+      "parameterlist_classes": 7,
+      "parameterlist_prose": 207
+    },
+    {
+      "jar": "qupath-extension-script-editor-0.7.0.jar",
+      "bundles": [],
+      "fxml": [],
+      "classes": 22,
+      "prose_strings": 16,
+      "parameterlist_classes": 0,
+      "parameterlist_prose": 0
+    },
+    {
+      "jar": "qupath-extension-svg-0.7.0.jar",
+      "bundles": [],
+      "fxml": [],
+      "classes": 7,
+      "prose_strings": 24,
+      "parameterlist_classes": 1,
+      "parameterlist_prose": 12
+    },
+    {
+      "jar": "qupath-extension-training-0.1.0.jar",
+      "bundles": [
+        "qupath/ext/training/ui/tour.properties",
+        "qupath/ext/training/ui/strings.properties"
+      ],
+      "fxml": [],
+      "classes": 15,
+      "prose_strings": 1,
+      "parameterlist_classes": 0,
+      "parameterlist_prose": 0
+    },
+    {
+      "jar": "qupath-fxtras-0.3.0.jar",
+      "bundles": [
+        "qupath/fx/localization/strings.properties"
+      ],
+      "fxml": [],
+      "classes": 72,
+      "prose_strings": 49,
+      "parameterlist_classes": 0,
+      "parameterlist_prose": 0
+    },
+    {
+      "jar": "qupath-gui-fx-0.7.0.jar",
+      "bundles": [
+        "log4j.properties",
+        "qupath/lib/gui/localization/qupath-gui-strings.properties",
+        "qupath/lib/gui/localization/qupath-gui-strings_en.properties"
+      ],
+      "fxml": [
+        {
+          "path": "qupath/lib/gui/update-manager-container.fxml",
+          "localized_refs": 5,
+          "literal_texts": 0
+        }
+      ],
+      "classes": 618,
+      "prose_strings": 2033,
+      "parameterlist_classes": 14,
+      "parameterlist_prose": 476
+    },
+    {
+      "jar": "qupath-imglib2-0.1.1.jar",
+      "bundles": [],
+      "fxml": [],
+      "classes": 20,
+      "prose_strings": 34,
+      "parameterlist_classes": 0,
+      "parameterlist_prose": 0
+    }
+  ],
+  "totals": {
+    "classes": 1854,
+    "prose_strings": 4841,
+    "parameterlist_classes": 60,
+    "parameterlist_prose": 1134
+  }
+}

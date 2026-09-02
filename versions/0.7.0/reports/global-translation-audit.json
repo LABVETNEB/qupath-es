@@ -1,0 +1,41 @@
+{
+  "generated": "2026-09-02T15:23:43+00:00",
+  "qupath_version": "0.7.0",
+  "base": "versions\\0.7.0\\base\\qupath-gui-strings.properties",
+  "tsv": "versions\\0.7.0\\work\\translation.tsv",
+  "target": "versions\\0.7.0\\dist\\qupath-gui-strings_es.properties",
+  "totals": {
+    "total_keys": 894,
+    "unique_keys": 894,
+    "duplicate_keys": 0,
+    "translated": 884,
+    "reviewed": 884,
+    "verified_ui": 0,
+    "keep_en": 10,
+    "blocked": 0,
+    "pending": 0,
+    "draft": 0
+  },
+  "structural_checks": {
+    "key_order_identical": true,
+    "missing_keys": 0,
+    "extra_keys": 0,
+    "placeholder_errors": 0,
+    "structural_errors": 0,
+    "empty_values": 0
+  },
+  "placeholder_checks": {
+    "message_format_keys": 3,
+    "printf_keys": 7
+  },
+  "identical_to_english": {
+    "count": 10,
+    "keep_en": 10,
+    "without_keep_en": []
+  },
+  "error_count": 0,
+  "warning_count": 0,
+  "errors": [],
+  "warnings": [],
+  "verdict": "SAFE TO INSTALL"
+}
