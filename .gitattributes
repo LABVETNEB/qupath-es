@@ -1,0 +1,13 @@
+.gitattributes text eol=lf
+
+# Canonical QuPath files: preserve bytes exactly
+versions/*/base/* -text
+
+# Project-authored text files
+*.py text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.tsv text eol=lf
+
+# Generated localization bundles
+versions/*/dist/*.properties text eol=lf

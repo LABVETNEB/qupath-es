@@ -1,0 +1,12 @@
+{
+  "file": "versions\\0.7.0\\base\\qupath-gui-strings.properties",
+  "bytes": 80798,
+  "physical_lines": 1083,
+  "entries": 894,
+  "unique_keys": 894,
+  "duplicate_keys": [],
+  "duplicate_key_count": 0,
+  "entries_with_physical_continuation": 20,
+  "message_format_entries": 3,
+  "printf_candidate_entries": 16
+}

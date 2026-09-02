@@ -27,7 +27,13 @@
       "non_comment_non_empty_lines": 917,
       "candidate_entries": 894,
       "continuation_lines": 23,
-      "candidate_entries_status": "PROVISIONAL_UNTIL_GATE_2_PARSER"
+      "candidate_entries_status": "CONFIRMED_BY_GATE_2_PARSER",
+      "parsed_entries": 894,
+      "unique_keys": 894,
+      "duplicate_keys": 0,
+      "continuation_entries": 20,
+      "message_format_candidates": 3,
+      "printf_candidates": 16
     },
     "english_stub": {
       "path": "base/qupath-gui-strings_en.properties",
