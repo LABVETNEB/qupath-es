@@ -64,6 +64,16 @@ Las protecciones aplicadas atacan esos cinco puntos.
 
 ## Qué está aplicado en GitHub
 
+Estado verificado tras aplicarlo:
+
+```
+proteccion de main : force_push=False  deletions=False  admins=False
+                     reviews=1  checks=[tests, canonical bundle integrity]
+ruleset de tags    : 22130386  "Protected release tags"  target=tag  active
+colaboradores      : LABVETNEB (unico)
+```
+
+
 ### Protección de la rama `main`
 
 | Ajuste | Valor | Qué impide |
@@ -80,7 +90,8 @@ Las protecciones aplicadas atacan esos cinco puntos.
 
 ### Protección de tags
 
-Un *ruleset* sobre los patrones `es-*` y `v*` bloquea:
+Un *ruleset* (id `22130386`, «Protected release tags») sobre los patrones
+`refs/tags/es-*` y `refs/tags/v*` bloquea:
 
 - el **borrado** de un tag publicado;
 - la **actualización no lineal** (mover un tag a otro commit).
@@ -100,12 +111,28 @@ alguien descarga meses después.
 
 Es una decisión consciente de compromiso: protege contra terceros y contra
 colaboradores futuros sin convertir cada corrección de una cadena en un pull
-request. El `force-push` y el borrado siguen bloqueados para todos, que es la
-parte irreversible.
+request.
 
-Si en algún momento se quiere máxima integridad —ni siquiera el mantenedor
-puede saltarse el proceso—, basta con poner `enforce_admins` en `true`; el
-comando está más abajo.
+**Conviene ser exacto sobre lo que esto implica.** Con `enforce_admins` en
+`false`, un administrador —hoy, solo el propietario— puede saltarse *todas* las
+reglas de la rama, incluidas las de `force-push` y borrado. No son «bloqueadas
+para todos»: son bloqueadas para todo el que no sea administrador.
+
+En la práctica:
+
+| Actor | Push directo | `force-push` | Borrar `main` | Fusionar sin revisión |
+| --- | --- | --- | --- | --- |
+| Tercero sin permisos | No | No | No | No |
+| Colaborador futuro (write) | **No** | **No** | **No** | **No** |
+| Propietario / administrador | Sí | Sí | Sí | Sí |
+
+La protección real frente a un error del propietario, por tanto, no es técnica
+sino operativa: `main` no se puede perder porque está replicada en cada clon, y
+los tags publicados sí están protegidos por un *ruleset* aparte.
+
+Si se quiere máxima integridad —que ni el mantenedor pueda saltarse el
+proceso—, basta con poner `enforce_admins` en `true`; el comando está más
+abajo. El coste es que cada cambio propio pasa a requerir un pull request.
 
 ---
 
