@@ -46,5 +46,18 @@
     "status": "GO",
     "canonical_translation_source": "base/qupath-gui-strings.properties",
     "base_files_policy": "IMMUTABLE"
+  },
+  "gate_2": {
+    "status": "GO",
+    "parser_entries": 894,
+    "unique_keys": 894,
+    "duplicate_keys": 0,
+    "total_tests": 31,
+    "translation_tsv_rows": 894,
+    "identity_mode": true,
+    "identity_bytes": 80798,
+    "identity_sha256": "796EFC44FC23369E4D7BDFDE69C0FA2A702051BF2F9D71399157B505E8D45D2D",
+    "binary_sequence_equal": true,
+    "validation_result": "PASS"
   }
 }

@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "base_entries": 894,
+  "target_entries": 894,
+  "base_unique_keys": 894,
+  "target_unique_keys": 894,
+  "missing_keys": [],
+  "extra_keys": [],
+  "base_duplicate_keys": [],
+  "target_duplicate_keys": [],
+  "key_order_identical": true,
+  "placeholder_errors": 0,
+  "empty_value_errors": 0,
+  "error_count": 0,
+  "errors": []
+}
