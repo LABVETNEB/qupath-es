@@ -1,4 +1,6 @@
 startupScript=PASS
+alreadySpanish=false
+displayBefore=en_US
 localeDefault=en_US
 localeFormat=en_US
 localeDisplay=es
@@ -45,7 +47,7 @@ GridView.classification=Clasificación
 Prefs.Locale=Idioma y región
 Measurements.Export.title=Exportar mediciones
 DragDrop.openImage=Abrir imagen
+Toolbar.magnification.description=Magnificación mostrada: haga doble clic para editarla
 ---
-sampledKeys=40
+sampledKeys=41
 missingKeys=0
-keepEnSampled=1

@@ -91,6 +91,33 @@ El script de arranque es necesario porque el runtime que acompaña a QuPath
 de idioma no puede persistirse entre reinicios. Detalle y verificación en
 [`versions/0.7.0/reports/spanish-locale-runtime.md`](versions/0.7.0/reports/spanish-locale-runtime.md).
 
+El script es **idempotente**: si el locale de presentación ya es español, no
+cambia nada y lo registra como `alreadySpanish=true`.
+
+### ¿Por qué un script y no una opción de la JVM?
+
+Se probaron todas las alternativas menos invasivas —propiedades
+`user.language.display`, `JAVA_TOOL_OPTIONS`, opciones del launcher jpackage,
+`-D` de la CLI de QuPath— y **todas fallan**: `PathPrefs` ejecuta
+`Locale.setDefault(Locale.US)` durante su inicialización estática, lo que
+descarta cualquier locale fijado antes. Y la preferencia no puede persistirse
+porque `LocaleConverter` serializa a nombres de visualización y este runtime
+solo conoce 5 locales, todos ingleses. Evidencia completa y medidas en
+[`versions/0.7.0/reports/pre-gui-locale-solution.md`](versions/0.7.0/reports/pre-gui-locale-solution.md).
+
+Consecuencia: unas pocas cadenas resueltas durante la construcción de la
+interfaz (tooltips de la barra de herramientas, nombres de herramientas de
+dibujo, texto de marcador del visor) quedan en inglés. El desglose está en
+[`versions/0.7.0/reports/locale-timing-audit.md`](versions/0.7.0/reports/locale-timing-audit.md).
+
+### Textos que no son traducibles en 0.7.0
+
+`Image list`, `Search entry in project` y
+`Drag & drop an image file or project folder` **no son claves del bundle** en
+0.7.0: son constantes compiladas en `ProjectBrowser.class` y
+`ViewerManager.class`. Se externalizaron después de esta versión, así que
+ningún mecanismo de localización externo puede traducirlas aquí.
+
 ## Formatos numéricos
 
 Solo se cambia el locale de **presentación**. Los locales *default* y *format*

@@ -1,0 +1,52 @@
+# Baseline: locale state of QuPath 0.7.0 before any intervention
+#
+# Captured with the console launcher and the `script` subcommand, so no GUI is
+# built.  No JVM options, no environment variables, no startup script, and no
+# locale preference stored in the registry.
+#
+# Command:
+#   "QuPath-0.7.0 (console).exe" script versions/0.7.0/runtime/diagnose-locale.groovy
+#
+# Reading of this baseline:
+#   * The host OS is Spanish (user.language=es, user.country=AR) yet
+#     locale.default is en_US -> PathPrefs called Locale.setDefault(Locale.US)
+#     and overwrote BOTH categories before this script could observe them.
+#   * availableLocales.total=5 -> the jlink runtime has no jdk.localedata.
+#   * The three keys said to be "translated but shown in English" raise
+#     MissingResourceException: they do not exist in the 0.7.0 bundle at all.
+#   * userPath is unset in this headless session, so the external localization
+#     directory is not searched here (the GUI session does find it).
+#
+<<<QUPATH-LOCALE-DIAGNOSTIC>>>
+sysprop.user.language=es
+sysprop.user.country=AR
+sysprop.user.variant=
+sysprop.user.language.display=null
+sysprop.user.country.display=null
+sysprop.user.variant.display=null
+sysprop.user.language.format=null
+sysprop.user.country.format=null
+sysprop.user.variant.format=null
+sysprop.JAVA_TOOL_OPTIONS.seen=null
+locale.default=en_US
+locale.display=en_US
+locale.format=en_US
+availableLocales.total=5
+availableLocales.spanish=0
+forLanguageTag.es.language=es
+forLanguageTag.es.toString=es
+format.sample=1234.50
+format.usesDot=true
+prefs.locale=en_US
+prefs.localeDisplay=en_US
+prefs.localeFormat=en_US
+postPrefs.locale.default=en_US
+postPrefs.locale.display=en_US
+postPrefs.locale.format=en_US
+res.Menu.File=File
+res.Panes.ProjectBrowser.imageList=<<MISSING:MissingResourceException>>
+res.Panes.ProjectBrowser.searchEntry=<<MISSING:MissingResourceException>>
+res.Viewer.ViewerManager.dragAndDropWithoutProject=<<MISSING:MissingResourceException>>
+res.AnalysisPane.projectTab=Project
+res.CommonActions.showPrefPane=Preferences...
+<<<END>>>
