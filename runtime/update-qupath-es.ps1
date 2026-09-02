@@ -179,7 +179,10 @@ function Resolve-Installation {
     $result = Invoke-Migrator $migratorArgs
     if (-not $result.ok) { Fail "Could not enumerate installations.`n$($result.raw)" }
 
-    $installs = @($result.data) | Where-Object { $_.valid }
+    # Wrap the whole pipeline: Where-Object returns a scalar for a single
+    # match, and a scalar has no .Count under StrictMode in Windows
+    # PowerShell 5.1.
+    $installs = @(@($result.data) | Where-Object { $_.valid })
 
     if ($installs.Count -eq 0) {
         Fail 'No usable QuPath installation was found. Use -QuPathPath to point at one.'
@@ -214,11 +217,20 @@ function Invoke-CapabilityProbe {
     $probe = Join-Path $PSScriptRoot 'probe-locale-capability.groovy'
     if (-not (Test-Path -LiteralPath $probe)) { return $null }
 
+    # QuPath's launcher writes harmless warnings to stderr.  With
+    # $ErrorActionPreference = 'Stop', Windows PowerShell 5.1 turns those into
+    # terminating errors and the probe never runs, so relax it just for this
+    # native call.
+    $previousPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+
     try {
         $raw = & $console.FullName script $probe 2>&1 | Out-String
     } catch {
         Write-Log "capability probe failed: $_" 'WARN'
         return $null
+    } finally {
+        $ErrorActionPreference = $previousPreference
     }
 
     $map = @{}
@@ -533,7 +545,7 @@ Say ("GUI jar SHA-256:    {0}" -f $install.gui_jar_sha256)
 if ($install.build_time)   { Say ("Build:              {0}" -f $install.build_time) }
 if ($install.latest_commit) { Say ("Upstream commit:    {0}" -f $install.latest_commit) }
 
-$verSources = ($install.version_sources.PSObject.Properties |
+$verSources = (@($install.version_sources.PSObject.Properties) |
     ForEach-Object { "$($_.Name)=$($_.Value)" }) -join ', '
 Say ("Version evidence:   {0}" -f $verSources)
 
@@ -557,8 +569,11 @@ if (-not $status -or -not $status.base_present) {
     Say ("Canonical bundle:   {0} keys" -f $status.base_keys)
     Say ("Base SHA-256:       {0}" -f $status.base_sha256)
 
-    if ($status.states.PSObject.Properties.Name.Count -gt 0) {
-        $stateText = ($status.states.PSObject.Properties |
+    # @() keeps this working under Windows PowerShell 5.1 with StrictMode:
+    # a single property would otherwise yield a scalar with no .Count.
+    $stateProps = @($status.states.PSObject.Properties)
+    if ($stateProps.Count -gt 0) {
+        $stateText = ($stateProps |
             ForEach-Object { "$($_.Name)=$($_.Value)" }) -join '  '
         Say ("Translation states: {0}" -f $stateText)
     }

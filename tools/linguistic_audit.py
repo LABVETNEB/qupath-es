@@ -122,6 +122,29 @@ def deaccent(text: str) -> str:
     return "".join(ch for ch in decomposed if not unicodedata.combining(ch))
 
 
+def detect_qupath_version(rows, tsv_path: Path) -> str:
+    """Work out which QuPath version this audit describes.
+
+    Taken from the data rather than hardcoded, so auditing a newly migrated
+    version cannot silently report the previous version's number.  The TSV's
+    own `qupath_ver` column is authoritative; the directory name
+    (versions/<version>/work/translation.tsv) is the fallback.
+    """
+    versions = {row.get("qupath_ver", "").strip() for row in rows}
+    versions.discard("")
+
+    if len(versions) == 1:
+        return versions.pop()
+
+    if len(versions) > 1:
+        return "MIXED:" + ",".join(sorted(versions))
+
+    try:
+        return tsv_path.resolve().parent.parent.name
+    except (OSError, IndexError):
+        return "unknown"
+
+
 def has_mojibake(text: str) -> bool:
     """Detect the classic UTF-8-read-as-Latin-1 signatures."""
     if "�" in text:
@@ -318,7 +341,7 @@ def audit(base_path: Path, tsv_path: Path, target_path: Path) -> dict:
 
     report = {
         "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "qupath_version": "0.7.0",
+        "qupath_version": detect_qupath_version(rows, tsv_path),
         "base": str(base_path),
         "tsv": str(tsv_path),
         "target": str(target_path),

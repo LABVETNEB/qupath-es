@@ -5,7 +5,12 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from tools.linguistic_audit import audit, deaccent, has_mojibake
+from tools.linguistic_audit import (
+    audit,
+    deaccent,
+    detect_qupath_version,
+    has_mojibake,
+)
 from tools.translation_generator import TSV_FIELDS
 
 
@@ -181,6 +186,59 @@ class FalsePositiveRegressionTests(unittest.TestCase):
         self.assertTrue(
             any(e["check"] == "placeholder" for e in report["errors"])
         )
+
+class VersionDetectionTests(unittest.TestCase):
+    """The audit must report the version it actually audited.
+
+    Regression guard: the report used to hardcode "0.7.0", so auditing a
+    migrated 0.8.x workspace would have claimed to be a 0.7.0 audit.
+    """
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _audit_with_version(self, qupath_ver):
+        base = self.tmp / "base.properties"
+        target = self.tmp / "target.properties"
+        tsv = self.tmp / "versions" / qupath_ver / "work" / "translation.tsv"
+        tsv.parent.mkdir(parents=True, exist_ok=True)
+
+        base.write_text("a = Hello\n", encoding="utf-8", newline="\n")
+        target.write_text("a = Hola\n", encoding="utf-8", newline="\n")
+        tsv.write_text(
+            TSV_HEADER + "\t".join(
+                ["a", "Hello", "Hola", "REVIEWED", "B", "r",
+                 "2026-01-01", qupath_ver, "", ""]
+            ) + "\n",
+            encoding="utf-8", newline="",
+        )
+        return audit(base, tsv, target)
+
+    def test_version_comes_from_the_tsv(self):
+        self.assertEqual(
+            self._audit_with_version("0.8.0")["qupath_version"], "0.8.0"
+        )
+        self.assertEqual(
+            self._audit_with_version("0.7.0")["qupath_version"], "0.7.0"
+        )
+
+    def test_mixed_versions_are_flagged_not_silently_picked(self):
+        rows = [
+            {"qupath_ver": "0.7.0"},
+            {"qupath_ver": "0.8.0"},
+        ]
+        result = detect_qupath_version(rows, Path("x/versions/0.8.0/work/t.tsv"))
+        self.assertTrue(result.startswith("MIXED:"))
+
+    def test_directory_name_is_the_fallback(self):
+        result = detect_qupath_version(
+            [{"qupath_ver": ""}],
+            Path("repo/versions/1.2.3/work/translation.tsv"),
+        )
+        self.assertEqual(result, "1.2.3")
 
 
 if __name__ == "__main__":

@@ -386,7 +386,10 @@ def main() -> int:
     export.add_argument("tsv", type=Path)
     export.add_argument(
         "--qupath-version",
-        default="0.7.0",
+        required=True,
+        help="QuPath version stamped into every row. There is deliberately no "
+             "default: a wrong version number would silently mislabel the "
+             "whole workspace.",
     )
 
     generate = sub.add_parser(

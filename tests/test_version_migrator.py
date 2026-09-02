@@ -477,6 +477,39 @@ class UpdaterScriptTests(unittest.TestCase):
         self.assertNotIn("Property().set(", text)
         self.assertNotIn(".put(", text)
 
+    def test_no_powershell_7_only_syntax(self):
+        """The script must run on Windows PowerShell 5.1, which most machines
+        have out of the box - not just on PowerShell 7."""
+        for token in ("??", "?.", "-Parallel", "&&", "||"):
+            with self.subTest(token=token):
+                self.assertNotIn(token, self.script)
+
+    def test_collections_are_wrapped_before_counting(self):
+        """Regression: under StrictMode in Windows PowerShell 5.1 a pipeline
+        that yields a single object is a scalar, and a scalar has no .Count.
+        Every .Count must therefore be taken from an @()-wrapped value."""
+        import re
+
+        for match in re.finditer(r"(\$[A-Za-z_][\w.]*)\.Count", self.script):
+            expression = match.group(1)
+            with self.subTest(expression=expression):
+                # Either the variable was built with @(...) or it is a hashtable.
+                assigned_as_array = re.search(
+                    re.escape(expression) + r"\s*=\s*@[({]", self.script
+                )
+                self.assertIsNotNone(
+                    assigned_as_array,
+                    f"{expression}.Count is read but {expression} is not "
+                    f"assigned from @(...) or @{{...}}",
+                )
+
+    def test_native_probe_call_tolerates_stderr(self):
+        """QuPath's launcher writes warnings to stderr; with
+        $ErrorActionPreference = 'Stop' those become terminating errors in
+        Windows PowerShell and the probe silently never runs."""
+        self.assertIn("$ErrorActionPreference = 'Continue'", self.script)
+        self.assertIn("finally", self.script)
+
 
 class SupportedVersionsTests(unittest.TestCase):
 

@@ -1,149 +1,149 @@
-# QuPath ES
+# qupath-es
 
-Localización castellana de la interfaz principal de QuPath, distribuida como
-**bundle externo**. El código fuente, los JAR y el ejecutable de QuPath no se
-modifican en ningún momento.
+**Localización al castellano de la interfaz de [QuPath](https://qupath.github.io/).**
 
-Proyecto no oficial. Véase [`NOTICE.md`](NOTICE.md) para procedencia y
-licencia (GPL-3.0).
+Proyecto **no oficial**, sin relación con el equipo de QuPath ni con la
+Universidad de Edimburgo. Licencia [GPL-3.0](LICENSE) · procedencia en
+[`NOTICE.md`](NOTICE.md).
 
-## Versión objetivo
+---
 
-| Item | Valor |
+## ¿Qué es esto?
+
+Un paquete de traducción que hace que los menús, paneles, diálogos y
+preferencias de QuPath aparezcan en castellano, más las herramientas para
+instalarlo, verificarlo y mantenerlo cuando salgan versiones nuevas de QuPath.
+
+### Qué hace
+
+- Instala un fichero de traducción **externo** que QuPath carga al arrancar.
+- Detecta la versión de QuPath instalada y comprueba si hay traducción para ella.
+- Valida la traducción antes de instalarla.
+- Hace copia de seguridad antes de sustituir nada, y permite deshacer.
+
+### Qué NO hace
+
+- **No modifica QuPath.** Ni sus JAR, ni su código, ni su ejecutable, ni su runtime.
+- **No descarga ni instala QuPath.** Eso lo haces tú desde la web oficial.
+- **No cambia los formatos numéricos.** El separador decimal sigue siendo el
+  punto y las mediciones exportadas no varían. Esto es deliberado: cambiarlo
+  podría alterar análisis.
+- **No toca tus imágenes, proyectos ni resultados.**
+- **No cierra QuPath.** Si está abierto cuando hace falta escribir, avisa y se
+  detiene.
+
+---
+
+## Versiones soportadas
+
+| Versión QuPath | Estado | Bundle principal | Modo de locale |
+| --- | --- | --- | --- |
+| **0.7.0** | Estable | **894 / 894** claves | `STARTUP_FALLBACK` |
+
+*Modo de locale* indica cómo se aplica el idioma. En QuPath 0.7.0 el runtime de
+Java que acompaña al programa no incluye los datos regionales del español, así
+que la preferencia de idioma no se puede guardar entre reinicios; se usa un
+pequeño script de arranque que aplica el idioma cada vez. Explicación completa
+en [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+> **894/894 no significa que toda la aplicación esté en castellano.**
+> Ese número es la cobertura del *bundle* principal de la interfaz. QuPath 0.7.0
+> contiene además textos escritos directamente en el código, que ninguna
+> traducción externa puede alcanzar. Ver
+> [limitaciones conocidas](docs/FAQ.md#por-qué-hay-frases-que-siguen-en-inglés).
+
+---
+
+## Empezar
+
+| Quiero… | Ir a |
 | --- | --- |
-| QuPath | 0.7.0 |
-| Build | 2026-02-25 16:06 |
-| Commit upstream | `04ccfa4` |
-| JAR de origen | `qupath-gui-fx-0.7.0.jar` |
-| SHA-256 del JAR | `4C3DB78B5A3A1F519F3D8CD5BAC4C69E598B1E59D97E666C4BDD23C31164B968` |
-| SHA-256 del bundle canónico | `796EFC44FC23369E4D7BDFDE69C0FA2A702051BF2F9D71399157B505E8D45D2D` |
+| Instalarlo rápido, ya tengo QuPath | [`docs/QUICK_START.md`](docs/QUICK_START.md) |
+| Instalarlo desde cero, paso a paso | [`docs/INSTALLATION.md`](docs/INSTALLATION.md) |
+| Instalarlo en otro ordenador | [`docs/THIRD_PARTY_INSTALLATION.md`](docs/THIRD_PARTY_INSTALLATION.md) |
+| Actualizar QuPath sin perder el castellano | [`docs/UPDATING_QUPATH_ES.md`](docs/UPDATING_QUPATH_ES.md) |
+| QuPath volvió al inglés | [`docs/REPAIR.md`](docs/REPAIR.md) |
+| Algo no funciona | [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md) |
+| Quitar la traducción | [`docs/UNINSTALL.md`](docs/UNINSTALL.md) |
+| Dudas frecuentes | [`docs/FAQ.md`](docs/FAQ.md) |
+| Entender cómo funciona por dentro | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
+| Colaborar o mantener el proyecto | [`docs/MAINTAINER_GUIDE.md`](docs/MAINTAINER_GUIDE.md) |
 
-## Estado
+### Resumen en tres comandos
 
-| Métrica | Valor |
-| --- | --- |
-| Claves del bundle principal | 894 |
-| `REVIEWED` | 884 |
-| `KEEP_EN` | 10 |
-| `BLOCKED` / `PENDING` / `DRAFT` | 0 |
-| Validador estructural | PASS (0 errores) |
-| Auditoría lingüística | SAFE TO INSTALL (0 errores, 0 avisos) |
-| Suite de pruebas | 71 tests OK |
+Con QuPath **cerrado**, en PowerShell:
 
-**Cobertura del bundle principal de la GUI: 894/894.** Esto **no** significa
-que toda la aplicación quede en castellano; véase
-[`versions/0.7.0/reports/localization-coverage.md`](versions/0.7.0/reports/localization-coverage.md).
-
-## Estructura
-
-```
-tools/                  pipeline de traducción y validación (Python 3.10+)
-  properties_audit.py      analizador de Java .properties
-  translation_validator.py validador estructural (claves, placeholders, escapes)
-  translation_generator.py generador del bundle a partir del TSV
-  es_translations.py       tabla de traducciones (fuente de verdad lingüística)
-  apply_translations.py    vuelca las traducciones al TSV de trabajo
-  linguistic_audit.py      auditoría lingüística y de calidad
-  coverage_audit.py        auditoría de cobertura sobre la distribución instalada
-tests/                  71 pruebas unitarias y de regresión
-versions/0.7.0/
-  base/                 bundle inglés canónico + MANIFEST + fingerprint (INMUTABLE)
-  work/translation.tsv  fuente de verdad por clave (estado, revisor, fecha)
-  dist/                 bundle español generado
-  runtime/              script de arranque para el locale español
-  reports/              validación, auditoría, cobertura, prueba E2E
-```
-
-El fichero `.properties` **se genera**; nunca se edita a mano. Para cambiar una
-traducción se edita `tools/es_translations.py` y se regenera.
-
-## Reconstruir y validar
-
-```bash
-python tools/apply_translations.py versions/0.7.0/work/translation.tsv
-python tools/translation_generator.py generate \
-    versions/0.7.0/base/qupath-gui-strings.properties \
-    versions/0.7.0/work/translation.tsv \
-    versions/0.7.0/dist/qupath-gui-strings_es.properties
-python tools/translation_validator.py \
-    versions/0.7.0/base/qupath-gui-strings.properties \
-    versions/0.7.0/dist/qupath-gui-strings_es.properties
-python tools/linguistic_audit.py \
-    versions/0.7.0/base/qupath-gui-strings.properties \
-    versions/0.7.0/work/translation.tsv \
-    versions/0.7.0/dist/qupath-gui-strings_es.properties \
-    --json versions/0.7.0/reports/global-translation-audit.json \
-    --markdown versions/0.7.0/reports/global-translation-audit.md
-python -m unittest discover -s tests -p "test_*.py"
-```
-
-## Actualizar QuPath
-
-Cuando instales una versión nueva de QuPath, cierra QuPath y ejecuta:
-
-```bash
+```powershell
+cd C:\qupath-es
 .\runtime\update-qupath-es.ps1
 ```
 
-Es un **diagnóstico que no escribe nada**. Detecta la versión instalada, indica
-si existe paquete español para ella y qué haría a continuación. Guía completa en
-[`docs/UPDATING_QUPATH_ES.md`](docs/UPDATING_QUPATH_ES.md).
+Ese primer comando es un **diagnóstico que no escribe nada** (*dry run*). Si
+informa `Spanish release: AVAILABLE`, instala con:
 
-El actualizador nunca copia la traducción anterior sobre una versión nueva sin
-comparar claves, textos ingleses, *placeholders* y estructura, y nunca instala
-una traducción que no haya pasado el validador.
+```powershell
+.\runtime\update-qupath-es.ps1 -Apply
+```
 
-## Instalación manual
+Si QuPath vuelve al inglés en algún momento:
 
-1. Copiar `versions/0.7.0/dist/qupath-gui-strings_es.properties` a
-   `<inicio>/QuPath/localization/`.
-2. Copiar `versions/0.7.0/runtime/qupath-es-startup.groovy` a
-   `<inicio>/QuPath/scripts/` y activarlo en
-   *Preferences → General → Startup script path*.
-3. Reiniciar QuPath.
+```powershell
+.\runtime\update-qupath-es.ps1 -Repair
+```
 
-El script de arranque es necesario porque el runtime que acompaña a QuPath
-0.7.0 en Windows omite el módulo `jdk.localedata`, de modo que la preferencia
-de idioma no puede persistirse entre reinicios. Detalle y verificación en
-[`versions/0.7.0/reports/spanish-locale-runtime.md`](versions/0.7.0/reports/spanish-locale-runtime.md).
+---
 
-El script es **idempotente**: si el locale de presentación ya es español, no
-cambia nada y lo registra como `alreadySpanish=true`.
+## Requisitos
 
-### ¿Por qué un script y no una opción de la JVM?
+**Para instalar y usar la traducción:**
 
-Se probaron todas las alternativas menos invasivas —propiedades
-`user.language.display`, `JAVA_TOOL_OPTIONS`, opciones del launcher jpackage,
-`-D` de la CLI de QuPath— y **todas fallan**: `PathPrefs` ejecuta
-`Locale.setDefault(Locale.US)` durante su inicialización estática, lo que
-descarta cualquier locale fijado antes. Y la preferencia no puede persistirse
-porque `LocaleConverter` serializa a nombres de visualización y este runtime
-solo conoce 5 locales, todos ingleses. Evidencia completa y medidas en
-[`versions/0.7.0/reports/pre-gui-locale-solution.md`](versions/0.7.0/reports/pre-gui-locale-solution.md).
+- Windows 10 u 11.
+- QuPath instalado (versión oficial, desde qupath.github.io).
+- PowerShell: sirve **Windows PowerShell 5.1** (el que trae Windows) o
+  PowerShell 7.
+- **Python 3** en el `PATH`. El actualizador lo usa para detectar la versión de
+  QuPath y validar la traducción. Si no quieres instalar Python, existe una
+  [instalación manual sin Python](docs/INSTALLATION.md#apéndice-instalación-manual-sin-python).
 
-Consecuencia: unas pocas cadenas resueltas durante la construcción de la
-interfaz (tooltips de la barra de herramientas, nombres de herramientas de
-dibujo, texto de marcador del visor) quedan en inglés. El desglose está en
-[`versions/0.7.0/reports/locale-timing-audit.md`](versions/0.7.0/reports/locale-timing-audit.md).
+**Para desarrollar o mantener:**
 
-### Textos que no son traducibles en 0.7.0
+- Lo anterior, más Git.
+- Sin dependencias de terceros: las herramientas usan solo la biblioteca
+  estándar de Python.
 
-`Image list`, `Search entry in project` y
-`Drag & drop an image file or project folder` **no son claves del bundle** en
-0.7.0: son constantes compiladas en `ProjectBrowser.class` y
-`ViewerManager.class`. Se externalizaron después de esta versión, así que
-ningún mecanismo de localización externo puede traducirlas aquí.
+---
 
-## Formatos numéricos
+## Estado del proyecto
 
-Solo se cambia el locale de **presentación**. Los locales *default* y *format*
-permanecen en `en_US`, de modo que el separador decimal sigue siendo el punto
-y las mediciones exportadas no se ven afectadas. La prueba E2E lo verifica
-(`formatSample=1234.50`, `formatUsesDot=true`).
+| Métrica | Valor |
+| --- | --- |
+| Claves del bundle principal (0.7.0) | 894 |
+| `REVIEWED` | 884 |
+| `KEEP_EN` (deliberadamente en inglés) | 10 |
+| `BLOCKED` / `PENDING` / `DRAFT` | 0 |
+| Validador estructural | PASS |
+| Auditoría lingüística | SAFE TO INSTALL |
+| Suite de pruebas | 141 tests |
 
-## Revertir
+Huellas de los artefactos de 0.7.0:
 
-- Desactivar el script de arranque en las preferencias, o
-- borrar `<inicio>/QuPath/localization/qupath-gui-strings_es.properties`.
+```
+base   (inglés canónico)  796EFC44FC23369E4D7BDFDE69C0FA2A702051BF2F9D71399157B505E8D45D2D
+dist   (español)          E4A966C90D1CE1368DE9EA21DECC7D9DBB0180087B60D3724690AAD4C128FC19
+```
 
-En ambos casos QuPath vuelve al inglés. La instalación de QuPath queda intacta.
+---
+
+## Estructura del repositorio
+
+```
+runtime/         actualizador y sondas (lo que ejecuta el usuario)
+tools/           motor de traducción, validación y migración (Python)
+tests/           141 pruebas
+versions/0.7.0/  bundle canónico, traducción, bundle generado e informes
+docs/            esta documentación
+backups/         copias de seguridad creadas por -Apply (no se borran solas)
+logs/            registro de cada ejecución (no versionado)
+```
+
+Detalle en [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
