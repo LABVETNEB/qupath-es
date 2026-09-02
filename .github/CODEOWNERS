@@ -1,0 +1,18 @@
+# Every file in this repository requires review by the maintainer.
+#
+# CODEOWNERS only takes effect when branch protection requires a review from
+# code owners; see docs/GOVERNANCE.md for what is enforced server-side.
+
+*                       @LABVETNEB
+
+# The canonical English bundles are captured from an official QuPath release
+# and must never change. Any diff here is a red flag.
+/versions/*/base/       @LABVETNEB
+
+# Anything that writes outside the repository.
+/runtime/               @LABVETNEB
+
+# The migration policy decides which translations may be reused without a
+# human looking at them.
+/tools/qupath_version_migrator.py   @LABVETNEB
+/tools/translation_validator.py     @LABVETNEB

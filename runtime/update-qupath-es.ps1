@@ -41,9 +41,22 @@
 .PARAMETER QuPathPath
     Point at a specific QuPath installation directory.
 
+.PARAMETER CreateShortcut
+    Create a "QuPath Espanol" shortcut (spelled with the correct accent at
+    runtime) pointing at the graphical launcher of the detected installation.
+    Refuses if the Spanish package is not properly installed, so the shortcut
+    never promises a Spanish interface it cannot deliver.
+
+.PARAMETER RemoveShortcut
+    Delete the shortcut created by -CreateShortcut.
+
+.PARAMETER StartMenu
+    With -CreateShortcut or -RemoveShortcut, act on the Start Menu entry as
+    well as the desktop one.
+
 .PARAMETER Force
-    Allow overwriting an existing captured version workspace.  Never bypasses
-    validation.
+    Allow overwriting an existing captured version workspace, or replacing an
+    existing shortcut.  Never bypasses validation.
 
 .EXAMPLE
     .\runtime\update-qupath-es.ps1
@@ -59,6 +72,9 @@ param(
     [switch]$PrepareMigration,
     [switch]$Rollback,
     [switch]$ListBackups,
+    [switch]$CreateShortcut,
+    [switch]$RemoveShortcut,
+    [switch]$StartMenu,
     [string]$Version,
     [string]$QuPathPath,
     [string]$BackupId,
@@ -313,6 +329,167 @@ function New-Backup {
     return $dir
 }
 
+function Get-GuiLauncher {
+    <#
+        Return the graphical launcher of an installation.
+
+        QuPath ships two executables: "QuPath-x.y.z.exe" and
+        "QuPath-x.y.z (console).exe".  The console one opens a terminal window
+        and exists for diagnostics - it must never end up behind a desktop
+        shortcut, so it is excluded explicitly rather than by ordering luck.
+    #>
+    param([string]$InstallPath)
+
+    $candidates = @(
+        Get-ChildItem -LiteralPath $InstallPath -Filter 'QuPath*.exe' `
+            -ErrorAction SilentlyContinue |
+            Where-Object { $_.Name -notmatch '(?i)console' }
+    )
+
+    if ($candidates.Count -eq 0) { return $null }
+    if ($candidates.Count -gt 1) {
+        # Prefer the shortest name: "QuPath-0.7.0.exe" over any variant.
+        return ($candidates | Sort-Object { $_.Name.Length } | Select-Object -First 1)
+    }
+
+    return $candidates[0]
+}
+
+function Get-ShortcutPaths {
+    param([switch]$IncludeStartMenu)
+
+    # Build the accented name from a code point instead of typing it.
+    # This file must stay pure ASCII: Windows PowerShell 5.1 reads a script
+    # that has no byte-order mark using the system ANSI code page, so an
+    # accented literal is mangled there, while PowerShell 7 reads the same
+    # file as UTF-8.  The two shells would then create - and fail to find -
+    # shortcuts with different names.  A code point is read identically.
+    $name = 'QuPath Espa' + [char]0x00F1 + 'ol.lnk'
+    $paths = @([IO.Path]::Combine(
+        [Environment]::GetFolderPath('Desktop'), $name))
+
+    if ($IncludeStartMenu) {
+        $programs = [Environment]::GetFolderPath('Programs')
+        if ($programs) { $paths += [IO.Path]::Combine($programs, $name) }
+    }
+
+    return $paths
+}
+
+function Test-SpanishInstalled {
+    <#
+        Is the Spanish package actually in place for this installation?
+        Returns a hashtable describing what is missing, so the caller can
+        explain rather than just refuse.
+    #>
+    param($Install, $Status)
+
+    $result = @{ ok = $false; problems = @() }
+
+    $userDir = Get-UserDirectory
+    if (-not $userDir) {
+        $result.problems += 'QuPath user directory not found'
+        return $result
+    }
+
+    $bundle = Join-Path $userDir 'localization\qupath-gui-strings_es.properties'
+
+    if (-not (Test-Path -LiteralPath $bundle)) {
+        $result.problems += 'Spanish bundle is not installed'
+        return $result
+    }
+
+    if ($Status -and $Status.dist_present) {
+        $installedHash = Get-Sha256 $bundle
+        if ($installedHash -ne $Status.dist_sha256) {
+            $result.problems += 'installed bundle does not match this release'
+        }
+    }
+
+    if ($script:LocaleMode -eq 'LOCALE_MODE_STARTUP_FALLBACK') {
+        $startup = Join-Path $userDir 'scripts\qupath-es-startup.groovy'
+        if (-not (Test-Path -LiteralPath $startup)) {
+            $result.problems += 'startup script is missing (needed by this QuPath version)'
+        }
+    }
+
+    $result.ok = ($result.problems.Count -eq 0)
+    return $result
+}
+
+function New-SpanishShortcut {
+    param($Install, $Status)
+
+    Say-Header 'Shortcut'
+
+    $launcher = Get-GuiLauncher -InstallPath $Install.path
+
+    if (-not $launcher) {
+        Fail "No graphical QuPath launcher found in $($Install.path)."
+    }
+
+    Say ("Target:             {0}" -f $launcher.FullName)
+
+    $check = Test-SpanishInstalled -Install $Install -Status $Status
+
+    if (-not $check.ok) {
+        Say 'The Spanish package is not ready on this machine:' 'Yellow'
+        foreach ($p in $check.problems) { Say "  - $p" 'Yellow' }
+        Fail 'Refusing to create a shortcut that would open QuPath in English. Run -Apply first.'
+    }
+
+    $shell = New-Object -ComObject WScript.Shell
+    $created = @()
+
+    foreach ($path in (Get-ShortcutPaths -IncludeStartMenu:$StartMenu)) {
+        if ((Test-Path -LiteralPath $path) -and (-not $Force)) {
+            Say ("Already exists (use -Force to replace): {0}" -f $path) 'Yellow'
+            continue
+        }
+
+        $parent = Split-Path -Parent $path
+        if (-not (Test-Path -LiteralPath $parent)) {
+            Say ("Skipping, folder not found: {0}" -f $parent) 'Yellow'
+            continue
+        }
+
+        $lnk = $shell.CreateShortcut($path)
+        $lnk.TargetPath = $launcher.FullName
+        $lnk.WorkingDirectory = $Install.path
+        $lnk.IconLocation = $launcher.FullName
+        $lnk.Description = "QuPath $($Install.version) con la interfaz en castellano"
+        $lnk.Save()
+
+        $created += $path
+        Say ("Created: {0}" -f $path) 'Green'
+    }
+
+    [void][Runtime.InteropServices.Marshal]::ReleaseComObject($shell)
+
+    if ($created.Count -eq 0) {
+        Say 'No shortcut was created.' 'Yellow'
+    } else {
+        Say ''
+        Say 'Open QuPath from this shortcut; the interface will be in Spanish.' 'Green'
+    }
+}
+
+function Remove-SpanishShortcut {
+    Say-Header 'Shortcut'
+
+    $removed = 0
+
+    foreach ($path in (Get-ShortcutPaths -IncludeStartMenu:$StartMenu)) {
+        if (Test-Path -LiteralPath $path) {
+            Remove-Item -LiteralPath $path -Force
+            Say ("Removed: {0}" -f $path) 'Green'
+            $removed++
+        }
+    }
+
+    if ($removed -eq 0) { Say 'No shortcut found.' 'Yellow' }
+}
+
 function Invoke-Rollback {
     Say-Header 'Rollback'
 
@@ -534,8 +711,9 @@ function Invoke-Apply {
 Say-Header 'QuPath Spanish Update Manager'
 Write-Log "repo=$RepoRoot"
 
-if ($ListBackups) { Show-Backups; exit 0 }
-if ($Rollback)    { Invoke-Rollback; exit 0 }
+if ($ListBackups)    { Show-Backups; exit 0 }
+if ($Rollback)       { Invoke-Rollback; exit 0 }
+if ($RemoveShortcut) { Remove-SpanishShortcut; exit 0 }
 
 $install = Resolve-Installation
 
@@ -639,11 +817,19 @@ if ($Repair) {
     exit 0
 }
 
+if ($CreateShortcut) {
+    New-SpanishShortcut -Install $install -Status $status
+    Say ''
+    Say ("Log: {0}" -f $script:LogPath)
+    exit 0
+}
+
 if ($Apply) {
     if (-not $status) { Fail 'Cannot apply: this version has no Spanish package. Run -PrepareMigration first.' }
     Invoke-Apply -Install $install -Status $status
     Say ''
     Say 'Start QuPath; the interface should come up in Spanish.' 'Green'
+    Say 'Tip: create a desktop shortcut with -CreateShortcut' 'Cyan'
     Say ("Log: {0}" -f $script:LogPath)
     exit 0
 }

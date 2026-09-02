@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Vulnerabilidad de seguridad
+    url: https://github.com/LABVETNEB/qupath-es/security/advisories
+    about: No abras una incidencia pública. Usa el aviso privado.
+  - name: Problema del propio QuPath
+    url: https://github.com/qupath/qupath/issues
+    about: Este proyecto solo mantiene la traducción. Los fallos de QuPath van a su repositorio.

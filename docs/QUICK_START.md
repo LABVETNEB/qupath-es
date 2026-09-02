@@ -88,7 +88,20 @@ Esto:
 4. verifica que la copia tiene el mismo hash que el original;
 5. instala el script de arranque del idioma y registra las preferencias.
 
-## 5. Abrir QuPath
+## 5. Crear el acceso directo (opcional pero recomendado)
+
+```powershell
+.\runtime\update-qupath-es.ps1 -CreateShortcut
+```
+
+Crea **QuPath Español** en el escritorio, apuntando al ejecutable gráfico
+correcto. Si el paquete español no estuviera bien instalado, se niega a crearlo
+en lugar de dejarte un acceso que abriría QuPath en inglés.
+
+Añade `-StartMenu` para crearlo también en el menú Inicio, y `-Force` para
+reemplazar uno existente.
+
+## 6. Abrir QuPath
 
 Abre **`QuPath-0.7.0.exe`**.
 
@@ -96,7 +109,7 @@ Abre **`QuPath-0.7.0.exe`**.
 > abre una ventana de consola y lo usan las herramientas internas. Para el uso
 > normal siempre el primero.
 
-## 6. Comprobar
+## 7. Comprobar
 
 La barra de menús debe mostrar:
 

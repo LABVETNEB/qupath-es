@@ -68,6 +68,7 @@ en [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 | Dudas frecuentes | [`docs/FAQ.md`](docs/FAQ.md) |
 | Entender cómo funciona por dentro | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
 | Colaborar o mantener el proyecto | [`docs/MAINTAINER_GUIDE.md`](docs/MAINTAINER_GUIDE.md) |
+| Cómo se protege el repositorio | [`docs/GOVERNANCE.md`](docs/GOVERNANCE.md) |
 
 ### Resumen en tres comandos
 
@@ -83,6 +84,12 @@ informa `Spanish release: AVAILABLE`, instala con:
 
 ```powershell
 .\runtime\update-qupath-es.ps1 -Apply
+```
+
+Y para crear un acceso directo **QuPath Español** en el escritorio:
+
+```powershell
+.\runtime\update-qupath-es.ps1 -CreateShortcut
 ```
 
 Si QuPath vuelve al inglés en algún momento:
@@ -123,7 +130,7 @@ Si QuPath vuelve al inglés en algún momento:
 | `BLOCKED` / `PENDING` / `DRAFT` | 0 |
 | Validador estructural | PASS |
 | Auditoría lingüística | SAFE TO INSTALL |
-| Suite de pruebas | 141 tests |
+| Suite de pruebas | 147 tests |
 
 Huellas de los artefactos de 0.7.0:
 
@@ -137,9 +144,10 @@ dist   (español)          E4A966C90D1CE1368DE9EA21DECC7D9DBB0180087B60D3724690A
 ## Estructura del repositorio
 
 ```
+.github/         gobernanza: CODEOWNERS, plantillas, integración continua
 runtime/         actualizador y sondas (lo que ejecuta el usuario)
 tools/           motor de traducción, validación y migración (Python)
-tests/           141 pruebas
+tests/           147 pruebas
 versions/0.7.0/  bundle canónico, traducción, bundle generado e informes
 docs/            esta documentación
 backups/         copias de seguridad creadas por -Apply (no se borran solas)

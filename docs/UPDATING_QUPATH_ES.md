@@ -130,6 +130,9 @@ el script de arranque en *Preferences → General → Startup script path*.
 | `-Apply` | Instala el bundle español ya validado |
 | `-PrepareMigration` | Captura una versión nueva y construye el espacio de migración |
 | `-Repair` | Restaura las preferencias perdidas |
+| `-CreateShortcut` | Crea el acceso directo «QuPath Español» |
+| `-RemoveShortcut` | Elimina ese acceso directo |
+| `-StartMenu` | Con los dos anteriores, actúa también sobre el menú Inicio |
 | `-Rollback` | Restaura la copia de seguridad más reciente |
 | `-ListBackups` | Lista las copias disponibles |
 | `-Version 0.8.0` | Fuerza una versión concreta |

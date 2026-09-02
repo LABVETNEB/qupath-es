@@ -1,0 +1,124 @@
+name: CI
+
+# Runs on every push to main and on every pull request, including pull
+# requests from forks.  A fork PR runs with a read-only token and no access to
+# secrets, so it can validate a proposal without being able to change anything
+# in this repository.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Show environment
+        run: |
+          python --version
+          echo "No third-party dependencies are installed on purpose:"
+          echo "the tooling uses the standard library only."
+
+      - name: Byte-compile the tools
+        run: |
+          for f in tools/*.py; do
+            python -m py_compile "$f"
+          done
+
+      - name: Run the test suite
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+
+  integrity:
+    name: canonical bundle integrity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # The canonical English bundle is captured from an official QuPath
+      # release and is immutable.  Its bytes must survive a fresh clone
+      # unchanged, which is why .gitattributes marks it '-text'.
+      - name: Canonical bundle matches its recorded fingerprint
+        run: |
+          python - <<'PY'
+          import hashlib, json, sys
+          from pathlib import Path
+
+          failures = []
+
+          for fingerprint in sorted(Path("versions").glob("*/fingerprint.json")):
+              data = json.loads(fingerprint.read_text(encoding="utf-8"))
+              version_dir = fingerprint.parent
+
+              for name, artifact in data.get("artifacts", {}).items():
+                  path = version_dir / artifact["path"]
+                  if not path.is_file():
+                      failures.append(f"{path}: missing")
+                      continue
+
+                  raw = path.read_bytes()
+                  digest = hashlib.sha256(raw).hexdigest().upper()
+
+                  if digest != artifact["sha256"]:
+                      failures.append(
+                          f"{path}: sha256 {digest} != recorded {artifact['sha256']}"
+                      )
+                  if len(raw) != artifact["bytes"]:
+                      failures.append(
+                          f"{path}: {len(raw)} bytes != recorded {artifact['bytes']}"
+                      )
+                  print(f"OK {path} ({len(raw)} bytes)")
+
+          if failures:
+              print("\nFAILURES:")
+              for f in failures:
+                  print(" ", f)
+              sys.exit(1)
+
+          print("\nAll canonical artifacts match their fingerprints.")
+          PY
+
+      - name: Released bundles validate against their canonical base
+        run: |
+          python - <<'PY'
+          import subprocess, sys
+          from pathlib import Path
+
+          failed = False
+
+          for base in sorted(Path("versions").glob("*/base/qupath-gui-strings.properties")):
+              dist = base.parent.parent / "dist" / "qupath-gui-strings_es.properties"
+              if not dist.is_file():
+                  print(f"skip {base.parent.parent.name}: no released bundle")
+                  continue
+
+              print(f"\n=== {base.parent.parent.name} ===")
+              result = subprocess.run(
+                  [sys.executable, "tools/translation_validator.py", str(base), str(dist)]
+              )
+              if result.returncode != 0:
+                  failed = True
+
+          sys.exit(1 if failed else 0)
+          PY

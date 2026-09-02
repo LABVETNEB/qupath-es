@@ -492,16 +492,62 @@ class UpdaterScriptTests(unittest.TestCase):
 
         for match in re.finditer(r"(\$[A-Za-z_][\w.]*)\.Count", self.script):
             expression = match.group(1)
+            # For "$result.problems" it is the member that must be an array,
+            # so accept an assignment to the whole expression or to its last
+            # component (which covers hashtable literals).
+            member = expression.rsplit(".", 1)[-1]
+
+            patterns = [
+                re.escape(expression) + r"\s*=\s*@[({]",
+                r"\b" + re.escape(member) + r"\s*=\s*@[({]",
+            ]
+
             with self.subTest(expression=expression):
-                # Either the variable was built with @(...) or it is a hashtable.
-                assigned_as_array = re.search(
-                    re.escape(expression) + r"\s*=\s*@[({]", self.script
+                self.assertTrue(
+                    any(re.search(p, self.script) for p in patterns),
+                    f"{expression}.Count is read but neither {expression} nor "
+                    f"'{member}' is assigned from @(...) or @{{...}}",
                 )
-                self.assertIsNotNone(
-                    assigned_as_array,
-                    f"{expression}.Count is read but {expression} is not "
-                    f"assigned from @(...) or @{{...}}",
-                )
+
+    def test_shortcut_targets_the_graphical_launcher_only(self):
+        """A desktop shortcut must never open the console launcher: that opens
+        a terminal window and exists only for diagnostics."""
+        self.assertIn("Get-GuiLauncher", self.script)
+        self.assertIn("notmatch '(?i)console'", self.script)
+
+    def test_shortcut_refuses_when_spanish_is_not_installed(self):
+        """A shortcut called 'QuPath Español' that opens an English QuPath
+        would be worse than no shortcut at all."""
+        self.assertIn("Test-SpanishInstalled", self.script)
+        self.assertIn(
+            "Refusing to create a shortcut that would open QuPath in English",
+            self.script,
+        )
+
+    def test_shortcut_can_be_removed(self):
+        self.assertIn("Remove-SpanishShortcut", self.script)
+        self.assertIn("[switch]$RemoveShortcut", self.script)
+
+    def test_shortcut_does_not_overwrite_without_force(self):
+        self.assertIn("Already exists (use -Force to replace)", self.script)
+
+    def test_script_is_pure_ascii(self):
+        """Windows PowerShell 5.1 reads a BOM-less script using the system ANSI
+        code page, while PowerShell 7 reads it as UTF-8.  An accented literal
+        therefore produces different strings in the two shells - which once
+        made them create two differently named desktop shortcuts, neither able
+        to find the other's."""
+        raw = (REPO / "runtime" / "update-qupath-es.ps1").read_bytes()
+        offenders = [(i, b) for i, b in enumerate(raw) if b > 0x7F]
+
+        self.assertEqual(
+            offenders, [],
+            "non-ASCII bytes in the script; build accented text from code "
+            "points instead, e.g. [char]0x00F1",
+        )
+
+    def test_accented_shortcut_name_is_built_from_a_code_point(self):
+        self.assertIn("[char]0x00F1", self.script)
 
     def test_native_probe_call_tolerates_stderr(self):
         """QuPath's launcher writes warnings to stderr; with
