@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QuPath Extension Manager catalog projection",
+  "description": "Closed local validation schema mirroring the qupath/extension-catalog-model fields used by QuPath 0.7.0. Network reachability is deliberately outside this offline schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "description", "extensions"],
+  "properties": {
+    "name": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "extensions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/extension"}
+    }
+  },
+  "$defs": {
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]+(?:\\.[0-9]+)?(?:\\.[0-9]+)?(?:-rc[0-9]+)?$"
+    },
+    "githubUrl": {
+      "type": "string",
+      "pattern": "^https://github\\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+(?:/.*)?$"
+    },
+    "dependencyUrl": {
+      "type": "string",
+      "pattern": "^https://(?:github\\.com|maven\\.scijava\\.org|repo1\\.maven\\.org)/.+$"
+    },
+    "versionRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min"],
+      "properties": {
+        "min": {"$ref": "#/$defs/version"},
+        "max": {
+          "anyOf": [
+            {"type": "null"},
+            {"$ref": "#/$defs/version"}
+          ]
+        },
+        "excludes": {
+          "anyOf": [
+            {"type": "null"},
+            {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {"$ref": "#/$defs/version"}
+            }
+          ]
+        }
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "main_url", "version_range"],
+      "properties": {
+        "name": {"$ref": "#/$defs/version"},
+        "main_url": {
+          "type": "string",
+          "pattern": "^https://github\\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/releases/download/.+$"
+        },
+        "required_dependency_urls": {
+          "anyOf": [
+            {"type": "null"},
+            {
+              "type": "array",
+              "items": {"$ref": "#/$defs/dependencyUrl"}
+            }
+          ]
+        },
+        "optional_dependency_urls": {
+          "anyOf": [
+            {"type": "null"},
+            {
+              "type": "array",
+              "items": {"$ref": "#/$defs/dependencyUrl"}
+            }
+          ]
+        },
+        "javadoc_urls": {
+          "anyOf": [
+            {"type": "null"},
+            {
+              "type": "array",
+              "items": {"$ref": "#/$defs/dependencyUrl"}
+            }
+          ]
+        },
+        "version_range": {"$ref": "#/$defs/versionRange"}
+      }
+    },
+    "extension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "description", "author", "homepage", "starred", "releases"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "description": {"type": "string", "minLength": 1},
+        "author": {"type": "string", "minLength": 1},
+        "homepage": {"$ref": "#/$defs/githubUrl"},
+        "starred": {"type": "boolean"},
+        "releases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/release"}
+        }
+      }
+    }
+  }
+}
