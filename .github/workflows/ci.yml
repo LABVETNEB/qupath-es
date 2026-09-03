@@ -1,7 +1,7 @@
 name: CI
 
 # Runs on every push to main and on every pull request, including pull
-# requests from forks.  A fork PR runs with a read-only token and no access to
+# requests from forks. A fork PR runs with a read-only token and no access to
 # secrets, so it can validate a proposal without being able to change anything
 # in this repository.
 
@@ -14,17 +14,22 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   tests:
     name: tests
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.12'
 
@@ -35,10 +40,38 @@ jobs:
           echo "the tooling uses the standard library only."
 
       - name: Byte-compile the tools
+        run: python -m compileall -q tools
+
+      - name: Run the test suite
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+
+  tests-windows:
+    name: tests (Windows)
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+
+      - name: Show environment
         run: |
-          for f in tools/*.py; do
-            python -m py_compile "$f"
-          done
+          python --version
+          Write-Output "No third-party dependencies are installed on purpose."
+
+      - name: Show InstanSeg bundle line endings
+        shell: pwsh
+        run: |
+          git ls-files --eol components/instanseg/l10n/v0.1.7/dist/strings_es.properties
+          git check-attr text -- components/instanseg/l10n/v0.1.7/dist/strings_es.properties
+
+      - name: Byte-compile the tools
+        run: python -m compileall -q tools
 
       - name: Run the test suite
         run: python -m unittest discover -s tests -p "test_*.py" -v
@@ -46,18 +79,19 @@ jobs:
   integrity:
     name: canonical bundle integrity
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.12'
 
       # The canonical English bundle is captured from an official QuPath
-      # release and is immutable.  Its bytes must survive a fresh clone
+      # release and is immutable. Its bytes must survive a fresh clone
       # unchanged, which is why .gitattributes marks it '-text'.
       - name: Canonical bundle matches its recorded fingerprint
         run: |

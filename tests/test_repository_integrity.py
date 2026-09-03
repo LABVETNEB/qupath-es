@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 import unittest
 from pathlib import Path
 
@@ -62,6 +63,30 @@ class FingerprintConsistencyTests(unittest.TestCase):
                 self.assertTrue(path.is_file(), f"missing artifact: {path}")
                 self.assertEqual(sha256_upper(path), artifact["sha256"])
                 self.assertEqual(path.stat().st_size, artifact["bytes"])
+
+
+class ComponentBundleAttributeTests(unittest.TestCase):
+    """Generated extension bundles must retain their committed bytes on checkout."""
+
+    def test_component_dist_bundles_are_marked_binary_in_git_attributes(self):
+        bundles = sorted(REPO.glob("components/*/l10n/*/dist/*.properties"))
+        self.assertTrue(bundles, "expected at least one component dist bundle")
+
+        for path in bundles:
+            relative = path.relative_to(REPO).as_posix()
+            with self.subTest(path=relative):
+                result = subprocess.run(
+                    ["git", "check-attr", "text", "--", relative],
+                    cwd=REPO,
+                    capture_output=True,
+                    text=True,
+                    check=True,
+                )
+                self.assertTrue(
+                    result.stdout.rstrip().endswith(": text: unset"),
+                    f"{relative} must be '-text' in .gitattributes; "
+                    f"git reported {result.stdout.strip()!r}",
+                )
 
 
 class DistributedBundleTests(unittest.TestCase):
