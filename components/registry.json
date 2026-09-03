@@ -105,7 +105,7 @@
       "repository": "BIOP/qupath-extension-cellpose",
       "owner": "BIOP",
       "type": "QUPATH_EXTENSION",
-      "priority": "P0/P1",
+      "priority": "P0",
       "role": "Segmentación celular y nuclear mediante Cellpose.",
       "license": "Apache-2.0",
       "build_system": "Gradle Kotlin DSL",
