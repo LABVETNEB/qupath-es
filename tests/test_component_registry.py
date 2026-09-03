@@ -89,6 +89,22 @@ LICENSE_BY_ID = {
     "image-export-toolkit": "Apache-2.0",
 }
 
+PRIORITY_BY_ID = {
+    "qupath-core": "BASE",
+    "dl-pixel-classifier": "P0",
+    "tiatoolbox": "P0",
+    "instanseg": "P0",
+    "cell-analysis-tools": "P0",
+    "training": "P0",
+    "stardist": "P0",
+    "cellpose": "P0",
+    "wsinfer": "P1",
+    "djl": "P1",
+    "bioimageio": "P1",
+    "sam": "P1",
+    "image-export-toolkit": "P1",
+}
+
 
 def read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -165,13 +181,22 @@ class ComponentRegistryTests(unittest.TestCase):
             with self.subTest(component=component["id"]):
                 self.assertEqual(component["entry_point"], EXTENSION_ENTRY_POINT)
 
-    def test_priorities_match_the_initial_corpus(self):
-        valid = {"BASE", "P0", "P0/P1", "P1"}
-        for component in self.components:
-            with self.subTest(component=component["id"]):
-                self.assertIn(component["priority"], valid)
+    def test_priorities_are_single_valued_and_match_the_corpus_contract(self):
+        actual = {
+            component["id"]: component["priority"]
+            for component in self.components
+        }
+        self.assertEqual(actual, PRIORITY_BY_ID)
 
-        self.assertEqual(self.by_id["cellpose"]["priority"], "P0/P1")
+        for component_id, priority in actual.items():
+            with self.subTest(component=component_id):
+                self.assertIn(priority, {"BASE", "P0", "P1"})
+                self.assertNotIn("/", priority)
+
+        schema_priorities = set(
+            self.schema["$defs"]["component"]["properties"]["priority"]["enum"]
+        )
+        self.assertEqual(schema_priorities, {"BASE", "P0", "P1"})
 
     def test_licenses_match_the_audited_identity(self):
         actual = {
