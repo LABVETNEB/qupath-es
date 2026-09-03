@@ -1,0 +1,2548 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-03T02:51:59+00:00",
+  "audit_type": "ECOSYSTEM_REPOSITORY_ARCHITECTURE_AUDIT",
+  "audit_mode": "READ_ONLY_AUDIT_AND_DESIGN. No se implemento ninguna arquitectura. Los unicos ficheros escritos son este informe y su companero Markdown.",
+  "repository": "https://github.com/LABVETNEB/qupath-es",
+  "repository_local_path": "C:\\qupath-es",
+  "repository_head": "120eb53b1c48571cdb828fbb985ed260c728b163",
+  "repository_branch": "main",
+  "working_tree_status": "CLEAN_AT_AUDIT_START",
+  "qupath_version": "0.7.0",
+  "qupath_build": "2026-02-25 16:06",
+  "qupath_upstream_commit": "04ccfa4",
+  "tests": {
+    "runner": "python -m unittest discover -s tests -p \"test_*.py\"",
+    "python_version": "3.14.5",
+    "python_executable": "C:\\Users\\Nico\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "total": 147,
+    "result": "OK",
+    "failures": 0,
+    "errors": 0,
+    "baseline_run": "before any write",
+    "final_run": "after writing the reports"
+  },
+  "frozen_artifacts": {
+    "versions/0.7.0/base/qupath-gui-strings.properties": "796EFC44FC23369E4D7BDFDE69C0FA2A702051BF2F9D71399157B505E8D45D2D",
+    "versions/0.7.0/dist/qupath-gui-strings_es.properties": "E4A966C90D1CE1368DE9EA21DECC7D9DBB0180087B60D3724690AAD4C128FC19",
+    "versions/0.7.0/work/translation.tsv": "D28002B435863AABB5F2C88DA2F6C84405353A6BD6453BF0CADA1C1588C7849C"
+  },
+  "evidence_grading": {
+    "FACT": "Medido en esta sesion sobre binarios instalados, el arbol de fuentes local o la API de GitHub.",
+    "OBSERVED": "Leido en fuentes o documentacion upstream sin ejecucion propia.",
+    "INFERRED": "Deducido de hechos verificados; no observado directamente.",
+    "RECOMMENDED": "Decision de diseno propuesta por esta auditoria.",
+    "UNKNOWN": "No verificable con los medios de esta sesion."
+  },
+  "corpus": {
+    "components_total": 13,
+    "extensions": 12,
+    "core": 1,
+    "p0": [
+      "dl-pixel-classifier",
+      "tiatoolbox",
+      "instanseg",
+      "cell-analysis-tools",
+      "training",
+      "stardist"
+    ],
+    "p0_p1": [
+      "cellpose"
+    ],
+    "p1": [
+      "wsinfer",
+      "djl",
+      "bioimageio",
+      "sam",
+      "image-export-toolkit"
+    ],
+    "base": [
+      "qupath-core"
+    ]
+  },
+  "components": [
+    {
+      "id": "dl-pixel-classifier",
+      "name": "qupath-extension-dl-pixel-classifier",
+      "type": "QUPATH_EXTENSION",
+      "repository": "https://github.com/uw-loci/qupath-extension-dl-pixel-classifier",
+      "owner": "uw-loci",
+      "role": "Deep learning para clasificacion de pixeles",
+      "priority": "P0",
+      "default_branch": "main",
+      "audited_commit": "cbf9bdeec4b923365bec1582c5cb93bec7829325",
+      "audited_commit_date": "2026-09-02T08:08:45Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": "v0.8.5",
+      "latest_release_published_at": "2026-07-22T23:09:27Z",
+      "release_assets": [
+        "qupath-extension-dl-pixel-classifier-0.8.5-all.jar"
+      ],
+      "publishes_binary_release": true,
+      "last_pushed_at": "2026-09-02T08:09:20Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "license_name": "Apache License 2.0",
+      "build_system": "GRADLE_KOTLIN_DSL + io.github.qupath.qupath-extension-settings:0.2.1",
+      "languages": {
+        "Java": 2547420,
+        "Python": 885291,
+        "Groovy": 41297,
+        "Shell": 16918,
+        "CSS": 544
+      },
+      "file_counts": {
+        "total_files": 201,
+        "java": 91,
+        "groovy": 6,
+        "py": 48,
+        "fxml": 0,
+        "json": 0,
+        "yaml": 3
+      },
+      "entry_point": "qupath.ext.dlclassifier.SetupDLClassifier",
+      "entry_point_mechanism": "META-INF/services/qupath.lib.gui.extensions.QuPathExtension",
+      "qupath_compatibility": {
+        "declared_api_version": "0.7.0",
+        "declared_where": "settings.gradle.kts qupath { version = ... }",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": null
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": true,
+        "bundles": [
+          {
+            "path": "src/main/resources/qupath/ext/dlclassifier/ui/strings.properties",
+            "keys": 66,
+            "bytes": 3495,
+            "external_flat_filename": "strings_es.properties"
+          }
+        ],
+        "total_bundle_keys": 66
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 0,
+        "assessment": "NONE_FOUND"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": 14
+      },
+      "hardcoded_ui_status": "PARTIALLY_EXTERNALISED",
+      "translation_mechanism": {
+        "resolution": "PLAIN_RESOURCEBUNDLE_GETBUNDLE",
+        "reachable_by_external_localization_directory": false,
+        "display_category_aware": false,
+        "notes": "Se resuelve con java.util.ResourceBundle.getBundle(String) de un solo argumento. No se aporta ningun ResourceBundle.Control de QuPath, de modo que el directorio externo de localizacion nunca se consulta; y no se solicita la categoria DISPLAY, de modo que bajo la politica de locale de este proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle incluido dentro del JAR seria seleccionado."
+      },
+      "localization_strategy_class": "TRANSLATABLE_WITH_EXTENSION_FORK",
+      "fork_required": true,
+      "fork_required_reason": "Existe bundle pero no se resuelve mediante un cargador consciente de QuPath y de DISPLAY",
+      "patch_required": true,
+      "upstream_pr_opportunity": "Migrar la resolucion de bundle al cargador de QuPath cuando exista; externalizar el resto de UI",
+      "audit_status": "AUDITED",
+      "translation_status": "NOT_STARTED",
+      "validation_status": "NOT_APPLICABLE",
+      "distribution_status": "UNSUPPORTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 66,
+        "value": null,
+        "confidence": "NOT_ESTIMATED"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2026-09-02T08:09:20Z",
+        "archived": false,
+        "open_issues": 6,
+        "stars": 0
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ]
+    },
+    {
+      "id": "tiatoolbox",
+      "name": "tiatoolbox-qupath-extension",
+      "type": "QUPATH_EXTENSION",
+      "repository": "https://github.com/TissueImageAnalytics/tiatoolbox-qupath-extension",
+      "owner": "TissueImageAnalytics",
+      "role": "Modelos de patologia digital TIAToolbox, inferencia (sidecar Python)",
+      "priority": "P0",
+      "default_branch": "main",
+      "audited_commit": "cb942b774c5b1f7340cfbb036687e0724adaaedd",
+      "audited_commit_date": "2026-08-21T15:59:03Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": null,
+      "latest_release_published_at": null,
+      "release_assets": [],
+      "publishes_binary_release": false,
+      "last_pushed_at": "2026-08-21T16:08:35Z",
+      "archived": false,
+      "license": "BSD-3-Clause",
+      "license_name": "BSD 3-Clause \"New\" or \"Revised\" License",
+      "build_system": "GRADLE_KOTLIN_DSL + io.github.qupath.qupath-extension-settings:0.2.1",
+      "languages": {
+        "Java": 158157,
+        "Python": 64380,
+        "Groovy": 2763
+      },
+      "file_counts": {
+        "total_files": 51,
+        "java": 24,
+        "groovy": 3,
+        "py": 5,
+        "fxml": 3,
+        "json": 1,
+        "yaml": 0
+      },
+      "entry_point": "qupath.ext.tiatoolbox.TIAToolboxExtension",
+      "entry_point_mechanism": "META-INF/services/qupath.lib.gui.extensions.QuPathExtension",
+      "qupath_compatibility": {
+        "declared_api_version": "0.6.0",
+        "declared_where": "settings.gradle.kts qupath { version = ... }",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": null
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": true,
+        "bundles": [
+          {
+            "path": "src/main/resources/qupath/ext/tiatoolbox/ui/strings.properties",
+            "keys": 106,
+            "bytes": 5543,
+            "external_flat_filename": "strings_es.properties"
+          }
+        ],
+        "total_bundle_keys": 106
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 0,
+        "assessment": "NONE_FOUND"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": 4
+      },
+      "hardcoded_ui_status": "PARTIALLY_EXTERNALISED",
+      "translation_mechanism": {
+        "resolution": "PLAIN_RESOURCEBUNDLE_GETBUNDLE",
+        "reachable_by_external_localization_directory": false,
+        "display_category_aware": false,
+        "notes": "Se resuelve con java.util.ResourceBundle.getBundle(String) de un solo argumento. No se aporta ningun ResourceBundle.Control de QuPath, de modo que el directorio externo de localizacion nunca se consulta; y no se solicita la categoria DISPLAY, de modo que bajo la politica de locale de este proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle incluido dentro del JAR seria seleccionado."
+      },
+      "localization_strategy_class": "TRANSLATABLE_WITH_EXTENSION_FORK",
+      "fork_required": true,
+      "fork_required_reason": "Existe bundle pero no se resuelve mediante un cargador consciente de QuPath y de DISPLAY",
+      "patch_required": true,
+      "upstream_pr_opportunity": "Migrar la resolucion de bundle al cargador de QuPath cuando exista; externalizar el resto de UI",
+      "audit_status": "AUDITED",
+      "translation_status": "NOT_STARTED",
+      "validation_status": "NOT_APPLICABLE",
+      "distribution_status": "UNSUPPORTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 106,
+        "value": null,
+        "confidence": "NOT_ESTIMATED"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2026-08-21T16:08:35Z",
+        "archived": false,
+        "open_issues": 1,
+        "stars": 3
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ]
+    },
+    {
+      "id": "instanseg",
+      "name": "qupath-extension-instanseg",
+      "type": "QUPATH_EXTENSION",
+      "repository": "https://github.com/qupath/qupath-extension-instanseg",
+      "owner": "qupath",
+      "role": "Segmentacion celular/nuclear mediante deep learning (InstanSeg)",
+      "priority": "P0",
+      "default_branch": "main",
+      "audited_commit": "90b260157f51f137201e11061b912b552c8b444f",
+      "audited_commit_date": "2026-07-02T14:57:15Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": "v0.1.7",
+      "latest_release_published_at": "2026-07-02T15:03:41Z",
+      "release_assets": [
+        "qupath-extension-instanseg-0.1.7-javadoc.jar",
+        "qupath-extension-instanseg-0.1.7-sources.jar",
+        "qupath-extension-instanseg-0.1.7.jar"
+      ],
+      "publishes_binary_release": true,
+      "last_pushed_at": "2026-07-02T15:03:41Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "license_name": "Apache License 2.0",
+      "build_system": "GRADLE_KOTLIN_DSL + io.github.qupath.qupath-extension-settings:0.2.1",
+      "languages": {
+        "Java": 194021,
+        "CSS": 954
+      },
+      "file_counts": {
+        "total_files": 41,
+        "java": 22,
+        "groovy": 0,
+        "py": 0,
+        "fxml": 1,
+        "json": 1,
+        "yaml": 4
+      },
+      "entry_point": "qupath.ext.instanseg.ui.InstanSegExtension",
+      "entry_point_mechanism": "META-INF/services/qupath.lib.gui.extensions.QuPathExtension",
+      "qupath_compatibility": {
+        "declared_api_version": "0.6.0",
+        "declared_where": "settings.gradle.kts qupath { version = ... }",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": null
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": true,
+        "bundles": [
+          {
+            "path": "src/main/resources/qupath/ext/instanseg/ui/strings.properties",
+            "keys": 97,
+            "bytes": 6183,
+            "external_flat_filename": "strings_es.properties"
+          }
+        ],
+        "total_bundle_keys": 97
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 0,
+        "assessment": "NONE_FOUND"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": 1
+      },
+      "hardcoded_ui_status": "PARTIALLY_EXTERNALISED",
+      "translation_mechanism": {
+        "resolution": "PLAIN_RESOURCEBUNDLE_GETBUNDLE",
+        "reachable_by_external_localization_directory": false,
+        "display_category_aware": false,
+        "notes": "Se resuelve con java.util.ResourceBundle.getBundle(String) de un solo argumento. No se aporta ningun ResourceBundle.Control de QuPath, de modo que el directorio externo de localizacion nunca se consulta; y no se solicita la categoria DISPLAY, de modo que bajo la politica de locale de este proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle incluido dentro del JAR seria seleccionado."
+      },
+      "localization_strategy_class": "TRANSLATABLE_WITH_EXTENSION_FORK",
+      "fork_required": true,
+      "fork_required_reason": "Existe bundle pero no se resuelve mediante un cargador consciente de QuPath y de DISPLAY",
+      "patch_required": true,
+      "upstream_pr_opportunity": "Migrar la resolucion de bundle al cargador de QuPath cuando exista; externalizar el resto de UI",
+      "audit_status": "AUDITED",
+      "translation_status": "NOT_STARTED",
+      "validation_status": "NOT_APPLICABLE",
+      "distribution_status": "UNSUPPORTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 97,
+        "value": null,
+        "confidence": "NOT_ESTIMATED"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2026-07-02T15:03:41Z",
+        "archived": false,
+        "open_issues": 6,
+        "stars": 29
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ]
+    },
+    {
+      "id": "cell-analysis-tools",
+      "name": "qupath-extension-cell-analysis-tools",
+      "type": "QUPATH_EXTENSION",
+      "repository": "https://github.com/uw-loci/qupath-extension-cell-analysis-tools",
+      "owner": "uw-loci",
+      "role": "Analisis celular avanzado, clustering, fenotipado (Python)",
+      "priority": "P0",
+      "default_branch": "main",
+      "audited_commit": "fe05c0c9e8e885380f5cdbd5695b8c612c02e6df",
+      "audited_commit_date": "2026-09-02T20:28:41Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": "v0.11.2",
+      "latest_release_published_at": "2026-08-31T02:49:47Z",
+      "release_assets": [
+        "qupath-extension-cell-analysis-tools-0.11.2-all.jar"
+      ],
+      "publishes_binary_release": true,
+      "last_pushed_at": "2026-09-02T20:29:32Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "license_name": "Apache License 2.0",
+      "build_system": "GRADLE_KOTLIN_DSL + io.github.qupath.qupath-extension-settings:0.2.1",
+      "languages": {
+        "Java": 2483317,
+        "Python": 460566,
+        "Groovy": 5416
+      },
+      "file_counts": {
+        "total_files": 255,
+        "java": 162,
+        "groovy": 1,
+        "py": 35,
+        "fxml": 0,
+        "json": 2,
+        "yaml": 2
+      },
+      "entry_point": "qupath.ext.qpcat.SetupQPCAT",
+      "entry_point_mechanism": "META-INF/services/qupath.lib.gui.extensions.QuPathExtension",
+      "qupath_compatibility": {
+        "declared_api_version": "0.7.0",
+        "declared_where": "settings.gradle.kts qupath { version = ... }",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": null
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": true,
+        "bundles": [
+          {
+            "path": "src/main/resources/qupath/ext/qpcat/ui/strings.properties",
+            "keys": 32,
+            "bytes": 1678,
+            "external_flat_filename": "strings_es.properties"
+          }
+        ],
+        "total_bundle_keys": 32
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 0,
+        "assessment": "NONE_FOUND"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": 30
+      },
+      "hardcoded_ui_status": "PARTIALLY_EXTERNALISED",
+      "translation_mechanism": {
+        "resolution": "PLAIN_RESOURCEBUNDLE_GETBUNDLE",
+        "reachable_by_external_localization_directory": false,
+        "display_category_aware": false,
+        "notes": "Se resuelve con java.util.ResourceBundle.getBundle(String) de un solo argumento. No se aporta ningun ResourceBundle.Control de QuPath, de modo que el directorio externo de localizacion nunca se consulta; y no se solicita la categoria DISPLAY, de modo que bajo la politica de locale de este proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle incluido dentro del JAR seria seleccionado."
+      },
+      "localization_strategy_class": "TRANSLATABLE_WITH_EXTENSION_FORK",
+      "fork_required": true,
+      "fork_required_reason": "Existe bundle pero no se resuelve mediante un cargador consciente de QuPath y de DISPLAY",
+      "patch_required": true,
+      "upstream_pr_opportunity": "Migrar la resolucion de bundle al cargador de QuPath cuando exista; externalizar el resto de UI",
+      "audit_status": "AUDITED",
+      "translation_status": "NOT_STARTED",
+      "validation_status": "NOT_APPLICABLE",
+      "distribution_status": "UNSUPPORTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 32,
+        "value": null,
+        "confidence": "NOT_ESTIMATED"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2026-09-02T20:29:32Z",
+        "archived": false,
+        "open_issues": 3,
+        "stars": 6
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ]
+    },
+    {
+      "id": "training",
+      "name": "qupath-extension-training",
+      "type": "QUPATH_EXTENSION",
+      "repository": "https://github.com/qupath/qupath-extension-training",
+      "owner": "qupath",
+      "role": "Entrenamiento/aprendizaje y tour guiado de la interfaz",
+      "priority": "P0",
+      "default_branch": "main",
+      "audited_commit": "bdd19fbcffa8d1e7e80584766667951b9cd3b26a",
+      "audited_commit_date": "2026-04-23T13:20:42Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": "v0.1.1",
+      "latest_release_published_at": "2026-04-23T13:24:42Z",
+      "release_assets": [
+        "qupath-extension-training-0.1.1-javadoc.jar",
+        "qupath-extension-training-0.1.1-sources.jar",
+        "qupath-extension-training-0.1.1.jar"
+      ],
+      "publishes_binary_release": true,
+      "last_pushed_at": "2026-04-23T13:24:42Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "license_name": "Apache License 2.0",
+      "build_system": "GRADLE_KOTLIN_DSL + io.github.qupath.qupath-extension-settings:0.2.1",
+      "languages": {
+        "Java": 55072,
+        "CSS": 484
+      },
+      "file_counts": {
+        "total_files": 31,
+        "java": 14,
+        "groovy": 0,
+        "py": 0,
+        "fxml": 0,
+        "json": 0,
+        "yaml": 4
+      },
+      "entry_point": "qupath.ext.training.ui.TrainingExtension",
+      "entry_point_mechanism": "META-INF/services/qupath.lib.gui.extensions.QuPathExtension",
+      "qupath_compatibility": {
+        "declared_api_version": "0.6.0",
+        "declared_where": "settings.gradle.kts qupath { version = ... }",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": "0.1.0"
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": true,
+        "bundles": [
+          {
+            "path": "src/main/resources/qupath/ext/training/ui/strings.properties",
+            "keys": 2,
+            "bytes": 100,
+            "external_flat_filename": "strings_es.properties"
+          },
+          {
+            "path": "src/main/resources/qupath/ext/training/ui/tour.properties",
+            "keys": 94,
+            "bytes": 12644,
+            "external_flat_filename": "tour_es.properties"
+          }
+        ],
+        "total_bundle_keys": 96
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 0,
+        "assessment": "NONE_FOUND"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": 0
+      },
+      "hardcoded_ui_status": "PARTIALLY_EXTERNALISED",
+      "translation_mechanism": {
+        "resolution": "PLAIN_RESOURCEBUNDLE_GETBUNDLE",
+        "reachable_by_external_localization_directory": false,
+        "display_category_aware": false,
+        "notes": "Se resuelve con java.util.ResourceBundle.getBundle(String) de un solo argumento. No se aporta ningun ResourceBundle.Control de QuPath, de modo que el directorio externo de localizacion nunca se consulta; y no se solicita la categoria DISPLAY, de modo que bajo la politica de locale de este proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle incluido dentro del JAR seria seleccionado."
+      },
+      "localization_strategy_class": "TRANSLATABLE_WITH_EXTENSION_FORK",
+      "fork_required": true,
+      "fork_required_reason": "Existe bundle pero no se resuelve mediante un cargador consciente de QuPath y de DISPLAY",
+      "patch_required": true,
+      "upstream_pr_opportunity": "Migrar la resolucion de bundle al cargador de QuPath cuando exista; externalizar el resto de UI",
+      "audit_status": "AUDITED",
+      "translation_status": "NOT_STARTED",
+      "validation_status": "NOT_APPLICABLE",
+      "distribution_status": "UNSUPPORTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 96,
+        "value": null,
+        "confidence": "NOT_ESTIMATED"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2026-04-23T13:24:42Z",
+        "archived": false,
+        "open_issues": 1,
+        "stars": 1
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ]
+    },
+    {
+      "id": "stardist",
+      "name": "qupath-extension-stardist",
+      "type": "QUPATH_EXTENSION",
+      "repository": "https://github.com/qupath/qupath-extension-stardist",
+      "owner": "qupath",
+      "role": "Segmentacion nuclear mediante StarDist",
+      "priority": "P0",
+      "default_branch": "main",
+      "audited_commit": "11b50db1d66cbd1bcb3ae61af538f5e16be84324",
+      "audited_commit_date": "2026-06-25T11:30:26Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": "v0.6.0",
+      "latest_release_published_at": "2025-06-27T12:22:26Z",
+      "release_assets": [
+        "qupath-extension-stardist-0.6.0-javadoc.jar",
+        "qupath-extension-stardist-0.6.0-sources.jar",
+        "qupath-extension-stardist-0.6.0.jar"
+      ],
+      "publishes_binary_release": true,
+      "last_pushed_at": "2026-06-25T11:30:29Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "license_name": "Apache License 2.0",
+      "build_system": "GRADLE_KOTLIN_DSL + io.github.qupath.qupath-extension-settings:0.2.1",
+      "languages": {
+        "Java": 90497,
+        "Groovy": 10626
+      },
+      "file_counts": {
+        "total_files": 25,
+        "java": 4,
+        "groovy": 4,
+        "py": 0,
+        "fxml": 0,
+        "json": 0,
+        "yaml": 4
+      },
+      "entry_point": "qupath.ext.stardist.StarDistExtension",
+      "entry_point_mechanism": "META-INF/services/qupath.lib.gui.extensions.QuPathExtension",
+      "qupath_compatibility": {
+        "declared_api_version": "0.6.0",
+        "declared_where": "settings.gradle.kts qupath { version = ... }",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": null
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": false,
+        "bundles": [],
+        "total_bundle_keys": 0
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 0,
+        "assessment": "NONE_FOUND"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": 1
+      },
+      "hardcoded_ui_status": "FULLY_HARDCODED",
+      "translation_mechanism": {
+        "resolution": "NO_RESOURCE_BUNDLE",
+        "reachable_by_external_localization_directory": false,
+        "display_category_aware": false,
+        "notes": "Se resuelve con java.util.ResourceBundle.getBundle(String) de un solo argumento. No se aporta ningun ResourceBundle.Control de QuPath, de modo que el directorio externo de localizacion nunca se consulta; y no se solicita la categoria DISPLAY, de modo que bajo la politica de locale de este proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle incluido dentro del JAR seria seleccionado."
+      },
+      "localization_strategy_class": "TRANSLATABLE_ONLY_AFTER_STRING_EXTERNALISATION",
+      "fork_required": true,
+      "fork_required_reason": "No existe ResourceBundle: primero hay que externalizar en codigo las cadenas visibles",
+      "patch_required": true,
+      "upstream_pr_opportunity": "Migrar la resolucion de bundle al cargador de QuPath cuando exista; externalizar el resto de UI",
+      "audit_status": "AUDITED",
+      "translation_status": "NOT_STARTED",
+      "validation_status": "NOT_APPLICABLE",
+      "distribution_status": "UNSUPPORTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 0,
+        "value": null,
+        "confidence": "NOT_ESTIMATED"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2026-06-25T11:30:29Z",
+        "archived": false,
+        "open_issues": 2,
+        "stars": 49
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ]
+    },
+    {
+      "id": "cellpose",
+      "name": "qupath-extension-cellpose",
+      "type": "QUPATH_EXTENSION",
+      "repository": "https://github.com/BIOP/qupath-extension-cellpose",
+      "owner": "BIOP",
+      "role": "Segmentacion celular/nuclear mediante Cellpose",
+      "priority": "P0/P1",
+      "default_branch": "main",
+      "audited_commit": "5d1481674b467bb4a590cc7d39b29f58fe40c287",
+      "audited_commit_date": "2026-07-06T14:15:35Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": "v0.12.1",
+      "latest_release_published_at": "2026-05-27T13:23:05Z",
+      "release_assets": [
+        "qupath-extension-cellpose-0.12.1.zip"
+      ],
+      "publishes_binary_release": true,
+      "last_pushed_at": "2026-07-06T14:15:35Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "license_name": "Apache License 2.0",
+      "build_system": "GRADLE_KOTLIN_DSL + io.github.qupath.qupath-extension-settings:0.2.1",
+      "languages": {
+        "Jupyter Notebook": 2550560,
+        "Java": 151581,
+        "Python": 15242,
+        "Groovy": 14861
+      },
+      "file_counts": {
+        "total_files": 109,
+        "java": 6,
+        "groovy": 4,
+        "py": 1,
+        "fxml": 0,
+        "json": 0,
+        "yaml": 7
+      },
+      "entry_point": "qupath.ext.biop.cellpose.CellposeExtension",
+      "entry_point_mechanism": "META-INF/services/qupath.lib.gui.extensions.QuPathExtension",
+      "qupath_compatibility": {
+        "declared_api_version": "0.7.0",
+        "declared_where": "settings.gradle.kts qupath { version = ... }",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": null
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": false,
+        "bundles": [],
+        "total_bundle_keys": 0
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 0,
+        "assessment": "NONE_FOUND"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": 7
+      },
+      "hardcoded_ui_status": "FULLY_HARDCODED",
+      "translation_mechanism": {
+        "resolution": "NO_RESOURCE_BUNDLE",
+        "reachable_by_external_localization_directory": false,
+        "display_category_aware": false,
+        "notes": "Se resuelve con java.util.ResourceBundle.getBundle(String) de un solo argumento. No se aporta ningun ResourceBundle.Control de QuPath, de modo que el directorio externo de localizacion nunca se consulta; y no se solicita la categoria DISPLAY, de modo que bajo la politica de locale de este proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle incluido dentro del JAR seria seleccionado."
+      },
+      "localization_strategy_class": "TRANSLATABLE_ONLY_AFTER_STRING_EXTERNALISATION",
+      "fork_required": true,
+      "fork_required_reason": "No existe ResourceBundle: primero hay que externalizar en codigo las cadenas visibles",
+      "patch_required": true,
+      "upstream_pr_opportunity": "Migrar la resolucion de bundle al cargador de QuPath cuando exista; externalizar el resto de UI",
+      "audit_status": "AUDITED",
+      "translation_status": "NOT_STARTED",
+      "validation_status": "NOT_APPLICABLE",
+      "distribution_status": "UNSUPPORTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 0,
+        "value": null,
+        "confidence": "NOT_ESTIMATED"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2026-07-06T14:15:35Z",
+        "archived": false,
+        "open_issues": 6,
+        "stars": 95
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ]
+    },
+    {
+      "id": "wsinfer",
+      "name": "qupath-extension-wsinfer",
+      "type": "QUPATH_EXTENSION",
+      "repository": "https://github.com/qupath/qupath-extension-wsinfer",
+      "owner": "qupath",
+      "role": "Inferencia deep learning sobre whole-slide images",
+      "priority": "P1",
+      "default_branch": "main",
+      "audited_commit": "13fe2dc3373b8ceb43c6ae4c285cfb32ef2ee311",
+      "audited_commit_date": "2025-12-03T13:54:34Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": "v0.4.0",
+      "latest_release_published_at": "2025-06-27T12:21:29Z",
+      "release_assets": [
+        "qupath-extension-wsinfer-0.4.0-javadoc.jar",
+        "qupath-extension-wsinfer-0.4.0-sources.jar",
+        "qupath-extension-wsinfer-0.4.0.jar"
+      ],
+      "publishes_binary_release": true,
+      "last_pushed_at": "2025-12-03T13:54:39Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "license_name": "Apache License 2.0",
+      "build_system": "GRADLE_KOTLIN_DSL + io.github.qupath.qupath-extension-settings:0.2.1",
+      "languages": {
+        "Java": 109522,
+        "CSS": 1014
+      },
+      "file_counts": {
+        "total_files": 38,
+        "java": 19,
+        "groovy": 0,
+        "py": 0,
+        "fxml": 2,
+        "json": 0,
+        "yaml": 4
+      },
+      "entry_point": "qupath.ext.wsinfer.WSInferExtension",
+      "entry_point_mechanism": "META-INF/services/qupath.lib.gui.extensions.QuPathExtension",
+      "qupath_compatibility": {
+        "declared_api_version": "0.6.0",
+        "declared_where": "settings.gradle.kts qupath { version = ... }",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": null
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": true,
+        "bundles": [
+          {
+            "path": "src/main/resources/qupath/ext/wsinfer/ui/strings.properties",
+            "keys": 65,
+            "bytes": 3946,
+            "external_flat_filename": "strings_es.properties"
+          }
+        ],
+        "total_bundle_keys": 65
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 0,
+        "assessment": "NONE_FOUND"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": 1
+      },
+      "hardcoded_ui_status": "PARTIALLY_EXTERNALISED",
+      "translation_mechanism": {
+        "resolution": "PLAIN_RESOURCEBUNDLE_GETBUNDLE",
+        "reachable_by_external_localization_directory": false,
+        "display_category_aware": false,
+        "notes": "Se resuelve con java.util.ResourceBundle.getBundle(String) de un solo argumento. No se aporta ningun ResourceBundle.Control de QuPath, de modo que el directorio externo de localizacion nunca se consulta; y no se solicita la categoria DISPLAY, de modo que bajo la politica de locale de este proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle incluido dentro del JAR seria seleccionado."
+      },
+      "localization_strategy_class": "TRANSLATABLE_WITH_EXTENSION_FORK",
+      "fork_required": true,
+      "fork_required_reason": "Existe bundle pero no se resuelve mediante un cargador consciente de QuPath y de DISPLAY",
+      "patch_required": true,
+      "upstream_pr_opportunity": "Migrar la resolucion de bundle al cargador de QuPath cuando exista; externalizar el resto de UI",
+      "audit_status": "AUDITED",
+      "translation_status": "NOT_STARTED",
+      "validation_status": "NOT_APPLICABLE",
+      "distribution_status": "UNSUPPORTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 65,
+        "value": null,
+        "confidence": "NOT_ESTIMATED"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2025-12-03T13:54:39Z",
+        "archived": false,
+        "open_issues": 2,
+        "stars": 30
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ]
+    },
+    {
+      "id": "djl",
+      "name": "qupath-extension-djl",
+      "type": "QUPATH_EXTENSION",
+      "repository": "https://github.com/qupath/qupath-extension-djl",
+      "owner": "qupath",
+      "role": "Backend Java (Deep Java Library) para ejecucion de modelos",
+      "priority": "P1",
+      "default_branch": "main",
+      "audited_commit": "58b6c022ca3611e67d73406c9650d50ef149e2d0",
+      "audited_commit_date": "2026-04-23T14:28:00Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": "v0.4.3",
+      "latest_release_published_at": "2026-04-23T14:48:07Z",
+      "release_assets": [
+        "qupath-extension-djl-0.4.3-javadoc.jar",
+        "qupath-extension-djl-0.4.3-sources.jar",
+        "qupath-extension-djl-0.4.3.jar"
+      ],
+      "publishes_binary_release": true,
+      "last_pushed_at": "2026-04-23T14:48:07Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "license_name": "Apache License 2.0",
+      "build_system": "GRADLE_KOTLIN_DSL + io.github.qupath.qupath-extension-settings:0.2.1",
+      "languages": {
+        "Java": 113349,
+        "CSS": 494
+      },
+      "file_counts": {
+        "total_files": 26,
+        "java": 7,
+        "groovy": 0,
+        "py": 0,
+        "fxml": 0,
+        "json": 0,
+        "yaml": 4
+      },
+      "entry_point": "qupath.ext.djl.DjlExtension",
+      "entry_point_mechanism": "META-INF/services/qupath.lib.gui.extensions.QuPathExtension",
+      "qupath_compatibility": {
+        "declared_api_version": "0.6.0",
+        "declared_where": "settings.gradle.kts qupath { version = ... }",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": "0.4.2"
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": true,
+        "bundles": [
+          {
+            "path": "src/main/resources/qupath/ext/djl/ui/strings.properties",
+            "keys": 46,
+            "bytes": 3006,
+            "external_flat_filename": "strings_es.properties"
+          }
+        ],
+        "total_bundle_keys": 46
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 0,
+        "assessment": "NONE_FOUND"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": 1
+      },
+      "hardcoded_ui_status": "PARTIALLY_EXTERNALISED",
+      "translation_mechanism": {
+        "resolution": "PLAIN_RESOURCEBUNDLE_GETBUNDLE",
+        "reachable_by_external_localization_directory": false,
+        "display_category_aware": false,
+        "notes": "Se resuelve con java.util.ResourceBundle.getBundle(String) de un solo argumento. No se aporta ningun ResourceBundle.Control de QuPath, de modo que el directorio externo de localizacion nunca se consulta; y no se solicita la categoria DISPLAY, de modo que bajo la politica de locale de este proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle incluido dentro del JAR seria seleccionado."
+      },
+      "localization_strategy_class": "TRANSLATABLE_WITH_EXTENSION_FORK",
+      "fork_required": true,
+      "fork_required_reason": "Existe bundle pero no se resuelve mediante un cargador consciente de QuPath y de DISPLAY",
+      "patch_required": true,
+      "upstream_pr_opportunity": "Migrar la resolucion de bundle al cargador de QuPath cuando exista; externalizar el resto de UI",
+      "audit_status": "AUDITED",
+      "translation_status": "NOT_STARTED",
+      "validation_status": "NOT_APPLICABLE",
+      "distribution_status": "UNSUPPORTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 46,
+        "value": null,
+        "confidence": "NOT_ESTIMATED"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2026-04-23T14:48:07Z",
+        "archived": false,
+        "open_issues": 0,
+        "stars": 10
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ]
+    },
+    {
+      "id": "bioimageio",
+      "name": "qupath-extension-bioimageio",
+      "type": "QUPATH_EXTENSION",
+      "repository": "https://github.com/qupath/qupath-extension-bioimageio",
+      "owner": "qupath",
+      "role": "Integracion de modelos interoperables BioImage.IO",
+      "priority": "P1",
+      "default_branch": "main",
+      "audited_commit": "5e6c1069ac46965bf3eec6d6502561fc497843ae",
+      "audited_commit_date": "2026-08-10T15:10:11Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": "v0.2.0",
+      "latest_release_published_at": "2026-08-10T15:17:31Z",
+      "release_assets": [
+        "qupath-extension-bioimageio-0.2.0-javadoc.jar",
+        "qupath-extension-bioimageio-0.2.0-sources.jar",
+        "qupath-extension-bioimageio-0.2.0.jar"
+      ],
+      "publishes_binary_release": true,
+      "last_pushed_at": "2026-08-10T15:17:31Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "license_name": "Apache License 2.0",
+      "build_system": "GRADLE_KOTLIN_DSL + io.github.qupath.qupath-extension-settings:0.2.1",
+      "languages": {
+        "Java": 27542,
+        "CSS": 576
+      },
+      "file_counts": {
+        "total_files": 24,
+        "java": 4,
+        "groovy": 0,
+        "py": 0,
+        "fxml": 1,
+        "json": 0,
+        "yaml": 4
+      },
+      "entry_point": "qupath.ext.bioimageio.BioimageIoExtension",
+      "entry_point_mechanism": "META-INF/services/qupath.lib.gui.extensions.QuPathExtension",
+      "qupath_compatibility": {
+        "declared_api_version": "0.8.0-SNAPSHOT",
+        "declared_where": "settings.gradle.kts qupath { version = ... }",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": null
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": true,
+        "bundles": [
+          {
+            "path": "src/main/resources/qupath/ext/bioimageio/strings.properties",
+            "keys": 29,
+            "bytes": 2017,
+            "external_flat_filename": "strings_es.properties"
+          }
+        ],
+        "total_bundle_keys": 29
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 0,
+        "assessment": "NONE_FOUND"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": 2
+      },
+      "hardcoded_ui_status": "PARTIALLY_EXTERNALISED",
+      "translation_mechanism": {
+        "resolution": "PLAIN_RESOURCEBUNDLE_GETBUNDLE",
+        "reachable_by_external_localization_directory": false,
+        "display_category_aware": false,
+        "notes": "Se resuelve con java.util.ResourceBundle.getBundle(String) de un solo argumento. No se aporta ningun ResourceBundle.Control de QuPath, de modo que el directorio externo de localizacion nunca se consulta; y no se solicita la categoria DISPLAY, de modo que bajo la politica de locale de este proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle incluido dentro del JAR seria seleccionado."
+      },
+      "localization_strategy_class": "TRANSLATABLE_WITH_EXTENSION_FORK",
+      "fork_required": true,
+      "fork_required_reason": "Existe bundle pero no se resuelve mediante un cargador consciente de QuPath y de DISPLAY",
+      "patch_required": true,
+      "upstream_pr_opportunity": "Migrar la resolucion de bundle al cargador de QuPath cuando exista; externalizar el resto de UI",
+      "audit_status": "AUDITED",
+      "translation_status": "NOT_STARTED",
+      "validation_status": "NOT_APPLICABLE",
+      "distribution_status": "UNSUPPORTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 29,
+        "value": null,
+        "confidence": "NOT_ESTIMATED"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2026-08-10T15:17:31Z",
+        "archived": false,
+        "open_issues": 3,
+        "stars": 5
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ]
+    },
+    {
+      "id": "sam",
+      "name": "qupath-extension-sam",
+      "type": "QUPATH_EXTENSION",
+      "repository": "https://github.com/ksugar/qupath-extension-sam",
+      "owner": "ksugar",
+      "role": "Segment Anything Model aplicado a QuPath",
+      "priority": "P1",
+      "default_branch": "main",
+      "audited_commit": "cf328efbbb7196296c2a257f15fc22c108fb8fec",
+      "audited_commit_date": "2026-02-15T15:42:53Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": "v0.9.1",
+      "latest_release_published_at": "2026-02-15T15:07:49Z",
+      "release_assets": [
+        "qupath-extension-sam-0.9.1-all.jar",
+        "qupath-extension-sam-0.9.1.jar"
+      ],
+      "publishes_binary_release": true,
+      "last_pushed_at": "2026-02-15T15:42:53Z",
+      "archived": false,
+      "license": "GPL-3.0",
+      "license_name": "GNU General Public License v3.0",
+      "build_system": "GRADLE_KOTLIN_DSL + io.github.qupath.qupath-extension-settings:0.2.1",
+      "languages": {
+        "Java": 281841,
+        "Groovy": 2882
+      },
+      "file_counts": {
+        "total_files": 46,
+        "java": 32,
+        "groovy": 2,
+        "py": 0,
+        "fxml": 0,
+        "json": 2,
+        "yaml": 0
+      },
+      "entry_point": "org.elephant.sam.SAMExtension",
+      "entry_point_mechanism": "META-INF/services/qupath.lib.gui.extensions.QuPathExtension",
+      "qupath_compatibility": {
+        "declared_api_version": "0.6.0",
+        "declared_where": "settings.gradle.kts qupath { version = ... }",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": null
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": false,
+        "bundles": [],
+        "total_bundle_keys": 0
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 0,
+        "assessment": "NONE_FOUND"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": 8
+      },
+      "hardcoded_ui_status": "FULLY_HARDCODED",
+      "translation_mechanism": {
+        "resolution": "NO_RESOURCE_BUNDLE",
+        "reachable_by_external_localization_directory": false,
+        "display_category_aware": false,
+        "notes": "Se resuelve con java.util.ResourceBundle.getBundle(String) de un solo argumento. No se aporta ningun ResourceBundle.Control de QuPath, de modo que el directorio externo de localizacion nunca se consulta; y no se solicita la categoria DISPLAY, de modo que bajo la politica de locale de este proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle incluido dentro del JAR seria seleccionado."
+      },
+      "localization_strategy_class": "TRANSLATABLE_ONLY_AFTER_STRING_EXTERNALISATION",
+      "fork_required": true,
+      "fork_required_reason": "No existe ResourceBundle: primero hay que externalizar en codigo las cadenas visibles",
+      "patch_required": true,
+      "upstream_pr_opportunity": "Migrar la resolucion de bundle al cargador de QuPath cuando exista; externalizar el resto de UI",
+      "audit_status": "AUDITED",
+      "translation_status": "NOT_STARTED",
+      "validation_status": "NOT_APPLICABLE",
+      "distribution_status": "UNSUPPORTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 0,
+        "value": null,
+        "confidence": "NOT_ESTIMATED"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2026-02-15T15:42:53Z",
+        "archived": false,
+        "open_issues": 13,
+        "stars": 137
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ]
+    },
+    {
+      "id": "image-export-toolkit",
+      "name": "qupath-extension-image-export-toolkit",
+      "type": "QUPATH_EXTENSION",
+      "repository": "https://github.com/uw-loci/qupath-extension-image-export-toolkit",
+      "owner": "uw-loci",
+      "role": "Exportacion avanzada de imagenes, regiones y datos",
+      "priority": "P1",
+      "default_branch": "main",
+      "audited_commit": "35bdbf516bb82de3096793dfdae01b3d9f6f3259",
+      "audited_commit_date": "2026-08-20T17:48:20Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": "v1.2.8",
+      "latest_release_published_at": "2026-06-10T05:25:12Z",
+      "release_assets": [
+        "qupath-extension-image-export-toolkit-1.2.8-all.jar"
+      ],
+      "publishes_binary_release": true,
+      "last_pushed_at": "2026-08-20T17:48:22Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "license_name": "Apache License 2.0",
+      "build_system": "GRADLE_KOTLIN_DSL + io.github.qupath.qupath-extension-settings:0.2.1",
+      "languages": {
+        "Java": 1221844
+      },
+      "file_counts": {
+        "total_files": 100,
+        "java": 77,
+        "groovy": 0,
+        "py": 0,
+        "fxml": 0,
+        "json": 0,
+        "yaml": 1
+      },
+      "entry_point": "qupath.ext.quiet.QuietExtension",
+      "entry_point_mechanism": "META-INF/services/qupath.lib.gui.extensions.QuPathExtension",
+      "qupath_compatibility": {
+        "declared_api_version": "0.7.0",
+        "declared_where": "settings.gradle.kts qupath { version = ... }",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": null
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": true,
+        "bundles": [
+          {
+            "path": "src/main/resources/qupath/ext/quiet/ui/strings.properties",
+            "keys": 611,
+            "bytes": 73108,
+            "external_flat_filename": "strings_es.properties"
+          }
+        ],
+        "total_bundle_keys": 611
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 0,
+        "assessment": "NONE_FOUND"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": 0
+      },
+      "hardcoded_ui_status": "PARTIALLY_EXTERNALISED",
+      "translation_mechanism": {
+        "resolution": "PLAIN_RESOURCEBUNDLE_GETBUNDLE",
+        "reachable_by_external_localization_directory": false,
+        "display_category_aware": false,
+        "notes": "Se resuelve con java.util.ResourceBundle.getBundle(String) de un solo argumento. No se aporta ningun ResourceBundle.Control de QuPath, de modo que el directorio externo de localizacion nunca se consulta; y no se solicita la categoria DISPLAY, de modo que bajo la politica de locale de este proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle incluido dentro del JAR seria seleccionado."
+      },
+      "localization_strategy_class": "TRANSLATABLE_WITH_EXTENSION_FORK",
+      "fork_required": true,
+      "fork_required_reason": "Existe bundle pero no se resuelve mediante un cargador consciente de QuPath y de DISPLAY",
+      "patch_required": true,
+      "upstream_pr_opportunity": "Migrar la resolucion de bundle al cargador de QuPath cuando exista; externalizar el resto de UI",
+      "audit_status": "AUDITED",
+      "translation_status": "NOT_STARTED",
+      "validation_status": "NOT_APPLICABLE",
+      "distribution_status": "UNSUPPORTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 611,
+        "value": null,
+        "confidence": "NOT_ESTIMATED"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2026-08-20T17:48:22Z",
+        "archived": false,
+        "open_issues": 0,
+        "stars": 3
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ]
+    },
+    {
+      "id": "qupath-core",
+      "name": "qupath",
+      "type": "QUPATH_CORE",
+      "repository": "https://github.com/qupath/qupath",
+      "owner": "qupath",
+      "role": "Aplicacion base: API, ParameterList, menus, acciones, sistema de extensiones, ResourceBundles, PathClass, mediciones",
+      "priority": "BASE",
+      "default_branch": "main",
+      "audited_commit": "67cbf619996582f8737550080cd05c6e52b37b13",
+      "audited_commit_date": "2026-09-01T12:37:23Z",
+      "audited_at": "2026-09-03T02:46:12+00:00",
+      "latest_release_or_tag": "v0.7.0",
+      "latest_release_published_at": "2026-03-02T15:07:30Z",
+      "release_assets": [
+        "QuPath-v0.7.0-Linux.tar.xz",
+        "QuPath-v0.7.0-Mac-arm64.pkg",
+        "QuPath-v0.7.0-Mac-x64.pkg",
+        "QuPath-v0.7.0-Windows.msi",
+        "QuPath-v0.7.0-Windows.zip"
+      ],
+      "publishes_binary_release": true,
+      "last_pushed_at": "2026-09-01T12:37:23Z",
+      "archived": false,
+      "license": "GPL-3.0",
+      "license_name": "GNU General Public License v3.0",
+      "build_system": "GRADLE_KOTLIN_DSL",
+      "languages": {
+        "Java": 9949695,
+        "CSS": 23982,
+        "Assembly": 15031,
+        "ImageJ Macro": 7324,
+        "Groovy": 4950,
+        "Shell": 2908
+      },
+      "file_counts": {
+        "total_files": 1331,
+        "java": 1030,
+        "groovy": 4,
+        "py": 0,
+        "fxml": 2,
+        "json": 12,
+        "yaml": 6
+      },
+      "entry_point": null,
+      "entry_point_mechanism": null,
+      "qupath_compatibility": {
+        "declared_api_version": "0.7.0",
+        "declared_where": "VERSION / release tag",
+        "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+        "bundled_in_qupath_0_7_0_install": null
+      },
+      "resource_bundle_status": {
+        "has_resource_bundle": true,
+        "bundles": [
+          {
+            "path": "qupath-gui-fx/src/main/resources/qupath/lib/gui/localization/qupath-gui-strings.properties",
+            "keys": 2610,
+            "bytes": 190947,
+            "external_flat_filename": "qupath-gui-strings_es.properties"
+          }
+        ],
+        "total_bundle_keys": 2610,
+        "branch_note": "Key count measured on the default branch (0.8.0-SNAPSHOT), not on 0.7.0."
+      },
+      "parameterlist_status": {
+        "files_matching_ParameterList": 76,
+        "assessment": "CORE_CONCENTRATION"
+      },
+      "pathclass_status": {
+        "files_matching_PathClass": null
+      },
+      "hardcoded_ui_status": "MAIN_BUNDLE_EXTERNALISED_REST_HARDCODED",
+      "translation_mechanism": {
+        "resolution": "QUPATH_RESOURCE_CONTROL_EXTERNAL_DIRECTORY",
+        "reachable_by_external_localization_directory": true,
+        "display_category_aware": true,
+        "notes": "Se resuelve a traves del QuPathResourceControl de QuPathResources, que busca en el directorio externo de localizacion y usa Locale.Category.DISPLAY."
+      },
+      "localization_strategy_class": "TRANSLATABLE_EXTERNAL",
+      "fork_required": false,
+      "fork_required_reason": null,
+      "patch_required": false,
+      "upstream_pr_opportunity": "Anadir a QuPathResources una API de bundles de extension sin colisiones y consciente de DISPLAY",
+      "audit_status": "AUDITED",
+      "translation_status": "TRANSLATED",
+      "validation_status": "VALIDATED",
+      "distribution_status": "DISTRIBUTED",
+      "estimated_translation_coverage": {
+        "bundle_keys_available": 2610,
+        "value": "894/894 claves del bundle principal (100%); aplicacion completa 50-60% (estimado)",
+        "confidence": "EXACT_FOR_BUNDLE_ESTIMATED_FOR_APPLICATION"
+      },
+      "maintenance_status": {
+        "last_pushed_at": "2026-09-01T12:37:23Z",
+        "archived": false,
+        "open_issues": 31,
+        "stars": 1433
+      },
+      "unknowns": [
+        "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+        "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+        "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+      ],
+      "frozen_target": {
+        "qupath_version": "0.7.0",
+        "upstream_commit": "04ccfa4",
+        "main_bundle_keys": 894,
+        "reviewed": 884,
+        "keep_en": 10,
+        "pending": 0,
+        "draft": 0,
+        "blocked": 0,
+        "note": "audited_commit points at the default branch, which is 0.8.0-SNAPSHOT. The 2610-key figure in resource_bundle_status therefore describes the 0.8 development branch, NOT the frozen 0.7.0 target."
+      }
+    }
+  ],
+  "key_findings": [
+    {
+      "id": "F1",
+      "grade": "FACT",
+      "title": "El directorio externo de localizacion es un espacio de nombres PLANO",
+      "detail": "QuPathResources.QuPathResourceControl.getShortPropertyFileName() descarta el paquete y conserva solo el ultimo segmento del nombre de bundle. Verificado en el codigo de 0.8.0-SNAPSHOT y confirmado en 0.7.0 por la presencia de los mismos metodos en qupath-gui-fx-0.7.0.jar y por el fichero plano ya instalado por este proyecto.",
+      "consequence": "11 bundles del corpus se llaman 'strings' y colapsan todos en strings_es.properties. Como maximo uno puede servirse externamente.",
+      "evidence": {
+        "colliding_external_filename": "strings_es.properties",
+        "corpus_bundles_colliding": 11,
+        "bundles_already_colliding_inside_the_0_7_0_install": [
+          "qupath/ext/djl/ui/strings",
+          "qupath/ext/openslide/strings",
+          "qupath/imagej/gui/scripts/strings",
+          "qupath/ext/training/ui/strings",
+          "qupath/fx/localization/strings",
+          "qupath/ext/extensionmanager/strings",
+          "qupath/ui/logviewer/ui/main/strings",
+          "qupath/ui/javadocviewer/strings"
+        ]
+      }
+    },
+    {
+      "id": "F2",
+      "grade": "FACT",
+      "title": "Ninguna extension del corpus es localizable externamente",
+      "detail": "Las 10 extensiones que tienen bundle lo resuelven con java.util.ResourceBundle.getBundle(String) de un argumento. Ninguna aporta un ResourceBundle.Control de QuPath ni solicita Locale.Category.DISPLAY.",
+      "consequence": "(a) el directorio externo nunca se consulta para ellas; (b) bajo la politica de locale del proyecto (DISPLAY=es, base/FORMAT=en_US) ni siquiera un bundle _es dentro del JAR seria seleccionado. Localizar cualquier extension exige un cambio de codigo, no solo un fichero de traduccion.",
+      "evidence": {
+        "extensions_with_bundle": 10,
+        "using_plain_getBundle": 10,
+        "using_qupath_aware_loader": 0
+      }
+    },
+    {
+      "id": "F3",
+      "grade": "FACT",
+      "title": "Tres extensiones no tienen ningun ResourceBundle",
+      "detail": "stardist, cellpose y sam no incluyen ningun .properties de interfaz.",
+      "consequence": "Requieren externalizacion de cadenas en origen antes de poder traducirse."
+    },
+    {
+      "id": "F4",
+      "grade": "FACT",
+      "title": "ParameterList es un problema del Core, no de las extensiones",
+      "detail": "Busqueda de codigo en los 12 repositorios: 0 ficheros usan ParameterList. En el arbol de QuPath 0.8.0-SNAPSHOT: 76 ficheros y 455 llamadas add*Parameter, de las cuales solo 9 referencian una consulta de recursos.",
+      "consequence": "~98% de las etiquetas y textos de ayuda de ParameterList siguen hardcoded incluso en la rama de desarrollo 0.8. La clave y la etiqueta estan separadas en la firma del metodo, asi que un PR upstream podria externalizar la etiqueta sin tocar la clave."
+    },
+    {
+      "id": "F5",
+      "grade": "FACT",
+      "title": "QuPath 0.7.0 ya incluye un gestor de extensiones con catalogos",
+      "detail": "extensionmanager-1.1.1.jar define el esquema Catalog/Extension/Release/VersionRange y un registry.json local en <dir usuario>/extensions/catalogs. El catalogo oficial es https://raw.githubusercontent.com/qupath/qupath-catalog/refs/heads/main/catalog.json",
+      "consequence": "Existe un canal de distribucion sancionado upstream. El registro propio debe poder proyectarse a ese esquema en lugar de competir con el.",
+      "evidence": {
+        "catalog_fields": [
+          "name",
+          "description",
+          "extensions[]"
+        ],
+        "extension_fields": [
+          "name",
+          "description",
+          "author",
+          "homepage",
+          "starred",
+          "releases[]"
+        ],
+        "release_fields": [
+          "name",
+          "mainUrl",
+          "requiredDependencyUrls[]",
+          "optionalDependencyUrls[]",
+          "javadocUrls[]",
+          "versionRange"
+        ],
+        "version_range_fields": [
+          "min",
+          "max",
+          "excludes[]"
+        ],
+        "allowed_release_hosts": [
+          "github.com",
+          "maven.scijava.org"
+        ],
+        "allowed_scheme": "https"
+      }
+    },
+    {
+      "id": "F6",
+      "grade": "FACT",
+      "title": "QuPath 0.8 triplica el bundle principal",
+      "detail": "894 claves en 0.7.0 frente a 2610 en la rama por defecto (0.8.0-SNAPSHOT).",
+      "consequence": "La migracion a 0.8.x traera del orden de 1716 claves nuevas. Debe planificarse."
+    },
+    {
+      "id": "F7",
+      "grade": "FACT",
+      "title": "Convencion de construccion uniforme en las 12 extensiones",
+      "detail": "Gradle Kotlin DSL con el plugin io.github.qupath.qupath-extension-settings:0.2.1 y un bloque qupath { version = ... } en settings.gradle.kts, mas un descriptor META-INF/services/qupath.lib.gui.extensions.QuPathExtension.",
+      "consequence": "Un unico procedimiento de auditoria, de compilacion y de fork sirve para todo el corpus, lo que hace viable escalar a 100 extensiones."
+    },
+    {
+      "id": "F8",
+      "grade": "FACT",
+      "title": "Dos componentes del corpus ya viajan dentro de QuPath 0.7.0",
+      "detail": "qupath-extension-djl 0.4.2 y qupath-extension-training 0.1.0 estan en la instalacion.",
+      "consequence": "No son extensiones que el usuario instale: son parte de la distribucion, con version fijada por QuPath. Su politica de version es la del Core, no la propia."
+    },
+    {
+      "id": "F9",
+      "grade": "FACT",
+      "title": "Una extension del corpus no publica releases",
+      "detail": "TissueImageAnalytics/tiatoolbox-qupath-extension no tiene ninguna release publicada.",
+      "consequence": "No hay artefacto que fijar por SHA-256: solo puede fijarse por commit."
+    },
+    {
+      "id": "F10",
+      "grade": "FACT",
+      "title": "Dos licencias distintas de la del repositorio conviven en el corpus",
+      "detail": "10 extensiones Apache-2.0, tiatoolbox BSD-3-Clause, sam GPL-3.0; QuPath Core GPL-3.0. qupath-es es GPL-3.0.",
+      "consequence": "La trazabilidad legal por componente es obligatoria, no opcional."
+    }
+  ],
+  "current_architecture": {
+    "grade": "FACT",
+    "tracked_files": 71,
+    "git_dir_size": "809 KB",
+    "worktree_size": "1.5 MB",
+    "shape": "VERSION_MAJOR_SINGLE_COMPONENT",
+    "top_level": [
+      "README.md",
+      "CONTRIBUTING.md",
+      "SECURITY.md",
+      "NOTICE.md",
+      "LICENSE",
+      "docs/",
+      "tools/",
+      "tests/",
+      "runtime/",
+      "versions/",
+      ".github/"
+    ],
+    "version_axis": "versions/<qupath-version>/{base,dist,work,runtime,reports} + fingerprint.json + target-version.json",
+    "component_axis": "NONE",
+    "source_of_truth": "versions/<v>/work/translation.tsv (una fila por clave)",
+    "generated": "versions/<v>/dist/qupath-gui-strings_es.properties",
+    "immutable": "versions/<v>/base/* con SHA-256 en fingerprint.json y test que lo vigila",
+    "ci": ".github/workflows/ci.yml: dos jobs (tests, canonical bundle integrity), sin matriz",
+    "tooling": [
+      "translation_generator.py",
+      "translation_validator.py",
+      "linguistic_audit.py",
+      "qupath_version_migrator.py",
+      "coverage_audit.py",
+      "locale_timing_audit.py",
+      "properties_audit.py",
+      "apply_translations.py",
+      "es_translations.py"
+    ],
+    "strengths": [
+      "Fuente de verdad por clave en TSV con estados de ciclo de vida y trazabilidad de revision.",
+      "Artefacto instalado generado, nunca editado a mano; prueba de identidad byte a byte.",
+      "Inmutabilidad del bundle canonico verificada por fingerprint y por CI.",
+      "Politica de locale explicita y justificada (solo DISPLAY; FORMAT se queda en en_US).",
+      "Migrador entre versiones con politica de reutilizacion conservadora ya probada.",
+      "Validacion en dos capas (estructural y linguistica) previa a instalar.",
+      "Cero dependencias de terceros en el utillaje: solo biblioteca estandar.",
+      ".gitattributes protege los bytes de los artefactos con -text.",
+      "Invariantes escritos y ejecutables: 147 tests en verde."
+    ],
+    "limitations": [
+      "No existe eje de componente: nada donde registrar 12 extensiones y su compatibilidad.",
+      "El TSV y el generador estan acoplados a un unico bundle (el principal de la GUI).",
+      "No hay metadatos de licencia, artefacto ni hash por componente de terceros.",
+      "No hay mecanismo de deteccion de cambios upstream fuera del bundle del Core.",
+      "CI no escala: dos jobs monoliticos sin filtros de ruta ni matriz.",
+      "supported-versions.json es un registro de versiones de QuPath, no de componentes.",
+      "No hay separacion declarada entre GENERATED, SOURCE_OF_TRUTH y UPSTREAM_REFERENCE mas alla de base/."
+    ]
+  },
+  "architecture_requirements": [
+    {
+      "id": "R01",
+      "requirement": "Los artefactos congelados de 0.7.0 no pueden cambiar ni de bytes ni de ruta."
+    },
+    {
+      "id": "R02",
+      "requirement": "El eje de version de QuPath y el eje de componente deben ser independientes."
+    },
+    {
+      "id": "R03",
+      "requirement": "Ningun codigo fuente upstream se copia al repositorio."
+    },
+    {
+      "id": "R04",
+      "requirement": "Todo componente debe ser reproducible desde repo + tag + commit + hash de artefacto."
+    },
+    {
+      "id": "R05",
+      "requirement": "La traduccion debe ser independiente del sistema de construccion del componente."
+    },
+    {
+      "id": "R06",
+      "requirement": "Los identificadores funcionales deben estar protegidos por tests, no por convencion."
+    },
+    {
+      "id": "R07",
+      "requirement": "El coste de auditar una actualizacion upstream debe ser proporcional al diff."
+    },
+    {
+      "id": "R08",
+      "requirement": "CI debe ejecutar solo lo afectado por un cambio."
+    },
+    {
+      "id": "R09",
+      "requirement": "La licencia y la procedencia de cada componente deben ser consultables por maquina."
+    },
+    {
+      "id": "R10",
+      "requirement": "Los estados AUDITED / TRANSLATED / VALIDATED / DISTRIBUTED deben ser independientes."
+    },
+    {
+      "id": "R11",
+      "requirement": "Ningun fichero generado debe poder confundirse con una fuente canonica."
+    },
+    {
+      "id": "R12",
+      "requirement": "El numero de directorios debe crecer O(componentes + versiones), no O(componentes x versiones)."
+    },
+    {
+      "id": "R13",
+      "requirement": "La arquitectura debe poder proyectarse al esquema de catalogo del Extension Manager."
+    },
+    {
+      "id": "R14",
+      "requirement": "Un tercero debe poder responder que hay soportado sin leer codigo."
+    },
+    {
+      "id": "R15",
+      "requirement": "Ningun directorio ceremonial ni vacio."
+    }
+  ],
+  "architecture_alternatives": [
+    {
+      "id": "A1",
+      "name": "Statu quo ampliado (solo versions/)",
+      "pros": [
+        "Cero cambios",
+        "Ya probado"
+      ],
+      "cons": [
+        "No hay donde registrar componentes",
+        "No escala mas alla del Core"
+      ],
+      "ci_impact": "ninguno",
+      "upstream_update": "manual",
+      "divergence_risk": "n/a",
+      "repo_growth": "nulo",
+      "operational_complexity": "baja",
+      "reproducibility": "solo Core",
+      "verdict": "RECHAZADA: no cubre el objetivo"
+    },
+    {
+      "id": "A2",
+      "name": "Directorio plano extensions/<id>/ en la raiz",
+      "pros": [
+        "Simple de entender",
+        "Crecimiento lineal"
+      ],
+      "cons": [
+        "Sin eje de version: no puede expresar compatibilidad por version de QuPath",
+        "Mezcla identidad, pines y traduccion en un solo nivel"
+      ],
+      "ci_impact": "filtros de ruta sencillos",
+      "upstream_update": "manual",
+      "divergence_risk": "medio",
+      "repo_growth": "bajo",
+      "operational_complexity": "baja",
+      "reproducibility": "parcial",
+      "verdict": "RECHAZADA: pierde la relacion version de QuPath -> version de extension"
+    },
+    {
+      "id": "A3",
+      "name": "Version-major: versions/<v>/extensions/<id>/",
+      "pros": [
+        "Coherente con la estructura actual",
+        "Aislamiento total entre versiones"
+      ],
+      "cons": [
+        "Duplica la traduccion de una extension en cada version de QuPath compatible",
+        "O(componentes x versiones) directorios: 100 x 5 = 500",
+        "Una correccion linguistica hay que aplicarla N veces"
+      ],
+      "ci_impact": "matriz enorme",
+      "upstream_update": "coste multiplicado",
+      "divergence_risk": "alto (copias divergentes)",
+      "repo_growth": "alto",
+      "operational_complexity": "alta",
+      "reproducibility": "buena",
+      "verdict": "RECHAZADA: duplicacion estructural"
+    },
+    {
+      "id": "A4",
+      "name": "Component-major + lockfile por version (RECOMENDADA)",
+      "pros": [
+        "O(componentes + versiones)",
+        "La traduccion vive donde vive su causa: la version del componente",
+        "La compatibilidad vive donde vive su causa: la version de QuPath",
+        "Se puede certificar una version de QuPath sin tocar los componentes",
+        "Proyectable al esquema de catalogo upstream"
+      ],
+      "cons": [
+        "Dos ficheros que leer para responder que hay certificado",
+        "Exige disciplina de esquema y tests de integridad referencial"
+      ],
+      "ci_impact": "filtros de ruta naturales por componente",
+      "upstream_update": "proporcional al diff",
+      "divergence_risk": "bajo",
+      "repo_growth": "bajo (solo metadatos y TSV)",
+      "operational_complexity": "media",
+      "reproducibility": "alta",
+      "verdict": "RECOMENDADA"
+    },
+    {
+      "id": "A5",
+      "name": "Git submodules por upstream",
+      "pros": [
+        "Referencia exacta a un commit",
+        "Sin copiar bytes en este repo"
+      ],
+      "cons": [
+        "13 submodulos hoy, 100 manana: clonado y CI fragiles",
+        "Los usuarios deben usar --recursive",
+        "Un upstream que borra un tag rompe el clon",
+        "No aporta nada que no de un commit anotado en un lockfile"
+      ],
+      "ci_impact": "checkout lento y propenso a fallos",
+      "upstream_update": "git submodule update",
+      "divergence_risk": "bajo",
+      "repo_growth": "medio (indices)",
+      "operational_complexity": "alta",
+      "reproducibility": "alta",
+      "verdict": "DESCARTADA: mismo beneficio que un pin por commit, con mucho mas coste operativo"
+    },
+    {
+      "id": "A6",
+      "name": "Git subtree por upstream",
+      "pros": [
+        "Clon unico sin pasos extra"
+      ],
+      "cons": [
+        "Copia el codigo upstream a la historia de este repo",
+        "El repositorio crece de forma permanente en cada sincronizacion",
+        "Mezcla licencias de terceros en el arbol propio",
+        "Los merges upstream se vuelven conflictivos"
+      ],
+      "ci_impact": "checkout pesado",
+      "upstream_update": "subtree pull conflictivo",
+      "divergence_risk": "alto",
+      "repo_growth": "muy alto e irreversible",
+      "operational_complexity": "alta",
+      "reproducibility": "alta",
+      "verdict": "DESCARTADA"
+    },
+    {
+      "id": "A7",
+      "name": "Vendorizar el codigo fuente",
+      "pros": [
+        "Todo disponible sin red"
+      ],
+      "cons": [
+        "Duplicacion masiva",
+        "Trazabilidad legal fragil",
+        "Deriva silenciosa respecto de upstream",
+        "Crecimiento irreversible del historial"
+      ],
+      "ci_impact": "alto",
+      "upstream_update": "resincronizacion manual",
+      "divergence_risk": "muy alto",
+      "repo_growth": "muy alto",
+      "operational_complexity": "alta",
+      "reproducibility": "aparente, no real",
+      "verdict": "DESCARTADA salvo excepcion justificada por componente"
+    },
+    {
+      "id": "A8",
+      "name": "Monorepo con los forks dentro de qupath-es",
+      "pros": [
+        "Un solo sitio",
+        "Refactor atomico"
+      ],
+      "cons": [
+        "Convierte un repo de localizacion en un repo de software Java",
+        "Obliga a CI de Gradle para 12-100 proyectos",
+        "Acopla extensiones entre si",
+        "Contamina el repositorio que hoy protege el bundle principal"
+      ],
+      "ci_impact": "muy alto",
+      "upstream_update": "merge por fork",
+      "divergence_risk": "alto",
+      "repo_growth": "muy alto",
+      "operational_complexity": "muy alta",
+      "reproducibility": "media",
+      "verdict": "DESCARTADA"
+    },
+    {
+      "id": "A9",
+      "name": "Repositorios satelite para los forks + referencia por metadatos (COMPLEMENTARIA)",
+      "pros": [
+        "Cada fork mantiene su propio historial y su relacion con su upstream",
+        "qupath-es no necesita cadena de construccion Java",
+        "El aislamiento entre extensiones es total",
+        "Las releases de los satelites cumplen la restriccion de host github.com del catalogo"
+      ],
+      "cons": [
+        "Mas repositorios que gobernar",
+        "Exige integridad referencial verificada por tests"
+      ],
+      "ci_impact": "distribuido, por satelite",
+      "upstream_update": "rebase por satelite",
+      "divergence_risk": "medio y acotado",
+      "repo_growth": "nulo en qupath-es",
+      "operational_complexity": "media",
+      "reproducibility": "alta",
+      "verdict": "RECOMENDADA como complemento de A4, solo cuando un fork sea inevitable"
+    },
+    {
+      "id": "A10",
+      "name": "Solo registro, sin directorios por componente",
+      "pros": [
+        "Minimo absoluto",
+        "Un unico fichero que leer"
+      ],
+      "cons": [
+        "No hay donde poner traducciones, auditorias ni parches",
+        "Un JSON gigante se vuelve inmanejable y conflictivo en PR"
+      ],
+      "ci_impact": "trivial pero inutil",
+      "upstream_update": "manual",
+      "divergence_risk": "n/a",
+      "repo_growth": "nulo",
+      "operational_complexity": "baja",
+      "reproducibility": "insuficiente",
+      "verdict": "DESCARTADA como arquitectura completa; adoptada como una de sus capas"
+    }
+  ],
+  "recommended_architecture": {
+    "grade": "RECOMMENDED",
+    "name": "Dos ejes independientes unidos por un lockfile, con forks fuera del repositorio",
+    "summary": "Se conserva intacto el eje versions/<version-de-qupath>/ que ya protege los artefactos congelados, y se anade un eje components/<id>/ independiente de la version de QuPath. Los dos ejes se unen mediante versions/<v>/components.lock.json, que fija que version de cada componente esta certificada para esa version de QuPath. Ningun codigo upstream entra en el repositorio: se referencia por repo + tag + commit + SHA-256 del artefacto. Cuando un fork sea inevitable, vive en un repositorio satelite y se referencia igual.",
+    "decision_drivers": [
+      "F1",
+      "F2",
+      "F4",
+      "F5",
+      "F7",
+      "R02",
+      "R12"
+    ],
+    "tree": [
+      "qupath-es/",
+      "  components/                         # eje COMPONENTE (independiente de QuPath)",
+      "    README.md                         # como se lee y se amplia este eje",
+      "    registry.json                     # SOURCE_OF_TRUTH: identidad de cada componente",
+      "    <component-id>/                   # se crea solo cuando hay contenido real",
+      "      component.json                  # SOURCE_OF_TRUTH: manifiesto del componente",
+      "      audits/<upstream-commit>.json   # UPSTREAM_REFERENCE: instantanea inmutable",
+      "      l10n/<upstream-tag>/",
+      "        <bundle-id>.tsv               # SOURCE_OF_TRUTH de la traduccion",
+      "        dist/<basename>_es.properties # GENERATED",
+      "      patches/<upstream-tag>/NNNN-*.patch  # solo si es imprescindible",
+      "  versions/                           # eje QUPATH (existente, intacto)",
+      "    supported-versions.json           # INTACTO",
+      "    0.7.0/",
+      "      base/  dist/  work/  runtime/  reports/     # INTACTOS",
+      "      fingerprint.json  target-version.json       # INTACTOS",
+      "      components.lock.json            # GENERATED_REVIEWED: pines certificados",
+      "  schemas/                            # JSON Schema de registry, component y lock",
+      "  catalog/catalog.json                # GENERATED: proyeccion al Extension Manager (diferido)",
+      "  tools/  tests/  docs/  runtime/     # existentes"
+    ],
+    "directory_rationale": {
+      "components/": "Eje de componente. Existe porque la traduccion y la auditoria dependen de la version del COMPONENTE, no de la de QuPath.",
+      "components/registry.json": "Identidad estable y lenta: id, repo, propietario, licencia, prioridad, punto de entrada. Se lee para saber que existe.",
+      "components/<id>/component.json": "Manifiesto del componente: bundles, rutas relevantes para deteccion de cambios, identificadores protegidos, politica de fork.",
+      "components/<id>/audits/": "Una instantanea por commit auditado. Inmutable: es la referencia contra la que se calcula el diff upstream.",
+      "components/<id>/l10n/<tag>/": "Traduccion anclada a una release del componente. Un TSV por bundle, con el mismo modelo de estados que el Core.",
+      "components/<id>/l10n/<tag>/dist/": "Bundle generado. Nunca se edita a mano. Mismo contrato que versions/*/dist/.",
+      "components/<id>/patches/": "Series de parches minimas y con destino upstream. Solo existe si hay parches reales.",
+      "versions/<v>/components.lock.json": "Union de los dos ejes: que version de cada componente esta certificada para esa version de QuPath, con hash de artefacto.",
+      "schemas/": "Contratos verificables por test. Sin esquema, el registro se degrada en texto libre.",
+      "catalog/catalog.json": "Proyeccion generada al esquema del Extension Manager de QuPath, para distribucion. Diferido hasta que exista al menos un artefacto distribuible."
+    },
+    "what_is_NOT_created": [
+      "Ningun directorio por componente sin contenido real.",
+      "Ningun submodulo, subtree ni copia de codigo upstream.",
+      "Ningun fork dentro de este repositorio.",
+      "Ningun binario de terceros: solo su URL y su SHA-256."
+    ]
+  },
+  "component_model": {
+    "identity": [
+      "id",
+      "canonical_name",
+      "repository",
+      "owner",
+      "priority",
+      "role",
+      "license",
+      "build_system",
+      "entry_point",
+      "satellite_fork"
+    ],
+    "per_release": [
+      "upstream_tag",
+      "upstream_commit",
+      "artifact_name",
+      "artifact_sha256",
+      "declared_qupath_api",
+      "bundles",
+      "protected_identifiers"
+    ],
+    "states": {
+      "audit_status": [
+        "NOT_AUDITED",
+        "AUDITED",
+        "STALE"
+      ],
+      "translation_status": [
+        "NOT_STARTED",
+        "IN_PROGRESS",
+        "TRANSLATED"
+      ],
+      "validation_status": [
+        "NOT_APPLICABLE",
+        "PENDING",
+        "VALIDATED",
+        "FAILED"
+      ],
+      "distribution_status": [
+        "UNSUPPORTED",
+        "EXPERIMENTAL",
+        "DISTRIBUTED"
+      ],
+      "rule": "Son independientes. AUDITED no implica TRANSLATED; TRANSLATED no implica VALIDATED."
+    },
+    "lazy_creation": "Un componente existe en registry.json desde el primer dia; su directorio solo cuando tiene contenido."
+  },
+  "versioning_model": {
+    "principle": "La compatibilidad es una relacion, no un atributo; vive en el lockfile, no en el componente.",
+    "relation": "qupath_version -> component_id -> upstream_tag -> upstream_commit -> artifact -> artifact_sha256 -> localization_revision -> validation_status",
+    "why_not_version_major": "Duplicaria la traduccion de cada extension en cada version de QuPath compatible (A3).",
+    "qupath_migration": "Una version nueva de QuPath crea versions/<nueva>/ con su base congelada y su propio components.lock.json. Los componentes no se tocan salvo que su propia version cambie.",
+    "known_cost": {
+      "0.7.0->0.8.x": "894 -> 2610 claves en el bundle principal (aprox. 1716 nuevas)"
+    }
+  },
+  "registry_model": {
+    "file": "components/registry.json",
+    "classification": "SOURCE_OF_TRUTH",
+    "edited_by": "humano, revisado por CODEOWNERS",
+    "fields": [
+      "schema_version",
+      "components[].id",
+      "components[].canonical_name",
+      "components[].repository",
+      "components[].owner",
+      "components[].priority",
+      "components[].role",
+      "components[].license",
+      "components[].build_system",
+      "components[].entry_point",
+      "components[].type",
+      "components[].satellite_fork",
+      "components[].first_registered"
+    ],
+    "naming_justification": "'registry' es el termino que usa el propio Extension Manager de QuPath para su estado local (registry.json), asi que el vocabulario ya es familiar para el ecosistema. Se coloca bajo components/ y no en la raiz para que el eje al que pertenece sea evidente.",
+    "rejected_names": {
+      "extensions-registry.json": "excluye a QuPath Core, que no es una extension",
+      "versions/0.7.0/extensions/registry.json": "ata la identidad a una version de QuPath"
+    }
+  },
+  "lockfile_model": {
+    "file": "versions/<qupath-version>/components.lock.json",
+    "classification": "GENERATED_REVIEWED",
+    "purpose": "Reproducir exactamente el estado auditado y certificado para una version de QuPath.",
+    "fields": [
+      "schema_version",
+      "qupath_version",
+      "qupath_upstream_commit",
+      "generated_at",
+      "components[].id",
+      "components[].upstream_tag",
+      "components[].upstream_commit",
+      "components[].artifact_name",
+      "components[].artifact_url",
+      "components[].artifact_sha256",
+      "components[].declared_qupath_api",
+      "components[].localization_revision",
+      "components[].audit_status",
+      "components[].translation_status",
+      "components[].validation_status",
+      "components[].distribution_status",
+      "components[].fork_repo",
+      "components[].fork_tag",
+      "components[].patches",
+      "components[].last_audited"
+    ],
+    "naming_justification": "El sufijo .lock.json comunica de inmediato 'no editar a mano, regenerar'. Se coloca dentro de versions/<v>/ porque el pin solo tiene sentido respecto de una version de QuPath.",
+    "rejected_names": {
+      "extensions.lock.json en la raiz": "no expresa a que version de QuPath pertenece el pin"
+    },
+    "null_policy": "artifact_sha256 = null es legitimo cuando el upstream no publica release (caso tiatoolbox); entonces el pin es solo por commit."
+  },
+  "upstream_tracking_model": {
+    "baseline": "components/<id>/audits/<upstream-commit>.json",
+    "flow": [
+      "commit auditado A",
+      "upstream avanza a commit B",
+      "diff A..B limitado a component.json:relevant_paths",
+      "clasificar ficheros afectados (bundle / FXML / codigo UI / script / metadatos de modelo)",
+      "detectar claves nuevas, eliminadas y con ingles cambiado",
+      "detectar cambios de identificadores protegidos",
+      "detectar cambio de compatibilidad declarada",
+      "reutilizar traducciones seguras segun la politica del migrador ya existente",
+      "marcar SOURCE_CHANGED / PLACEHOLDER_SIGNATURE_CHANGED / STRUCTURE_CHANGED",
+      "escribir una nueva instantanea de auditoria",
+      "ejecutar los tests del componente"
+    ],
+    "reuse": "Se reutiliza la maquina de estados de tools/qupath_version_migrator.py en lugar de inventar una segunda politica. Es la decision de diseno mas importante de esta capa: una sola politica de reutilizacion para el Core y para las extensiones.",
+    "cost_control": "El diff se limita a relevant_paths, de modo que el coste es proporcional al cambio real."
+  },
+  "translation_model": {
+    "source_of_truth": "TSV por bundle, una fila por clave, con el mismo modelo de estados que el Core.",
+    "columns": [
+      "key",
+      "en",
+      "es",
+      "state",
+      "surface",
+      "class",
+      "batch",
+      "reviewer",
+      "rev_date",
+      "component_ver",
+      "qupath_ver",
+      "issues",
+      "notes"
+    ],
+    "new_columns_vs_core": {
+      "surface": "MAIN_BUNDLE | EXTENSION_RESOURCE_BUNDLE | EXTENSION_HARDCODED | CORE_HARDCODED | PARAMETERLIST | FXML | GROOVY_SCRIPT | PYTHON_SCRIPT | PLUGIN_METADATA | MODEL_METADATA | LOG_MESSAGE | MEASUREMENT_NAME | PATHCLASS_NAME | EXTERNAL_LIBRARY | OPERATING_SYSTEM | UNSUPPORTED | UNKNOWN",
+      "class": "USER_VISIBLE_SAFE | USER_VISIBLE_CONTEXT_REQUIRED | MACHINE_IDENTIFIER | FILE_FORMAT_IDENTIFIER | MODEL_IDENTIFIER | MEASUREMENT_IDENTIFIER | PATHCLASS_IDENTIFIER | LOG_ONLY | DEVELOPER_ONLY | UNKNOWN"
+    },
+    "strategy_class": "TRANSLATABLE_EXTERNAL | TRANSLATABLE_EXTENSION_RESOURCE | TRANSLATABLE_WITH_EXTENSION_FORK | TRANSLATABLE_ONLY_WITH_CORE_FORK | RUNTIME_PATCH_POSSIBLE | DO_NOT_TRANSLATE | UNKNOWN",
+    "hard_rule": "Una fila con class = UNKNOWN nunca se traduce automaticamente; bloquea la release del componente.",
+    "preference_order": [
+      "ResourceBundle externo soportado oficialmente",
+      "Bundle propio de la extension",
+      "Recurso externo de configuracion",
+      "API de localizacion soportada",
+      "Extension auxiliar propia",
+      "Parche mantenido",
+      "Fork independiente de la extension",
+      "Fork de QuPath Core"
+    ],
+    "forbidden": [
+      "Modificar un JAR instalado",
+      "Descompilar y reempaquetar un JAR como solucion de produccion"
+    ]
+  },
+  "qupath_core_policy": {
+    "principle": "QuPath Core no es un componente mas: es el sustrato del que depende todo lo demas.",
+    "differences_vs_extensions": [
+      "Su bundle SI es alcanzable externamente (unico caso del corpus).",
+      "Su base congelada define la identidad de una version del repositorio.",
+      "Concentra el problema de ParameterList (76 ficheros, 455 llamadas).",
+      "Define la infraestructura de PathClass, mediciones y modelos que los tests deben proteger.",
+      "Un fork del Core es la ultima opcion posible y no se contempla hoy."
+    ],
+    "location": "Se queda donde esta: versions/<v>/. No se mueve a components/.",
+    "why_not_move": "Mover la base congelada cambiaria rutas verificadas por fingerprint.json, por CODEOWNERS y por los tests, sin ganar nada. La regla es: el Core es el eje de version; las extensiones son el eje de componente.",
+    "registry_presence": "Aparece en components/registry.json con type = QUPATH_CORE para que un tercero encuentre su procedencia y su licencia en el mismo sitio que las demas, pero sin directorio propio bajo components/.",
+    "recorded": [
+      "source repository",
+      "version",
+      "upstream commit",
+      "build",
+      "ResourceBundles",
+      "ParameterList",
+      "hardcoded UI",
+      "menus",
+      "actions",
+      "extension API",
+      "measurement infrastructure",
+      "PathClass",
+      "model infrastructure",
+      "localization APIs"
+    ]
+  },
+  "extension_policy": {
+    "integration_is_not_vendoring": {
+      "integrate": [
+        "repository URL",
+        "upstream owner",
+        "upstream commit",
+        "upstream tag",
+        "release",
+        "artifact",
+        "artifact SHA-256",
+        "QuPath compatibility",
+        "license",
+        "build system",
+        "entry point",
+        "ResourceBundles",
+        "strings",
+        "audit",
+        "translations",
+        "tests",
+        "patches",
+        "coverage",
+        "installation mechanism"
+      ],
+      "do_not_copy": "El codigo fuente del componente."
+    },
+    "when_copying_source_would_be_justified": [
+      "Upstream archivado o borrado y sin espejo, con el componente aun en uso.",
+      "Licencia que exige redistribuir la fuente junto al binario que nosotros publicamos.",
+      "Fragmento minimo necesario para un test de regresion, no el arbol completo."
+    ],
+    "in_all_other_cases": "Copiar la fuente es mala practica: duplica, deriva y rompe la trazabilidad legal."
+  },
+  "fork_policy": {
+    "principle": "Un fork es deuda. Se contrae solo cuando no hay alternativa menos invasiva y se paga con un PR upstream.",
+    "options_ranked": [
+      {
+        "option": "D",
+        "name": "PR upstream para externalizar cadenas y adoptar un cargador consciente de DISPLAY",
+        "invasiveness": 1,
+        "verdict": "PREFERIDA: resuelve el problema para todos los idiomas, no solo el nuestro"
+      },
+      {
+        "option": "E",
+        "name": "Extension auxiliar propia de localizacion",
+        "invasiveness": 2,
+        "verdict": "LIMITADA: no puede cambiar como otra extension resuelve su bundle (ver F2)"
+      },
+      {
+        "option": "B",
+        "name": "Mantener solo parches contra upstream",
+        "invasiveness": 3,
+        "verdict": "UTIL como paso intermedio y como contenido del PR"
+      },
+      {
+        "option": "C",
+        "name": "Fork independiente en LABVETNEB/<nombre>-es",
+        "invasiveness": 4,
+        "verdict": "ACEPTABLE cuando upstream no responde; aislado en un satelite"
+      },
+      {
+        "option": "A",
+        "name": "Modificar el codigo dentro de qupath-es",
+        "invasiveness": 5,
+        "verdict": "RECHAZADA: convierte un repo de localizacion en un monorepo Java"
+      }
+    ],
+    "naming": "LABVETNEB/<upstream-repo-name>-es",
+    "recorded_in_registry": [
+      "satellite_fork.repository",
+      "satellite_fork.upstream_ref",
+      "satellite_fork.divergence_summary"
+    ],
+    "current_state": "Ningun fork existe hoy. Ninguno se crea en esta fase."
+  },
+  "patch_policy": {
+    "location": "components/<id>/patches/<upstream-tag>/NNNN-descripcion.patch",
+    "rules": [
+      "Minimos y con destino upstream declarado.",
+      "Deben aplicar limpiamente sobre el commit auditado; hay un test que lo comprueba.",
+      "Un parche que no se ha propuesto upstream en 2 releases se revisa o se retira.",
+      "Nunca parchean identificadores funcionales, solo capas de presentacion."
+    ],
+    "relationship_to_forks": "El fork es el vehiculo; el parche es el contenido. El parche es lo que se conserva."
+  },
+  "license_policy": {
+    "repository_license": "GPL-3.0",
+    "corpus_licenses": {
+      "Apache-2.0": 10,
+      "BSD-3-Clause": 1,
+      "GPL-3.0": 2
+    },
+    "required_per_component": [
+      "repository",
+      "license",
+      "source commit",
+      "artifact",
+      "modifications",
+      "redistribution status",
+      "fork status"
+    ],
+    "where": "components/registry.json (identidad) + versions/<v>/components.lock.json (lo redistribuido)",
+    "notice": "NOTICE.md se amplia con una entrada por componente en cuanto se redistribuya algo suyo.",
+    "hard_rule": "Ningun artefacto de terceros se redistribuye sin licencia, commit de origen y hash registrados."
+  },
+  "artifact_policy": {
+    "never_stored_in_git": true,
+    "referenced_by": [
+      "artifact_url",
+      "artifact_name",
+      "artifact_sha256"
+    ],
+    "verification": "Un test descarga opcionalmente y verifica el hash; en CI sin red, verifica solo la forma.",
+    "host_constraint": "El Extension Manager de QuPath solo acepta releases en github.com y maven.scijava.org sobre https. Cualquier plan de distribucion debe respetarlo.",
+    "no_release_case": "Si el upstream no publica release (tiatoolbox), el pin es por commit y artifact_sha256 = null."
+  },
+  "reports_policy": {
+    "location": "versions/<qupath-version>/reports/",
+    "convention": "<tema-en-kebab-case>.md junto a <tema-en-kebab-case>.json cuando hay datos estructurados",
+    "immutability_decision": {
+      "options": [
+        "A: un fichero vivo por version, confiando en el historial de Git",
+        "B: instantaneas fechadas por HEAD"
+      ],
+      "chosen": "A, con matiz",
+      "rationale": "El directorio versions/<v>/ YA es la frontera de instantanea: la evidencia de 0.7.0 nunca se sobrescribe con la de 0.8.0 porque viven en directorios distintos. Dentro de una version, el fichero se actualiza en su sitio y el historial de Git conserva la evidencia anterior. Ademas el JSON lleva repository_head, asi que cualquier copia se identifica a si misma. Instantaneas fechadas anadirian ficheros sin limite y obligarian a decidir cual es la vigente.",
+      "hard_rule": "Nunca se actualiza en su sitio un informe cuyo qupath_version sea distinto del auditado."
+    }
+  },
+  "ci_policy": {
+    "always_run": [
+      "validacion de esquema de registry y lockfiles",
+      "unicidad de ids y URLs de repositorio",
+      "integridad referencial registry <-> lockfiles <-> directorios",
+      "fingerprint de los artefactos canonicos (job ya existente)",
+      "codificacion UTF-8 y ausencia de BOM",
+      "tests de proteccion de identificadores",
+      "ausencia de comandos peligrosos en scripts"
+    ],
+    "per_component": [
+      "paridad estructural del ResourceBundle",
+      "claves de parametro sin cambios",
+      "ids de modelo sin cambios",
+      "nombres de medicion sin cambios",
+      "PathClass sin cambios",
+      "marcadores preservados",
+      "solo cambian cadenas de presentacion",
+      "los parches aplican limpiamente",
+      "la referencia upstream es reproducible",
+      "el hash del artefacto coincide"
+    ],
+    "how_to_avoid_running_everything": "Un job de deteccion calcula los componentes afectados a partir de las rutas del diff (components/<id>/** y versions/<v>/components.lock.json) y emite una matriz dinamica. Si solo cambia Cellpose, solo corre el job de Cellpose mas los jobs globales.",
+    "how_to_identify_the_extension_in_a_PR": "Por el prefijo de ruta components/<id>/; no hace falta heuristica.",
+    "scaling_to_100": "Los jobs globales son O(1) en numero y recorren ficheros pequenos. Los jobs por componente solo se activan por ruta. El unico job que crece es la deteccion de deriva upstream, que se ejecuta programado y con limite de concurrencia.",
+    "not_implemented_in_this_phase": true
+  },
+  "protected_identifiers_policy": {
+    "never_translated": [
+      "nombres de clases",
+      "packages Java",
+      "metodos",
+      "variables",
+      "enums internos",
+      "nombres de fichero",
+      "rutas",
+      "claves JSON/YAML/XML",
+      "nombres de propiedades consumidas por codigo",
+      "argumentos CLI",
+      "flags",
+      "identificadores de modelos",
+      "IDs",
+      "checkpoints",
+      "engines",
+      "arquitecturas",
+      "claves de configuracion",
+      "regex",
+      "nombres de canales consumidos programaticamente",
+      "nombres de mediciones",
+      "PathClass persistidas",
+      "encabezados esperados por scripts",
+      "parameter keys",
+      "nombres de funciones",
+      "comandos Groovy y Python",
+      "imports",
+      "URLs",
+      "hashes",
+      "UUID",
+      "nombres de repositorios",
+      "nombres de artefactos",
+      "extensiones de fichero",
+      "tensor names",
+      "input/output node names",
+      "weights"
+    ],
+    "parameterlist_rule": {
+      "translatable": [
+        "display label",
+        "description",
+        "help text"
+      ],
+      "never": [
+        "parameter key"
+      ],
+      "example_ok": "Learning rate -> Tasa de aprendizaje",
+      "example_forbidden": "learningRate -> tasaAprendizaje",
+      "evidence": "La firma add*Parameter(clave, etiqueta, ...) separa clave y etiqueta, asi que la etiqueta puede externalizarse sin tocar la clave."
+    },
+    "measurement_rule": "Cadenas como 'Nucleus: Area' o 'Detection probability' pueden ser claves consumidas por scripts, clasificadores, exportaciones y proyectos. No se traducen salvo que se demuestre que existe una capa de presentacion independiente; en ese caso solo se traduce esa capa.",
+    "pathclass_rule": "Tumor, Stroma, Positive, Negative y demas PathClass persistidas no se traducen mientras no exista separacion demostrada entre id interno y nombre visible.",
+    "model_rule": "No se modifica nada que un engine consuma; solo descripciones visuales con capa segura.",
+    "enforcement": "Lista declarada en components/<id>/component.json y verificada por test, no por convencion. Un identificador protegido que cambie hace fallar CI."
+  },
+  "scalability": [
+    {
+      "extensions": 12,
+      "component_dirs": "<= 12 (creacion perezosa; hoy serian 1-2)",
+      "lockfile_entries_per_qupath_version": 13,
+      "estimated_repo_growth": "~1 MB de metadatos y TSV sobre los 1.5 MB actuales",
+      "ci_minutes_per_pr": "bajo: jobs globales + 1 componente",
+      "maintainer_load": "asumible por una persona",
+      "verdict": "COMODO"
+    },
+    {
+      "extensions": 25,
+      "component_dirs": "<= 25",
+      "lockfile_entries_per_qupath_version": 26,
+      "estimated_repo_growth": "~3-5 MB",
+      "ci_minutes_per_pr": "bajo",
+      "maintainer_load": "una persona con revision compartida",
+      "verdict": "COMODO"
+    },
+    {
+      "extensions": 50,
+      "component_dirs": "<= 50",
+      "lockfile_entries_per_qupath_version": 51,
+      "estimated_repo_growth": "~10-15 MB",
+      "ci_minutes_per_pr": "bajo por PR; la deriva upstream programada empieza a pesar",
+      "maintainer_load": "requiere automatizar la deteccion de deriva",
+      "verdict": "VIABLE con automatizacion"
+    },
+    {
+      "extensions": 100,
+      "component_dirs": "<= 100",
+      "lockfile_entries_per_qupath_version": 101,
+      "estimated_repo_growth": "~25-40 MB tras varios anos",
+      "ci_minutes_per_pr": "bajo por PR gracias a los filtros de ruta",
+      "maintainer_load": "exige priorizacion explicita: no todo se traduce",
+      "risk": "El cuello de botella no es la arquitectura sino la revision linguistica humana.",
+      "verdict": "VIABLE"
+    },
+    {
+      "comparison": "Alternativa A3 (version-major) a 100 extensiones y 5 versiones de QuPath",
+      "component_dirs": "500",
+      "verdict": "INMANEJABLE: por eso se descarta"
+    }
+  ],
+  "risks": [
+    {
+      "id": "K1",
+      "severity": "ALTA",
+      "risk": "Upstream no acepta los PR de externalizacion y los forks se vuelven permanentes.",
+      "mitigation": "La traduccion vive en TSV independientes del sistema de construccion, de modo que un fork se reduce a regenerar un .properties y reconstruir. Se limita el numero de forks priorizando P0."
+    },
+    {
+      "id": "K2",
+      "severity": "ALTA",
+      "risk": "Traducir una cadena que en realidad es un identificador consumido por scripts o modelos.",
+      "mitigation": "class = UNKNOWN bloquea; identificadores protegidos declarados y verificados por test."
+    },
+    {
+      "id": "K3",
+      "severity": "ALTA",
+      "risk": "La migracion a QuPath 0.8 (894 -> 2610 claves) consume todo el esfuerzo disponible.",
+      "mitigation": "Planificarla como version propia; no iniciarla a la vez que las primeras extensiones."
+    },
+    {
+      "id": "K4",
+      "severity": "MEDIA",
+      "risk": "Deriva de los forks respecto de upstream release tras release.",
+      "mitigation": "Parches minimos, rebase por tag, y revision obligatoria si un parche vive 2 releases."
+    },
+    {
+      "id": "K5",
+      "severity": "MEDIA",
+      "risk": "Mezcla de licencias al redistribuir artefactos de terceros.",
+      "mitigation": "Licencia, commit y hash obligatorios en el lockfile; NOTICE.md por componente."
+    },
+    {
+      "id": "K6",
+      "severity": "MEDIA",
+      "risk": "El registro y los lockfiles divergen de la realidad y nadie lo nota.",
+      "mitigation": "Test de integridad referencial y job programado de deteccion de deriva."
+    },
+    {
+      "id": "K7",
+      "severity": "BAJA",
+      "risk": "tiatoolbox no publica releases: no hay artefacto que fijar.",
+      "mitigation": "Pin por commit y artifact_sha256 = null, contemplado por el esquema."
+    },
+    {
+      "id": "K8",
+      "severity": "BAJA",
+      "risk": "Contaminar el bundle principal al ampliar el utillaje a varios bundles.",
+      "mitigation": "Los artefactos de versions/0.7.0/ estan congelados y vigilados por fingerprint y CI."
+    }
+  ],
+  "costly_to_reverse_decisions": [
+    "Adoptar submodules, subtree o vendoring: reescribe el historial y es dificil de deshacer.",
+    "Elegir el eje version-major para los componentes: obligaria a una migracion masiva despues.",
+    "Publicar un catalogo bajo una URL: los usuarios la fijan y deja de poder cambiarse.",
+    "Fijar los ids de componente: quedan referenciados por lockfiles, forks, informes y rutas.",
+    "El esquema de nombres de los forks satelite."
+  ],
+  "decisions_to_postpone": [
+    "Si publicar catalogo propio: requiere al menos un artefacto distribuible.",
+    "Si construir una extension auxiliar propia: su alcance real esta limitado por F2.",
+    "Si versionar en Git los .properties generados de extension o construirlos en CI.",
+    "Firma y notarizacion de los JAR forkeados.",
+    "Soporte de locales distintos de es.",
+    "Si el lockfile debe incluir dependencias transitivas de cada extension."
+  ],
+  "transition_from_current_architecture": [
+    "Nada de lo existente se mueve ni se renombra.",
+    "El eje components/ se anade en paralelo; versions/ queda intacto.",
+    "El primer lockfile se anade a versions/0.7.0/ sin tocar los artefactos congelados.",
+    "El utillaje se generaliza por extension, no por reescritura: translation_generator y translation_validator ya operan sobre un par (base, dist) y admiten otros bundles.",
+    "docs/ARCHITECTURE.md gana una seccion nueva; sus invariantes actuales no cambian."
+  ],
+  "implementation_roadmap": [
+    {
+      "pr": 1,
+      "title": "Capa de identidad",
+      "creates": [
+        "schemas/component-registry.schema.json",
+        "components/registry.json",
+        "components/README.md",
+        "tests/test_component_registry.py"
+      ],
+      "risk": "muy bajo",
+      "reversible": true
+    },
+    {
+      "pr": 2,
+      "title": "Capa de fijacion para 0.7.0",
+      "creates": [
+        "schemas/components-lock.schema.json",
+        "versions/0.7.0/components.lock.json",
+        "tests/test_components_lock.py"
+      ],
+      "risk": "bajo",
+      "reversible": true
+    },
+    {
+      "pr": 3,
+      "title": "Instantaneas de auditoria de los 13 componentes",
+      "creates": [
+        "components/<id>/component.json",
+        "components/<id>/audits/<commit>.json",
+        "tools/component_audit.py",
+        "tests/test_component_audit.py"
+      ],
+      "risk": "bajo",
+      "reversible": true
+    },
+    {
+      "pr": 4,
+      "title": "Detector de deriva upstream",
+      "creates": [
+        "tools/upstream_watch.py",
+        "tests/test_upstream_watch.py"
+      ],
+      "risk": "bajo",
+      "reversible": true
+    },
+    {
+      "pr": 5,
+      "title": "Piloto de localizacion de una extension (sin fork)",
+      "creates": [
+        "components/instanseg/l10n/v0.1.7/strings.tsv",
+        "components/instanseg/l10n/v0.1.7/dist/strings_es.properties",
+        "tests/test_extension_translation.py"
+      ],
+      "note": "Demuestra el pipeline completo y mide el coste real por clave.",
+      "risk": "bajo",
+      "reversible": true
+    },
+    {
+      "pr": 6,
+      "title": "PR upstream a QuPath proponiendo una API de bundles de extension",
+      "target": "qupath/qupath",
+      "note": "Fuera de este repositorio; se registra aqui su estado.",
+      "risk": "medio",
+      "reversible": true
+    },
+    {
+      "pr": 7,
+      "title": "Primer satelite de fork y su release, si el PR upstream no avanza",
+      "target": "LABVETNEB/qupath-extension-instanseg-es",
+      "risk": "medio",
+      "reversible": true
+    },
+    {
+      "pr": 8,
+      "title": "CI con matriz dinamica por rutas",
+      "modifies": [
+        ".github/workflows/ci.yml"
+      ],
+      "risk": "medio",
+      "reversible": true
+    },
+    {
+      "pr": 9,
+      "title": "Proyeccion a catalogo del Extension Manager",
+      "creates": [
+        "catalog/catalog.json",
+        "tools/catalog_projection.py"
+      ],
+      "note": "Solo cuando exista al menos un artefacto distribuible.",
+      "risk": "medio",
+      "reversible": true
+    },
+    {
+      "pr": 10,
+      "title": "Andamiaje de versions/0.8.0/ cuando QuPath 0.8 se publique",
+      "risk": "alto por volumen (1716 claves nuevas)",
+      "reversible": true
+    }
+  ],
+  "first_recommended_pr": {
+    "title": "components: registro de identidad del ecosistema (solo metadatos)",
+    "rationale": "Es puramente aditivo, no toca nada congelado, no depende de decisiones aun abiertas y ya aporta valor: responde 'que hay soportado' sin leer codigo. Ademas fija los ids de componente, que es la unica decision costosa de revertir en esta fase.",
+    "creates": [
+      "schemas/component-registry.schema.json",
+      "components/registry.json",
+      "components/README.md",
+      "tests/test_component_registry.py"
+    ],
+    "modifies": [
+      "docs/ARCHITECTURE.md (seccion nueva sobre los dos ejes)"
+    ],
+    "must_not_touch": [
+      "versions/0.7.0/base/qupath-gui-strings.properties",
+      "versions/0.7.0/base/qupath-gui-strings_en.properties",
+      "versions/0.7.0/base/MANIFEST.MF",
+      "versions/0.7.0/dist/qupath-gui-strings_es.properties",
+      "versions/0.7.0/work/translation.tsv",
+      "versions/0.7.0/fingerprint.json",
+      "versions/0.7.0/target-version.json",
+      "versions/supported-versions.json",
+      "versions/0.7.0/reports/* (salvo anadir informes nuevos)",
+      "versions/0.7.0/runtime/*",
+      "runtime/*",
+      "tools/*",
+      "tests/* existentes",
+      ".github/workflows/ci.yml",
+      ".gitattributes"
+    ],
+    "acceptance": [
+      "Los 147 tests siguen pasando y se anaden los nuevos.",
+      "Los SHA-256 congelados no cambian.",
+      "git diff --stat solo muestra ficheros nuevos del PR."
+    ]
+  },
+  "do_not_modify": [
+    "versions/0.7.0/base/qupath-gui-strings.properties",
+    "versions/0.7.0/base/qupath-gui-strings_en.properties",
+    "versions/0.7.0/base/MANIFEST.MF",
+    "versions/0.7.0/dist/qupath-gui-strings_es.properties",
+    "versions/0.7.0/work/translation.tsv",
+    "versions/0.7.0/fingerprint.json",
+    "versions/0.7.0/target-version.json",
+    "versions/supported-versions.json"
+  ],
+  "unknowns": [
+    {
+      "id": "U1",
+      "question": "Comportamiento real de cada extension sobre QuPath 0.7.0 en ejecucion.",
+      "status": "NOT_VERIFIED",
+      "why": "Auditoria estatica; no se instalo ni se ejecuto ninguna extension.",
+      "how_to_resolve": "Instalar cada extension en un perfil de prueba y observar la interfaz."
+    },
+    {
+      "id": "U2",
+      "question": "Categoria de locale exacta que usa ResourceBundle.getBundle(String) de un argumento.",
+      "status": "NOT_VERIFIED",
+      "why": "La imagen jlink de QuPath no incluye jshell ni JDK, y no hay Java en el PATH.",
+      "impact": "NINGUNO sobre la conclusion: sea Locale.getDefault() o getDefault(FORMAT), ambas valen en_US bajo la politica del proyecto, asi que el bundle _es no se seleccionaria igualmente."
+    },
+    {
+      "id": "U3",
+      "question": "Reparto exacto entre cadenas visibles y no visibles en las extensiones sin bundle.",
+      "status": "NOT_VERIFIED",
+      "why": "Requiere revision manual literal por literal.",
+      "how_to_resolve": "Auditoria de literales por fichero en el piloto de cada componente."
+    },
+    {
+      "id": "U4",
+      "question": "Nombres de medicion y PathClass concretos emitidos por cada extension.",
+      "status": "NOT_VERIFIED",
+      "how_to_resolve": "Enumerarlos en component.json durante la auditoria por componente (PR 3)."
+    },
+    {
+      "id": "U5",
+      "question": "Compatibilidad real de cada extension con 0.7.0 mas alla de lo declarado.",
+      "status": "PARTIALLY_VERIFIED",
+      "detail": "Se conoce la API declarada en settings.gradle.kts (0.6.0 x7, 0.7.0 x4, 0.8.0-SNAPSHOT x1); no se ha verificado en ejecucion."
+    },
+    {
+      "id": "U6",
+      "question": "Si el equipo de QuPath aceptaria una API de bundles de extension.",
+      "status": "UNKNOWN",
+      "how_to_resolve": "Abrir una discusion upstream antes de escribir el PR."
+    }
+  ]
+}
