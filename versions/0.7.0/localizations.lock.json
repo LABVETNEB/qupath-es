@@ -17,12 +17,12 @@
     {
       "component_id": "dl-pixel-classifier",
       "locale": "es",
-      "revision": null,
-      "source_of_truth": null,
-      "dist_bundle": null,
-      "dist_sha256": null,
-      "translation_status": "NOT_STARTED",
-      "validation_status": "NOT_APPLICABLE",
+      "revision": "v0.8.5",
+      "source_of_truth": "components/dl-pixel-classifier/l10n/v0.8.5/strings.tsv",
+      "dist_bundle": "components/dl-pixel-classifier/l10n/v0.8.5/dist/strings_es.properties",
+      "dist_sha256": "78926B65BC6864E9EE672B7603E0415D872340B75B01A478FBA5002770AD928B",
+      "translation_status": "IN_PROGRESS",
+      "validation_status": "NOT_VALIDATED",
       "distribution_status": "UNSUPPORTED"
     },
     {

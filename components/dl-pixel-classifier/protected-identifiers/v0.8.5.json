@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "component_id": "dl-pixel-classifier",
+  "localization_revision": "v0.8.5",
+  "evidence": [
+    {
+      "commit": "cbf9bdeec4b923365bec1582c5cb93bec7829325",
+      "files": {
+        "src/main/resources/qupath/ext/dlclassifier/ui/strings.properties": "5fa9d8f4c351f655885f79d90cdf161dd6cb9eed"
+      }
+    }
+  ],
+  "inventory_status": "PARTIAL",
+  "rules": [
+    {
+      "category": "MODEL_IDENTIFIER",
+      "value": "DL Pixel Classifier",
+      "match": "CONTAINS",
+      "evidence_paths": [
+        "src/main/resources/qupath/ext/dlclassifier/ui/strings.properties"
+      ]
+    },
+    {
+      "category": "ENGINE",
+      "value": "PyTorch",
+      "match": "CONTAINS",
+      "evidence_paths": [
+        "src/main/resources/qupath/ext/dlclassifier/ui/strings.properties"
+      ]
+    }
+  ]
+}

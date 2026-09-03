@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "component_id": "dl-pixel-classifier",
+  "revision": "v0.8.5",
+  "source_bundle_path": "src/main/resources/qupath/ext/dlclassifier/ui/strings.properties",
+  "dist_bundle": "dist/strings_es.properties",
+  "expected_keys": 66,
+  "expected_key_sha256": "b95e48390bb002c4fc5d0021ef4985e92002e6703b67fb94b083f0dce85e4f91",
+  "expected_source_signature_sha256": "d6a08f829416d0526cc5763d294773ad11d255b798af4612f142dac2bfb763db",
+  "expected_state_counts": {
+    "DRAFT": 63,
+    "KEEP_EN": 3
+  },
+  "expected_keep_en_keys": [
+    "name",
+    "channels.minMax",
+    "channels.zScore"
+  ],
+  "expected_row_metadata": {
+    "batch": "DLPIXEL-ES-v0.8.5",
+    "reviewer": "ChatGPT",
+    "rev_date": "2026-09-03",
+    "qupath_ver": "0.7.0",
+    "issues": ""
+  }
+}
