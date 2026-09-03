@@ -219,16 +219,20 @@ def _normalized_changed_file(
 ) -> dict[str, Any]:
     filename = str(item.get("filename", ""))
     previous_filename = item.get("previous_filename")
-    relevant = is_relevant_path(filename, relevant_patterns)
+    destination_relevant = is_relevant_path(filename, relevant_patterns)
+    previous_relevant = bool(previous_filename) and is_relevant_path(
+        str(previous_filename), relevant_patterns
+    )
+    relevant = destination_relevant or previous_relevant
 
-    # Renames can move a file into or out of a relevant path.
-    if previous_filename:
-        relevant = relevant or is_relevant_path(
-            str(previous_filename), relevant_patterns
-        )
+    classification_path = filename
+    if not destination_relevant and previous_relevant:
+        classification_path = str(previous_filename)
 
     classification = (
-        classify_path(filename, bundle_paths) if relevant else "IRRELEVANT"
+        classify_path(classification_path, bundle_paths)
+        if relevant
+        else "IRRELEVANT"
     )
 
     return {
@@ -350,6 +354,20 @@ def watch_component(
             return base_result
 
         if compare_status == "ahead":
+            if not analysis_complete and not relevant_files:
+                base_result.update(
+                    {
+                        "status": STATUS_UNKNOWN,
+                        "relevant_drift": None,
+                        "action": "INVESTIGATE",
+                        "error": (
+                            "GitHub compare file inventory is truncated before "
+                            "relevant drift can be ruled out"
+                        ),
+                    }
+                )
+                return base_result
+
             relevant_drift = bool(relevant_files)
             base_result.update(
                 {
