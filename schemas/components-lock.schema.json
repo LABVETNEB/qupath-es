@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "qupath-es component lock",
-  "description": "Per-QuPath reproducibility pins for the registered component corpus. This file records exact source pins and localization/distribution state without claiming runtime compatibility that has not been verified.",
+  "description": "Per-QuPath reproducibility pins for the registered component corpus. This file records exact source pins, audit-evidence commits, release-asset provenance and localization/distribution state without claiming runtime compatibility that has not been verified.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -64,6 +64,7 @@
         "component_id",
         "upstream_tag",
         "upstream_commit",
+        "evidence_commit",
         "pin_basis",
         "artifact_name",
         "artifact_url",
@@ -92,6 +93,9 @@
           ]
         },
         "upstream_commit": {
+          "$ref": "#/$defs/sha1"
+        },
+        "evidence_commit": {
           "$ref": "#/$defs/sha1"
         },
         "pin_basis": {
@@ -188,7 +192,33 @@
         "last_audited": {
           "$ref": "#/$defs/date"
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "pin_basis": {
+                "const": "UPSTREAM_RELEASE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "artifact_name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "artifact_url": {
+                "type": "string",
+                "pattern": "^https://github\\.com/.+/releases/download/"
+              },
+              "artifact_sha256": {
+                "$ref": "#/$defs/sha256"
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }
