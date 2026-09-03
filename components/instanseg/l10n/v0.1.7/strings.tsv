@@ -1,0 +1,98 @@
+key	en	es	state	batch	reviewer	rev_date	qupath_ver	issues	notes
+title	InstanSeg	InstanSeg	KEEP_EN	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		Marca InstanSeg; se conserva sin traducir
+extension.description	TBC	Por confirmar	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+extension.title	InstanSeg Extension	Extensión InstanSeg	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+extension.qupath.version	v0.6.0	v0.6.0	KEEP_EN	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		Identificador de versión requerido por la extensión; no traducir
+workflow.title	Run InstanSeg model	Ejecutar modelo InstanSeg	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+workflow.makeMeasurements	Make measurements	Realizar mediciones	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.processing.pane	InstanSeg	InstanSeg	KEEP_EN	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		Marca InstanSeg; se conserva sin traducir
+ui.model	Select a model	Seleccionar un modelo	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.model.tooltip	Select the model you would like to use	Seleccione el modelo que desea utilizar	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.model.download.tooltip	Download the selected model	Descargar el modelo seleccionado	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.model-popup	The selected model is not available - do you want to download it?	El modelo seleccionado no está disponible. ¿Desea descargarlo?	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.model-not-downloaded	Model not downloaded - no segmentation performed	Modelo no descargado: no se realizó la segmentación	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.model-not-downloaded.tooltip	Online model - needs to be downloaded first	Modelo en línea: debe descargarse primero	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.model.info.tooltip	Show model description and citation	Mostrar la descripción y la cita del modelo	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.label	Create or select annotation(s) or TMA core(s)	Crear o seleccionar anotaciones o núcleos de TMA	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.alt	or	o	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.sub-label	Select all	Seleccionar todo	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.all-annotations	Annotations	Anotaciones	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.all-annotations.tooltip	Selects all annotations in current image - tiles will be generated within these annotations	Selecciona todas las anotaciones de la imagen actual; se generarán mosaicos dentro de estas anotaciones	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.all-TMA-cores	TMA cores	Núcleos de TMA	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.all-TMA-cores.tooltip	Selects all TMA cores in current image - tiles will be generated within these cores	Selecciona todos los núcleos de TMA de la imagen actual; se generarán mosaicos dentro de estos núcleos	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.run	Run	Ejecutar	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.run.tooltip	Run the selected model	Ejecutar el modelo seleccionado	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.error.no-selection	No annotation, TMA core, or detection selected	No se seleccionó ninguna anotación, núcleo de TMA ni detección	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.error.no-model	No model selected	No se seleccionó ningún modelo	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.error.model-not-downloaded	Model has not been downloaded yet	El modelo aún no se ha descargado	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.error.no-device	No device selected	No se seleccionó ningún dispositivo	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.error.no-image	No image selected	No se seleccionó ninguna imagen	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.error.num-channels-dont-match	Model requires %d channels, input has %d	El modelo requiere %d canales; la entrada tiene %d	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.annotations-single	1 annotation selected	1 anotación seleccionada	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.annotations-multiple	%d annotations selected	%d anotaciones seleccionadas	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.TMA-cores-single	1 TMA core selected	1 núcleo de TMA seleccionado	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.TMA-cores-multiple	%d TMA cores selected	%d núcleos de TMA seleccionados	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.detections-single	1 detection selected	1 detección seleccionada	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.detections-multiple	%d detections selected	%d detecciones seleccionadas	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.selection.empty	No valid objects selected	No se seleccionaron objetos válidos	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.pane	Additional Options	Opciones adicionales	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.device	Preferred device	Dispositivo preferido	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.device.tooltip	Select the preferred device for model running (choose CPU if other options are not available)	Seleccione el dispositivo preferido para ejecutar el modelo (elija CPU si las demás opciones no están disponibles)	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.output-channels	Outputs	Salidas	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.output-channels.tooltip	Choose which output channels to use, for InstanSeg models trained to give different outputs	Elija qué canales de salida utilizar para los modelos InstanSeg entrenados para generar diferentes salidas	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.threads	Threads	Hilos	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.threads.tooltip	Define the preferred number of threads	Defina el número preferido de hilos	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.tilesize	Tile size	Tamaño del mosaico	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.tilesize.tooltip	Define the approximate tile size	Defina el tamaño aproximado del mosaico	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.tileboundary	Tile padding	Relleno del mosaico	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.tileboundary.tooltip	Define how much padding to add on tile boundaries.\nSmaller values can make processing faster, but may cause objects to be split or broken at tile boundaries.	Defina cuánto relleno añadir en los límites de los mosaicos.\nLos valores menores pueden acelerar el procesamiento, pero pueden hacer que los objetos se dividan o se corten en los límites de los mosaicos.	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.input-channels	Input channels	Canales de entrada	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.input-channels.tooltip	Define the set of channels to be used in inference	Defina el conjunto de canales que se utilizará en la inferencia	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.makeMeasurements	Make measurements	Realizar mediciones	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.makeMeasurements.tooltip	Make shape and intensity measurements after detecting objects	Realizar mediciones de forma e intensidad después de detectar objetos	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.randomColors	Random colors	Colores aleatorios	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.randomColors.tooltip	Assign random colors to detected objects	Asignar colores aleatorios a los objetos detectados	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.outputType	Output type	Tipo de salida	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.outputType.tooltip	The type of output (annotation/detection/cell) that should be created. This should usually be left as Default	Tipo de salida (anotación/detección/célula) que se creará. Normalmente debe dejarse como Predeterminado	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.noChannelSelected	No channels selected!	¡No se seleccionaron canales!	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.oneChannelSelected	1 channel selected	1 canal seleccionado	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.nChannelSelected	%d channels selected	%d canales seleccionados	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.directory	Downloaded model directory	Directorio de modelos descargados	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.directory-name	Models:	Modelos:	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.directory-not-set.tooltip	Choose a directory where models should be stored	Elija un directorio donde almacenar los modelos	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.directory-exists	%s already exists.\nDo you want to use this default, or specify another directory?	%s ya existe.\n¿Desea usar este directorio predeterminado o especificar otro?	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.directory-create	Do you want to create a new model directory at \n%s?	¿Desea crear un nuevo directorio de modelos en \n%s?	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.directory-cannot-create	Unable to create directory at \n%s	No se puede crear el directorio en \n%s	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.directory-default	Use default	Usar predeterminado	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.directory-choose	Choose directory	Elegir directorio	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.directory-choose-model	Choose model directory	Elegir directorio de modelos	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.cancel	Cancel	Cancelar	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.directory-not-set	Choose directory to store models	Elegir directorio para almacenar modelos	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.options.directory.tooltip	Double-click the model directory name to open it in the system browser	Haga doble clic en el nombre del directorio de modelos para abrirlo en el explorador del sistema	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.model-directory.choose-directory	Choose directory	Elegir directorio	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.model-directory.choose-prompt	Please choose a directory to store InstanSeg models	Elija un directorio para almacenar los modelos InstanSeg	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.model-online-check.prompt	Check online for new models when InstanSeg starts?	¿Buscar en línea nuevos modelos al iniciar InstanSeg?	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.model-online-check.always	Always	Siempre	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.model-online-check.never	Never	Nunca	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.model-online-check.allow-once	Allow once	Permitir una vez	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.processing	Processing tiles	Procesando mosaicos	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.processing-progress	Processing %d/%d tiles (%.1f per second)	Procesando %d/%d mosaicos (%.1f por segundo)	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.processing-completed	Completed %d/%d tiles (%.1f per second)	Completados %d/%d mosaicos (%.1f por segundo)	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.cancel	Cancel	Cancelar	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.popup.fetching	Downloading model: %s	Descargando modelo: %s	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.popup.available	Model available: %s	Modelo disponible: %s	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.pytorch-downloading	Downloading PyTorch engine...	Descargando motor PyTorch...	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.pytorch	PyTorch engine not found - would you like to download it?\n This may take some time (but is only required once).	No se encontró el motor PyTorch. ¿Desea descargarlo?\n Esto puede tardar un tiempo (pero sólo es necesario una vez).	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.pytorch-popup	No segmentation performed - PyTorch engine not found.	No se realizó la segmentación: no se encontró el motor PyTorch.	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.stop-tasks	Stop all running tasks?	¿Detener todas las tareas en ejecución?	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.prefs.model-directory	InstanSeg model directory	Directorio de modelos InstanSeg	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+ui.prefs.model-directory.description	Choose a directory to store InstanSeg models	Elija un directorio para almacenar los modelos InstanSeg	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+error.window	Error initializing InstanSeg window.\nAn internet connection is required when running for the first time.	Error al inicializar la ventana de InstanSeg.\nSe requiere conexión a Internet al ejecutarlo por primera vez.	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+error.no-imagedata	Cannot run InstanSeg without an image available.	No se puede ejecutar InstanSeg sin una imagen disponible.	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+error.no-pixel-size	Pixel size is not set in this image! Results may be inaccurate.	¡El tamaño de píxel no está definido en esta imagen! Los resultados pueden ser inexactos.	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+error.downloading	Error downloading files	Error al descargar archivos	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+error.querying-local	Error querying local files	Error al consultar archivos locales	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+error.localModel	Can't find file in user model directory	No se encuentra el archivo en el directorio de modelos del usuario	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+error.tiles-failed	InstanSeg failed for %d tile(s).	InstanSeg falló en %d mosaico(s).	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+error.modelPath	Unable to fetch model path	No se puede obtener la ruta del modelo	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
+error.checkingModel	Downloaded model is missing zip or RDF file(s).\n Try deleting files from your downloaded model directory and retrying.	Al modelo descargado le falta el archivo ZIP o uno o más archivos RDF.\n Pruebe a eliminar los archivos del directorio de modelos descargados y vuelva a intentarlo.	DRAFT	INSTANSEG-ES-v0.1.7	ChatGPT	2026-09-03	0.7.0		
