@@ -234,7 +234,7 @@ class ComponentsLockTests(unittest.TestCase):
         self.assertEqual(entry["runtime_compatibility"], "NOT_VERIFIED")
         self.assertEqual(entry["distribution_status"], "UNSUPPORTED")
 
-    def test_localization_states_match_the_architecture_audit(self):
+    def test_localization_states_follow_repository_content(self):
         core = self.by_id["qupath-core"]
         self.assertEqual(core["audit_status"], "AUDITED")
         self.assertEqual(core["translation_status"], "TRANSLATED")
@@ -244,19 +244,39 @@ class ComponentsLockTests(unittest.TestCase):
         for component_id, entry in self.by_id.items():
             if component_id == "qupath-core":
                 continue
+
             with self.subTest(component=component_id):
                 self.assertEqual(entry["audit_status"], "AUDITED")
-                self.assertEqual(entry["translation_status"], "NOT_STARTED")
-                self.assertEqual(entry["validation_status"], "NOT_APPLICABLE")
                 self.assertEqual(entry["distribution_status"], "UNSUPPORTED")
 
-    def test_no_forks_patches_or_localization_revisions_exist_yet(self):
+                l10n_root = REPO / "components" / component_id / "l10n"
+                revisions = (
+                    sorted(path.name for path in l10n_root.iterdir() if path.is_dir())
+                    if l10n_root.is_dir()
+                    else []
+                )
+
+                if revisions:
+                    self.assertIn(
+                        entry["translation_status"],
+                        {"IN_PROGRESS", "TRANSLATED"},
+                    )
+                    self.assertIn(
+                        entry["validation_status"],
+                        {"NOT_VALIDATED", "VALIDATED"},
+                    )
+                    self.assertIn(entry["localization_revision"], revisions)
+                else:
+                    self.assertEqual(entry["translation_status"], "NOT_STARTED")
+                    self.assertEqual(entry["validation_status"], "NOT_APPLICABLE")
+                    self.assertIsNone(entry["localization_revision"])
+
+    def test_no_forks_or_patches_exist_yet(self):
         for entry in self.components:
             with self.subTest(component=entry["component_id"]):
                 self.assertIsNone(entry["fork_repo"])
                 self.assertIsNone(entry["fork_tag"])
                 self.assertEqual(entry["patches"], [])
-                self.assertIsNone(entry["localization_revision"])
 
     def test_dates_are_iso_dates(self):
         date.fromisoformat(self.lock["locked_at"])

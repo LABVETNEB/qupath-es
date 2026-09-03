@@ -230,14 +230,15 @@ class InstanSegExtensionTranslationTests(unittest.TestCase):
         )
         self.assertRegex(UPSTREAM_BUNDLE_BLOB_SHA, r"^[0-9a-f]{40}$")
 
-    def test_lockfile_pin_matches_v017_but_runtime_remains_unverified(self) -> None:
+    def test_lockfile_pin_tracks_pilot_but_runtime_remains_unverified(self) -> None:
         entry = self.lock_entry
         self.assertEqual(entry["upstream_tag"], EXTENSION_VERSION)
         self.assertEqual(entry["upstream_commit"], UPSTREAM_COMMIT)
         self.assertEqual(entry["runtime_compatibility"], "NOT_VERIFIED")
         self.assertEqual(entry["distribution_status"], "UNSUPPORTED")
-        self.assertIsNone(entry["localization_revision"])
-        self.assertEqual(entry["translation_status"], "NOT_STARTED")
+        self.assertEqual(entry["localization_revision"], EXTENSION_VERSION)
+        self.assertEqual(entry["translation_status"], "IN_PROGRESS")
+        self.assertEqual(entry["validation_status"], "NOT_VALIDATED")
 
     def test_pilot_does_not_claim_external_installability(self) -> None:
         mechanism = self.audit["translation_mechanism"]
