@@ -10,6 +10,7 @@ Los ADRs registran decisiones estructurales que no deben cambiar de forma implí
 | [ADR-0004](0004-language-axis.md) | Aceptado | Separar el estado lingüístico por `(component_id, locale)` |
 | [ADR-0005](0005-reproducible-release-artifacts.md) | Aceptado | Construir paquetes de release reproducibles y verificables desde blobs Git |
 | [ADR-0006](0006-tag-gated-release-publication.md) | Aceptado | Publicar sólo desde tags contenidos en `main`, con provenance attestation verificable |
+| [ADR-0007](0007-path-scoped-component-ci.md) | Aceptado | Detectar extensiones afectadas por diff y validarlas mediante matriz dinámica |
 
 ## Regla de mantenimiento
 

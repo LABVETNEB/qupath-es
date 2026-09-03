@@ -156,3 +156,101 @@ jobs:
 
           sys.exit(1 if failed else 0)
           PY
+
+  component_detection:
+    name: component detection
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      components: ${{ steps.detect.outputs.components }}
+      has_components: ${{ steps.detect.outputs.has_components }}
+
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+
+      - name: Detect affected extension components
+        id: detect
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BEFORE_SHA: ${{ github.event.before }}
+          CURRENT_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          case "$EVENT_NAME" in
+            workflow_dispatch)
+              python tools/ci_component_matrix.py \
+                --repo . \
+                --all \
+                --head "$CURRENT_SHA" \
+                --github-output "$GITHUB_OUTPUT"
+              ;;
+            pull_request)
+              python tools/ci_component_matrix.py \
+                --repo . \
+                --base "$BASE_SHA" \
+                --head "$HEAD_SHA" \
+                --github-output "$GITHUB_OUTPUT"
+              ;;
+            push)
+              if [[ -z "$BEFORE_SHA" || "$BEFORE_SHA" =~ ^0+$ ]]; then
+                python tools/ci_component_matrix.py \
+                  --repo . \
+                  --all \
+                  --head "$CURRENT_SHA" \
+                  --github-output "$GITHUB_OUTPUT"
+              else
+                python tools/ci_component_matrix.py \
+                  --repo . \
+                  --base "$BEFORE_SHA" \
+                  --head "$CURRENT_SHA" \
+                  --github-output "$GITHUB_OUTPUT"
+              fi
+              ;;
+            *)
+              echo "::error::Unsupported CI event: $EVENT_NAME"
+              exit 1
+              ;;
+          esac
+
+  component_check:
+    name: component (${{ matrix.component }})
+    needs: component_detection
+    if: needs.component_detection.outputs.has_components == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        component: ${{ fromJSON(needs.component_detection.outputs.components) }}
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify component state
+        shell: bash
+        env:
+          COMPONENT_ID: ${{ matrix.component }}
+        run: |
+          set -euo pipefail
+          python tools/component_ci.py --repo . --component "$COMPONENT_ID"
