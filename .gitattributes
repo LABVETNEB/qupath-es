@@ -10,11 +10,12 @@ versions/*/base/* -text
 *.tsv text eol=lf
 
 # Generated localization bundles.
-# Byte-exact, like the canonical base: the release SHA-256 is computed over
-# these bytes and the file is installed verbatim, so Git must not rewrite
-# line endings.  The generator already matches the canonical bundle's
-# convention (CRLF for QuPath 0.7.0).
+# Byte-exact, like the canonical base: release SHA-256 values are computed over
+# these bytes and the files are installed verbatim, so Git must not rewrite
+# line endings. Core 0.7.0 uses CRLF; extension bundles may use LF. In both
+# cases the repository blob, checkout and installed bytes must stay identical.
 versions/*/dist/*.properties -text
+components/**/l10n/**/dist/*.properties -text
 
 # Runtime helper scripts are project-authored text.
 versions/*/runtime/*.groovy text eol=lf
