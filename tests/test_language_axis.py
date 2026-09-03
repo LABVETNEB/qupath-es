@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sys
@@ -13,6 +14,7 @@ REGISTRY = ROOT / "components" / "registry.json"
 COMPONENT_LOCK = ROOT / "versions" / "0.7.0" / "components.lock.json"
 LOCALIZATION_LOCK = ROOT / "versions" / "0.7.0" / "localizations.lock.json"
 SCHEMA = ROOT / "schemas" / "localizations-lock.schema.json"
+SUPPORTED_VERSIONS = ROOT / "versions" / "supported-versions.json"
 
 if str(TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(TOOLS_DIR))
@@ -26,6 +28,7 @@ ENTRY_FIELDS = {
     "revision",
     "source_of_truth",
     "dist_bundle",
+    "dist_sha256",
     "translation_status",
     "validation_status",
     "distribution_status",
@@ -36,6 +39,7 @@ LANGUAGE_SPECIFIC_FIELDS = {
     "revision",
     "source_of_truth",
     "dist_bundle",
+    "dist_sha256",
     "translation_status",
     "validation_status",
     "distribution_status",
@@ -57,9 +61,15 @@ PIN_FIELDS_THAT_MUST_NOT_APPEAR = {
     "last_audited",
 }
 
+SHA256_RE = re.compile(r"^[0-9A-F]{64}$")
+
 
 def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def sha256_upper(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest().upper()
 
 
 class LanguageAxisTests(unittest.TestCase):
@@ -69,6 +79,7 @@ class LanguageAxisTests(unittest.TestCase):
         cls.component_lock = load_json(COMPONENT_LOCK)
         cls.localization_lock = load_json(LOCALIZATION_LOCK)
         cls.schema = load_json(SCHEMA)
+        cls.supported_versions = load_json(SUPPORTED_VERSIONS)
         cls.entries = cls.localization_lock["localizations"]
 
     def test_json_files_are_strict_utf8_without_bom_and_use_lf(self):
@@ -169,6 +180,7 @@ class LanguageAxisTests(unittest.TestCase):
                     self.assertIsNone(entry["revision"])
                     self.assertIsNone(entry["source_of_truth"])
                     self.assertIsNone(entry["dist_bundle"])
+                    self.assertIsNone(entry["dist_sha256"])
                     self.assertEqual(entry["validation_status"], "NOT_APPLICABLE")
                     self.assertEqual(entry["distribution_status"], "UNSUPPORTED")
                     continue
@@ -181,6 +193,38 @@ class LanguageAxisTests(unittest.TestCase):
 
                 self.assertTrue(entry["source_of_truth"].endswith(".tsv"))
                 self.assertTrue(entry["dist_bundle"].endswith(".properties"))
+
+    def test_every_materialized_distribution_has_exact_sha256(self):
+        materialized = [
+            entry
+            for entry in self.entries
+            if entry["dist_bundle"] is not None
+        ]
+        self.assertTrue(materialized)
+
+        for entry in materialized:
+            with self.subTest(
+                component=entry["component_id"],
+                locale=entry["locale"],
+            ):
+                self.assertRegex(entry["dist_sha256"], SHA256_RE)
+                self.assertEqual(
+                    sha256_upper(ROOT / entry["dist_bundle"]),
+                    entry["dist_sha256"],
+                )
+
+    def test_core_distribution_fingerprint_matches_release_metadata(self):
+        spanish = {
+            entry["component_id"]: entry
+            for entry in self.entries
+            if entry["locale"] == "es"
+        }
+        core = spanish["qupath-core"]
+        release = self.supported_versions["versions"]["0.7.0"]
+        self.assertEqual(
+            core["dist_sha256"],
+            release["spanish_bundle_sha256"],
+        )
 
     def test_existing_spanish_materialization_is_preserved_without_moves(self):
         spanish = {
@@ -199,6 +243,10 @@ class LanguageAxisTests(unittest.TestCase):
             core["dist_bundle"],
             "versions/0.7.0/dist/qupath-gui-strings_es.properties",
         )
+        self.assertEqual(
+            core["dist_sha256"],
+            "E4A966C90D1CE1368DE9EA21DECC7D9DBB0180087B60D3724690AAD4C128FC19",
+        )
 
         instanseg = spanish["instanseg"]
         self.assertEqual(instanseg["revision"], "v0.1.7")
@@ -209,6 +257,10 @@ class LanguageAxisTests(unittest.TestCase):
         self.assertEqual(
             instanseg["dist_bundle"],
             "components/instanseg/l10n/v0.1.7/dist/strings_es.properties",
+        )
+        self.assertEqual(
+            instanseg["dist_sha256"],
+            "D2405B02E4284BF5AA7F8C51EDB61E3C3B3364C064DC393E1B0D2C23C6E0E06A",
         )
 
 

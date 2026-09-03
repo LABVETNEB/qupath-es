@@ -9,6 +9,7 @@
       "revision": null,
       "source_of_truth": "versions/0.7.0/work/translation.tsv",
       "dist_bundle": "versions/0.7.0/dist/qupath-gui-strings_es.properties",
+      "dist_sha256": "E4A966C90D1CE1368DE9EA21DECC7D9DBB0180087B60D3724690AAD4C128FC19",
       "translation_status": "TRANSLATED",
       "validation_status": "VALIDATED",
       "distribution_status": "DISTRIBUTED"
@@ -19,6 +20,7 @@
       "revision": null,
       "source_of_truth": null,
       "dist_bundle": null,
+      "dist_sha256": null,
       "translation_status": "NOT_STARTED",
       "validation_status": "NOT_APPLICABLE",
       "distribution_status": "UNSUPPORTED"
@@ -29,6 +31,7 @@
       "revision": null,
       "source_of_truth": null,
       "dist_bundle": null,
+      "dist_sha256": null,
       "translation_status": "NOT_STARTED",
       "validation_status": "NOT_APPLICABLE",
       "distribution_status": "UNSUPPORTED"
@@ -39,6 +42,7 @@
       "revision": "v0.1.7",
       "source_of_truth": "components/instanseg/l10n/v0.1.7/strings.tsv",
       "dist_bundle": "components/instanseg/l10n/v0.1.7/dist/strings_es.properties",
+      "dist_sha256": "D2405B02E4284BF5AA7F8C51EDB61E3C3B3364C064DC393E1B0D2C23C6E0E06A",
       "translation_status": "IN_PROGRESS",
       "validation_status": "NOT_VALIDATED",
       "distribution_status": "UNSUPPORTED"
@@ -49,6 +53,7 @@
       "revision": null,
       "source_of_truth": null,
       "dist_bundle": null,
+      "dist_sha256": null,
       "translation_status": "NOT_STARTED",
       "validation_status": "NOT_APPLICABLE",
       "distribution_status": "UNSUPPORTED"
@@ -59,6 +64,7 @@
       "revision": null,
       "source_of_truth": null,
       "dist_bundle": null,
+      "dist_sha256": null,
       "translation_status": "NOT_STARTED",
       "validation_status": "NOT_APPLICABLE",
       "distribution_status": "UNSUPPORTED"
@@ -69,6 +75,7 @@
       "revision": null,
       "source_of_truth": null,
       "dist_bundle": null,
+      "dist_sha256": null,
       "translation_status": "NOT_STARTED",
       "validation_status": "NOT_APPLICABLE",
       "distribution_status": "UNSUPPORTED"
@@ -79,6 +86,7 @@
       "revision": null,
       "source_of_truth": null,
       "dist_bundle": null,
+      "dist_sha256": null,
       "translation_status": "NOT_STARTED",
       "validation_status": "NOT_APPLICABLE",
       "distribution_status": "UNSUPPORTED"
@@ -89,6 +97,7 @@
       "revision": null,
       "source_of_truth": null,
       "dist_bundle": null,
+      "dist_sha256": null,
       "translation_status": "NOT_STARTED",
       "validation_status": "NOT_APPLICABLE",
       "distribution_status": "UNSUPPORTED"
@@ -99,6 +108,7 @@
       "revision": null,
       "source_of_truth": null,
       "dist_bundle": null,
+      "dist_sha256": null,
       "translation_status": "NOT_STARTED",
       "validation_status": "NOT_APPLICABLE",
       "distribution_status": "UNSUPPORTED"
@@ -109,6 +119,7 @@
       "revision": null,
       "source_of_truth": null,
       "dist_bundle": null,
+      "dist_sha256": null,
       "translation_status": "NOT_STARTED",
       "validation_status": "NOT_APPLICABLE",
       "distribution_status": "UNSUPPORTED"
@@ -119,6 +130,7 @@
       "revision": null,
       "source_of_truth": null,
       "dist_bundle": null,
+      "dist_sha256": null,
       "translation_status": "NOT_STARTED",
       "validation_status": "NOT_APPLICABLE",
       "distribution_status": "UNSUPPORTED"
@@ -129,6 +141,7 @@
       "revision": null,
       "source_of_truth": null,
       "dist_bundle": null,
+      "dist_sha256": null,
       "translation_status": "NOT_STARTED",
       "validation_status": "NOT_APPLICABLE",
       "distribution_status": "UNSUPPORTED"
