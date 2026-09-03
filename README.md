@@ -14,12 +14,19 @@ Un paquete de traducción que hace que los menús, paneles, diálogos y
 preferencias de QuPath aparezcan en castellano, más las herramientas para
 instalarlo, verificarlo y mantenerlo cuando salgan versiones nuevas de QuPath.
 
+El repositorio también mantiene un corpus auditado de extensiones de QuPath para
+estudiar cómo localizar su interfaz sin mezclar identidad, pins, evidencia,
+compatibilidad y distribución. Ese modelo está documentado en
+[`docs/COMPONENTS.md`](docs/COMPONENTS.md).
+
 ### Qué hace
 
 - Instala un fichero de traducción **externo** que QuPath carga al arrancar.
 - Detecta la versión de QuPath instalada y comprueba si hay traducción para ella.
 - Valida la traducción antes de instalarla.
 - Hace copia de seguridad antes de sustituir nada, y permite deshacer.
+- Registra identidad, pins y provenance de un corpus de extensiones sin
+  vendorizar su código fuente.
 
 ### Qué NO hace
 
@@ -31,6 +38,8 @@ instalarlo, verificarlo y mantenerlo cuando salgan versiones nuevas de QuPath.
 - **No toca tus imágenes, proyectos ni resultados.**
 - **No cierra QuPath.** Si está abierto cuando hace falta escribir, avisa y se
   detiene.
+- **No afirma compatibilidad de una extensión sólo porque su API declarada
+  coincida.** La compatibilidad runtime se registra como un estado separado.
 
 ---
 
@@ -66,7 +75,9 @@ en [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 | Algo no funciona | [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md) |
 | Quitar la traducción | [`docs/UNINSTALL.md`](docs/UNINSTALL.md) |
 | Dudas frecuentes | [`docs/FAQ.md`](docs/FAQ.md) |
-| Entender cómo funciona por dentro | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
+| Entender el bundle principal y runtime | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
+| Entender componentes, lockfiles y provenance | [`docs/COMPONENTS.md`](docs/COMPONENTS.md) |
+| Ver decisiones arquitectónicas (ADR) | [`docs/adr/`](docs/adr/) |
 | Colaborar o mantener el proyecto | [`docs/MAINTAINER_GUIDE.md`](docs/MAINTAINER_GUIDE.md) |
 | Cómo se protege el repositorio | [`docs/GOVERNANCE.md`](docs/GOVERNANCE.md) |
 
@@ -127,14 +138,16 @@ Si QuPath vuelve al inglés en algún momento:
 | Claves del bundle principal (0.7.0) | 894 |
 | `REVIEWED` | 884 |
 | `KEEP_EN` (deliberadamente en inglés) | 10 |
-| `BLOCKED` / `PENDING` / `DRAFT` | 0 |
+| `BLOCKED` / `PENDING` / `DRAFT` del Core | 0 |
 | Validador estructural | PASS |
 | Auditoría lingüística | SAFE TO INSTALL |
-| Suite de pruebas | 147 tests |
+| CI | Ubuntu + Windows + integridad canónica |
+| Registry de componentes | 13 identidades estables |
+| JSON Schema | Contratos ejecutables para registry y lockfile |
 
-Huellas de los artefactos de 0.7.0:
+Huellas de los artefactos Core de 0.7.0:
 
-```
+```text
 base   (inglés canónico)  796EFC44FC23369E4D7BDFDE69C0FA2A702051BF2F9D71399157B505E8D45D2D
 dist   (español)          E4A966C90D1CE1368DE9EA21DECC7D9DBB0180087B60D3724690AAD4C128FC19
 ```
@@ -143,15 +156,19 @@ dist   (español)          E4A966C90D1CE1368DE9EA21DECC7D9DBB0180087B60D3724690A
 
 ## Estructura del repositorio
 
-```
-.github/         gobernanza: CODEOWNERS, plantillas, integración continua
-runtime/         actualizador y sondas (lo que ejecuta el usuario)
-tools/           motor de traducción, validación y migración (Python)
-tests/           147 pruebas
-versions/0.7.0/  bundle canónico, traducción, bundle generado e informes
-docs/            esta documentación
-backups/         copias de seguridad creadas por -Apply (no se borran solas)
+```text
+.github/         gobernanza, plantillas e integración continua
+components/      identidad, políticas, auditorías y localización de extensiones
+schemas/         contratos JSON Schema ejecutables
+runtime/         actualizador y sondas que ejecuta el usuario
+tools/           traducción, validación, migración y provenance
+tests/           pruebas unitarias y de integridad cross-platform
+versions/0.7.0/  objetivo QuPath: Core congelado, lockfile, dist e informes
+docs/            documentación técnica, operativa y ADRs
+backups/         copias creadas por -Apply (no se borran solas)
 logs/            registro de cada ejecución (no versionado)
 ```
 
-Detalle en [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+Detalle del runtime y bundle principal en
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Modelo del corpus de extensiones
+en [`docs/COMPONENTS.md`](docs/COMPONENTS.md).
