@@ -1,8 +1,8 @@
 """Minimal, dependency-free validator for the JSON Schema subset used here.
 
 This module intentionally does not claim full JSON Schema Draft 2020-12
-compliance.  It implements the closed subset exercised by the repository's
-schemas so that those files are executable contracts rather than documentation.
+compliance. It implements the closed subset exercised by the repository's
+schemas so those files are executable contracts rather than documentation.
 Unsupported keywords fail closed when they can affect validation semantics.
 """
 from __future__ import annotations
@@ -31,6 +31,9 @@ SUPPORTED_KEYWORDS = {
     "minLength",
     "pattern",
     "anyOf",
+    "allOf",
+    "if",
+    "then",
 }
 
 
@@ -124,6 +127,20 @@ def validate(
                 f"{path}: value matches none of the anyOf alternatives: "
                 + " | ".join(failures)
             )
+
+    if "allOf" in schema:
+        for candidate in schema["allOf"]:
+            validate(instance, candidate, root_schema=root_schema, path=path)
+
+    if "if" in schema:
+        try:
+            validate(instance, schema["if"], root_schema=root_schema, path=path)
+        except SchemaValidationError:
+            condition_matches = False
+        else:
+            condition_matches = True
+        if condition_matches and "then" in schema:
+            validate(instance, schema["then"], root_schema=root_schema, path=path)
 
     if "type" in schema:
         declared = schema["type"]

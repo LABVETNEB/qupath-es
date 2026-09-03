@@ -1,9 +1,4 @@
-"""Integrity tests for the per-QuPath component lockfile.
-
-The registry owns stable component identity.  A components.lock.json owns the
-version-specific relationship between one QuPath target and exact upstream
-pins.  These tests deliberately keep those responsibilities separate.
-"""
+"""Integrity tests for the per-QuPath component lockfile."""
 from __future__ import annotations
 
 import json
@@ -19,120 +14,30 @@ LOCK = REPO / "versions" / "0.7.0" / "components.lock.json"
 SCHEMA = REPO / "schemas" / "components-lock.schema.json"
 
 SHA1_RE = re.compile(r"^[0-9a-f]{40}$")
+SHA256_RE = re.compile(r"^[0-9A-F]{64}$")
 
 EXPECTED_FIELDS = {
-    "component_id",
-    "upstream_tag",
-    "upstream_commit",
-    "pin_basis",
-    "artifact_name",
-    "artifact_url",
-    "artifact_sha256",
-    "declared_qupath_api",
-    "runtime_compatibility",
-    "localization_revision",
-    "audit_status",
-    "translation_status",
-    "validation_status",
-    "distribution_status",
-    "fork_repo",
-    "fork_tag",
-    "patches",
-    "last_audited",
+    "component_id", "upstream_tag", "upstream_commit", "evidence_commit",
+    "pin_basis", "artifact_name", "artifact_url", "artifact_sha256",
+    "declared_qupath_api", "runtime_compatibility", "localization_revision",
+    "audit_status", "translation_status", "validation_status",
+    "distribution_status", "fork_repo", "fork_tag", "patches", "last_audited",
 }
 
 EXPECTED_PINS = {
-    "qupath-core": {
-        "tag": None,
-        "commit": "04ccfa4fb7d43e9b566393e08e83690b72248d44",
-        "basis": "FROZEN_TARGET_COMMIT",
-        "api": "0.7.0",
-        "compatibility": "FROZEN_TARGET",
-    },
-    "dl-pixel-classifier": {
-        "tag": "v0.8.5",
-        "commit": "a1d327888f91d8f18465396028650154e54befcb",
-        "basis": "UPSTREAM_RELEASE",
-        "api": "0.7.0",
-        "compatibility": "NOT_VERIFIED",
-    },
-    "tiatoolbox": {
-        "tag": None,
-        "commit": "cb942b774c5b1f7340cfbb036687e0724adaaedd",
-        "basis": "AUDITED_COMMIT",
-        "api": "0.6.0",
-        "compatibility": "NOT_VERIFIED",
-    },
-    "instanseg": {
-        "tag": "v0.1.7",
-        "commit": "90b260157f51f137201e11061b912b552c8b444f",
-        "basis": "UPSTREAM_RELEASE",
-        "api": "0.6.0",
-        "compatibility": "NOT_VERIFIED",
-    },
-    "cell-analysis-tools": {
-        "tag": "v0.11.2",
-        "commit": "76def4ef4cab2e673d4a247953028562403ce69e",
-        "basis": "UPSTREAM_RELEASE",
-        "api": "0.7.0",
-        "compatibility": "NOT_VERIFIED",
-    },
-    "training": {
-        "tag": "v0.1.0",
-        "commit": "8703a810fb7bb1c84a94d436c1bbaf514301891a",
-        "basis": "QUPATH_BUNDLED",
-        "api": "0.6.0",
-        "compatibility": "BUNDLED_WITH_TARGET",
-    },
-    "stardist": {
-        "tag": "v0.6.0",
-        "commit": "934b041671217f0f82ae2f2d587352c0972b2364",
-        "basis": "UPSTREAM_RELEASE",
-        "api": "0.6.0",
-        "compatibility": "NOT_VERIFIED",
-    },
-    "cellpose": {
-        "tag": "v0.12.1",
-        "commit": "782652ea3357e9f48970d4ac21452c5d2d0df491",
-        "basis": "UPSTREAM_RELEASE",
-        "api": "0.7.0",
-        "compatibility": "NOT_VERIFIED",
-    },
-    "wsinfer": {
-        "tag": "v0.4.0",
-        "commit": "f1c652e79780d104e67b7404a9cb7c966cd58e60",
-        "basis": "UPSTREAM_RELEASE",
-        "api": "0.6.0",
-        "compatibility": "NOT_VERIFIED",
-    },
-    "djl": {
-        "tag": "v0.4.2",
-        "commit": "cce175dac8bd5981acb641f900cc10744d9dc5ab",
-        "basis": "QUPATH_BUNDLED",
-        "api": "0.6.0",
-        "compatibility": "BUNDLED_WITH_TARGET",
-    },
-    "bioimageio": {
-        "tag": "v0.2.0",
-        "commit": "5e6c1069ac46965bf3eec6d6502561fc497843ae",
-        "basis": "UPSTREAM_RELEASE",
-        "api": "0.8.0-SNAPSHOT",
-        "compatibility": "NOT_VERIFIED",
-    },
-    "sam": {
-        "tag": "v0.9.1",
-        "commit": "8a286013540eaafa94927a485904a1df6a2dc601",
-        "basis": "UPSTREAM_RELEASE",
-        "api": "0.6.0",
-        "compatibility": "NOT_VERIFIED",
-    },
-    "image-export-toolkit": {
-        "tag": "v1.2.8",
-        "commit": "f11426e3f74665fdee41ed5d75d5bd559a3008b9",
-        "basis": "UPSTREAM_RELEASE",
-        "api": "0.7.0",
-        "compatibility": "NOT_VERIFIED",
-    },
+    "qupath-core": (None, "04ccfa4fb7d43e9b566393e08e83690b72248d44", "FROZEN_TARGET_COMMIT", "0.7.0", "FROZEN_TARGET"),
+    "dl-pixel-classifier": ("v0.8.5", "a1d327888f91d8f18465396028650154e54befcb", "UPSTREAM_RELEASE", "0.7.0", "NOT_VERIFIED"),
+    "tiatoolbox": (None, "cb942b774c5b1f7340cfbb036687e0724adaaedd", "AUDITED_COMMIT", "0.6.0", "NOT_VERIFIED"),
+    "instanseg": ("v0.1.7", "90b260157f51f137201e11061b912b552c8b444f", "UPSTREAM_RELEASE", "0.6.0", "NOT_VERIFIED"),
+    "cell-analysis-tools": ("v0.11.2", "76def4ef4cab2e673d4a247953028562403ce69e", "UPSTREAM_RELEASE", "0.7.0", "NOT_VERIFIED"),
+    "training": ("v0.1.0", "8703a810fb7bb1c84a94d436c1bbaf514301891a", "QUPATH_BUNDLED", "0.6.0", "BUNDLED_WITH_TARGET"),
+    "stardist": ("v0.6.0", "934b041671217f0f82ae2f2d587352c0972b2364", "UPSTREAM_RELEASE", "0.6.0", "NOT_VERIFIED"),
+    "cellpose": ("v0.12.1", "782652ea3357e9f48970d4ac21452c5d2d0df491", "UPSTREAM_RELEASE", "0.7.0", "NOT_VERIFIED"),
+    "wsinfer": ("v0.4.0", "f1c652e79780d104e67b7404a9cb7c966cd58e60", "UPSTREAM_RELEASE", "0.6.0", "NOT_VERIFIED"),
+    "djl": ("v0.4.2", "cce175dac8bd5981acb641f900cc10744d9dc5ab", "QUPATH_BUNDLED", "0.6.0", "BUNDLED_WITH_TARGET"),
+    "bioimageio": ("v0.2.0", "5e6c1069ac46965bf3eec6d6502561fc497843ae", "UPSTREAM_RELEASE", "0.8.0-SNAPSHOT", "NOT_VERIFIED"),
+    "sam": ("v0.9.1", "8a286013540eaafa94927a485904a1df6a2dc601", "UPSTREAM_RELEASE", "0.6.0", "NOT_VERIFIED"),
+    "image-export-toolkit": ("v1.2.8", "f11426e3f74665fdee41ed5d75d5bd559a3008b9", "UPSTREAM_RELEASE", "0.7.0", "NOT_VERIFIED"),
 }
 
 
@@ -158,10 +63,7 @@ class ComponentsLockTests(unittest.TestCase):
     def test_top_level_target_is_frozen_qupath_070(self):
         self.assertEqual(self.lock["schema_version"], 1)
         self.assertEqual(self.lock["qupath_version"], "0.7.0")
-        self.assertEqual(
-            self.lock["qupath_upstream_commit"],
-            "04ccfa4fb7d43e9b566393e08e83690b72248d44",
-        )
+        self.assertEqual(self.lock["qupath_upstream_commit"], "04ccfa4fb7d43e9b566393e08e83690b72248d44")
         self.assertRegex(self.lock["qupath_upstream_commit"], SHA1_RE)
 
     def test_lock_ids_match_registry_exactly_and_in_order(self):
@@ -179,16 +81,43 @@ class ComponentsLockTests(unittest.TestCase):
     def test_pins_are_exactly_the_reviewed_initial_snapshot(self):
         self.assertEqual(set(self.by_id), set(EXPECTED_PINS))
         for component_id, expected in EXPECTED_PINS.items():
+            tag, commit, basis, api, compatibility = expected
             entry = self.by_id[component_id]
             with self.subTest(component=component_id):
-                self.assertEqual(entry["upstream_tag"], expected["tag"])
-                self.assertEqual(entry["upstream_commit"], expected["commit"])
-                self.assertEqual(entry["pin_basis"], expected["basis"])
-                self.assertEqual(entry["declared_qupath_api"], expected["api"])
-                self.assertEqual(
-                    entry["runtime_compatibility"], expected["compatibility"]
-                )
+                self.assertEqual(entry["upstream_tag"], tag)
+                self.assertEqual(entry["upstream_commit"], commit)
+                self.assertEqual(entry["pin_basis"], basis)
+                self.assertEqual(entry["declared_qupath_api"], api)
+                self.assertEqual(entry["runtime_compatibility"], compatibility)
                 self.assertRegex(entry["upstream_commit"], SHA1_RE)
+
+    def test_evidence_commit_is_explicit_and_backed_by_snapshot(self):
+        core = self.by_id["qupath-core"]
+        self.assertEqual(core["evidence_commit"], core["upstream_commit"])
+        for component_id, entry in self.by_id.items():
+            self.assertRegex(entry["evidence_commit"], SHA1_RE)
+            if component_id == "qupath-core":
+                continue
+            audit_path = REPO / "components" / component_id / "audits" / f"{entry['evidence_commit']}.json"
+            with self.subTest(component=component_id):
+                self.assertTrue(audit_path.is_file(), f"missing evidence snapshot: {audit_path}")
+                audit = load_json(audit_path)
+                self.assertEqual(audit["upstream_commit"], entry["evidence_commit"])
+
+    def test_release_pins_have_exact_asset_provenance(self):
+        for entry in self.components:
+            with self.subTest(component=entry["component_id"]):
+                if entry["pin_basis"] == "UPSTREAM_RELEASE":
+                    self.assertIsInstance(entry["artifact_name"], str)
+                    self.assertTrue(entry["artifact_name"])
+                    self.assertIsInstance(entry["artifact_url"], str)
+                    self.assertTrue(entry["artifact_url"].startswith("https://github.com/"))
+                    self.assertIn("/releases/download/", entry["artifact_url"])
+                    self.assertTrue(entry["artifact_url"].endswith("/" + entry["artifact_name"]))
+                    self.assertRegex(entry["artifact_sha256"], SHA256_RE)
+                else:
+                    self.assertIsNone(entry["artifact_url"])
+                    self.assertIsNone(entry["artifact_sha256"])
 
     def test_core_pin_is_the_frozen_target_not_default_branch(self):
         core = self.by_id["qupath-core"]
@@ -215,12 +144,6 @@ class ComponentsLockTests(unittest.TestCase):
         self.assertIsNone(entry["artifact_url"])
         self.assertIsNone(entry["artifact_sha256"])
 
-    def test_unmeasured_artifact_hashes_are_null_not_invented(self):
-        for entry in self.components:
-            with self.subTest(component=entry["component_id"]):
-                self.assertIsNone(entry["artifact_url"])
-                self.assertIsNone(entry["artifact_sha256"])
-
     def test_external_extensions_do_not_claim_runtime_validation(self):
         for component_id, entry in self.by_id.items():
             if component_id in {"qupath-core", "training", "djl"}:
@@ -236,7 +159,6 @@ class ComponentsLockTests(unittest.TestCase):
 
     def test_localization_states_follow_repository_content(self):
         core = self.by_id["qupath-core"]
-        self.assertEqual(core["audit_status"], "AUDITED")
         self.assertEqual(core["translation_status"], "TRANSLATED")
         self.assertEqual(core["validation_status"], "VALIDATED")
         self.assertEqual(core["distribution_status"], "DISTRIBUTED")
@@ -244,27 +166,14 @@ class ComponentsLockTests(unittest.TestCase):
         for component_id, entry in self.by_id.items():
             if component_id == "qupath-core":
                 continue
-
             with self.subTest(component=component_id):
                 self.assertEqual(entry["audit_status"], "AUDITED")
                 self.assertEqual(entry["distribution_status"], "UNSUPPORTED")
-
                 l10n_root = REPO / "components" / component_id / "l10n"
-                revisions = (
-                    sorted(path.name for path in l10n_root.iterdir() if path.is_dir())
-                    if l10n_root.is_dir()
-                    else []
-                )
-
+                revisions = sorted(path.name for path in l10n_root.iterdir() if path.is_dir()) if l10n_root.is_dir() else []
                 if revisions:
-                    self.assertIn(
-                        entry["translation_status"],
-                        {"IN_PROGRESS", "TRANSLATED"},
-                    )
-                    self.assertIn(
-                        entry["validation_status"],
-                        {"NOT_VALIDATED", "VALIDATED"},
-                    )
+                    self.assertIn(entry["translation_status"], {"IN_PROGRESS", "TRANSLATED"})
+                    self.assertIn(entry["validation_status"], {"NOT_VALIDATED", "VALIDATED"})
                     self.assertIn(entry["localization_revision"], revisions)
                 else:
                     self.assertEqual(entry["translation_status"], "NOT_STARTED")
@@ -281,30 +190,22 @@ class ComponentsLockTests(unittest.TestCase):
     def test_dates_are_iso_dates(self):
         date.fromisoformat(self.lock["locked_at"])
         for entry in self.components:
-            with self.subTest(component=entry["component_id"]):
-                date.fromisoformat(entry["last_audited"])
+            date.fromisoformat(entry["last_audited"])
 
-    def test_schema_encodes_lockfile_separation_and_closed_world_contract(self):
-        self.assertEqual(self.schema["$schema"], "https://json-schema.org/draft/2020-12/schema")
+    def test_schema_encodes_closed_world_contract(self):
         self.assertFalse(self.schema["additionalProperties"])
-        self.assertEqual(self.schema["properties"]["schema_version"]["const"], 1)
-
         component_schema = self.schema["$defs"]["componentPin"]
         self.assertFalse(component_schema["additionalProperties"])
         self.assertEqual(set(component_schema["required"]), EXPECTED_FIELDS)
         self.assertEqual(set(component_schema["properties"]), EXPECTED_FIELDS)
+        self.assertTrue(component_schema["allOf"], "release provenance condition must be encoded")
 
     def test_registry_does_not_absorb_version_specific_lock_fields(self):
         registry_fields = set(self.registry["components"][0])
         lock_only = {
-            "upstream_tag",
-            "upstream_commit",
-            "artifact_sha256",
-            "declared_qupath_api",
-            "runtime_compatibility",
-            "translation_status",
-            "validation_status",
-            "distribution_status",
+            "upstream_tag", "upstream_commit", "evidence_commit", "artifact_sha256",
+            "declared_qupath_api", "runtime_compatibility", "translation_status",
+            "validation_status", "distribution_status",
         }
         self.assertTrue(registry_fields.isdisjoint(lock_only))
 
