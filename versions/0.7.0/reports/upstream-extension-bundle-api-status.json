@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "record_type": "UPSTREAM_CHANGE_STATUS",
+  "roadmap_pr": 6,
+  "title": "QuPath extension ResourceBundle API",
+  "status": "DISCUSSION_REQUIRED",
+  "implementation_status": "NOT_STARTED",
+  "upstream_repository": "qupath/qupath",
+  "upstream_default_branch": "main",
+  "observed_upstream_head": "67cbf619996582f8737550080cd05c6e52b37b13",
+  "observed_at": "2026-09-03",
+  "observed_files": [
+    {
+      "path": "qupath-gui-fx/src/main/java/qupath/lib/gui/localization/QuPathResources.java",
+      "blob_sha": "6143911c4eff5eccf72567d1d34858a461644738"
+    }
+  ],
+  "governance": {
+    "contribution_policy": "DISCUSS_BEFORE_PULL_REQUEST",
+    "contributing_path": "CONTRIBUTING.md",
+    "feature_request_template_path": ".github/ISSUE_TEMPLATE/feature_request.md",
+    "preferred_discussion_channel": "https://forum.image.sc/tags/qupath",
+    "existing_discussion_url": "https://forum.image.sc/t/qupath-internationalize-multi-language-support/77468",
+    "existing_discussion_discovered_via_issue": "https://github.com/qupath/qupath/issues/1609",
+    "maintainer_reference_comment": "https://github.com/qupath/qupath/issues/1609#issuecomment-2316693891",
+    "labvetneb_post_status": "NOT_POSTED",
+    "reason_not_posted": "No authenticated image.sc/Discourse integration is available in the current execution environment; creating a duplicate GitHub issue would contradict the maintainer's explicit routing to the existing forum discussion."
+  },
+  "duplicate_search": {
+    "github_issue_queries": [
+      "ResourceBundle localization extension locale",
+      "QuPathResources",
+      "i18n",
+      "translation language ResourceBundle"
+    ],
+    "github_pr_queries": [
+      "localization ResourceBundle extension"
+    ],
+    "equivalent_open_github_issue_or_pr_found": false,
+    "note": "This records the searches performed on 2026-09-03; it is not a claim that the forum contains no related proposals."
+  },
+  "observed_problem": {
+    "display_locale_is_used_by_qupath_resources": true,
+    "bundle_lookup_uses_qupath_core_classloader": true,
+    "public_extension_classloader_entrypoint": false,
+    "external_localization_lookup_flattens_bundle_name": true,
+    "flat_example": "strings_es.properties",
+    "collision_risk": "Eleven audited extension bundles use the basename strings, so a flat external namespace cannot address them independently.",
+    "extension_impact": "The audited extension bundles use plain ResourceBundle.getBundle(String), so they do not reach QuPath's external localization directories and do not follow the project's DISPLAY-only locale policy."
+  },
+  "proposed_contract_for_discussion": {
+    "goal": "Allow extensions to resolve their own localized ResourceBundles through QuPath without forks, while preserving DISPLAY locale semantics and avoiding external filename collisions.",
+    "requirements": [
+      "Expose a supported QuPath API for loading an arbitrary bundle with the extension's ClassLoader or anchor Class.",
+      "Resolve locale with Locale.getDefault(Locale.Category.DISPLAY), without changing FORMAT or the global default locale.",
+      "Search the extension ClassLoader first for extension-owned resources, with a controlled fallback to QuPath's application ClassLoader where appropriate.",
+      "Use the full bundle namespace for external localization lookup, for example qupath/ext/instanseg/ui/strings_es.properties, rather than flattening all bundles to strings_es.properties.",
+      "Preserve the existing external lookup behavior for the QuPath main bundle so current installations are not broken.",
+      "Keep the API read-only with respect to locale preferences and external files.",
+      "Add tests for DISPLAY selection, extension ClassLoader visibility, namespaced external overrides, collision isolation, missing-resource fallback, and legacy main-bundle compatibility."
+    ],
+    "non_goals": [
+      "Do not vendor extension source into qupath-es.",
+      "Do not patch installed JAR files.",
+      "Do not change measurement names, PathClass identifiers, model identifiers, parameter keys, FORMAT locale, or global default locale.",
+      "Do not create a permanent QuPath fork before upstream direction is known."
+    ]
+  },
+  "acceptance_gate_before_code": {
+    "required": true,
+    "condition": "A QuPath core maintainer confirms the preferred API shape or provides equivalent implementation direction in the existing internationalization discussion or another upstream channel.",
+    "next_action": "POST_TECHNICAL_PROPOSAL_TO_EXISTING_FORUM_DISCUSSION"
+  },
+  "upstream_issue_url": null,
+  "upstream_pr_url": null,
+  "source_audit": "versions/0.7.0/reports/ecosystem-repository-architecture-audit.md"
+}
