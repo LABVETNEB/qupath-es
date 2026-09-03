@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "component_id": "instanseg",
+  "localization_revision": "v0.1.7",
+  "evidence": [
+    {
+      "commit": "90b260157f51f137201e11061b912b552c8b444f",
+      "files": {
+        "src/main/resources/qupath/ext/instanseg/ui/strings.properties": "72ae3eab9ddc9317efd6d7afc0e5d814f8bcf697",
+        "src/main/java/qupath/ext/instanseg/core/InstanSegModel.java": "c42d1b64da63ccda7a85758c7091f70f39abbfc6",
+        "src/main/java/qupath/ext/instanseg/core/InstanSegOutputToObjectConverter.java": "74381ec734200e0a79ff5093bf328474eb09cef6"
+      }
+    }
+  ],
+  "inventory_status": "PARTIAL",
+  "rules": [
+    {
+      "category": "MODEL_IDENTIFIER",
+      "value": "InstanSeg",
+      "match": "CONTAINS",
+      "evidence_paths": [
+        "src/main/resources/qupath/ext/instanseg/ui/strings.properties"
+      ]
+    },
+    {
+      "category": "ENGINE",
+      "value": "PyTorch",
+      "match": "CONTAINS",
+      "evidence_paths": [
+        "src/main/resources/qupath/ext/instanseg/ui/strings.properties"
+      ]
+    },
+    {
+      "category": "MODEL_IO_NODE",
+      "value": "instance_segmentation",
+      "match": "CONTAINS",
+      "evidence_paths": [
+        "src/main/java/qupath/ext/instanseg/core/InstanSegModel.java"
+      ]
+    },
+    {
+      "category": "MODEL_IO_NODE",
+      "value": "detection_embeddings",
+      "match": "CONTAINS",
+      "evidence_paths": [
+        "src/main/java/qupath/ext/instanseg/core/InstanSegModel.java"
+      ]
+    },
+    {
+      "category": "MODEL_IO_NODE",
+      "value": "detection_logits",
+      "match": "CONTAINS",
+      "evidence_paths": [
+        "src/main/java/qupath/ext/instanseg/core/InstanSegModel.java",
+        "src/main/java/qupath/ext/instanseg/core/InstanSegOutputToObjectConverter.java"
+      ]
+    },
+    {
+      "category": "MODEL_IO_NODE",
+      "value": "detection_classes",
+      "match": "CONTAINS",
+      "evidence_paths": [
+        "src/main/java/qupath/ext/instanseg/core/InstanSegModel.java",
+        "src/main/java/qupath/ext/instanseg/core/InstanSegOutputToObjectConverter.java"
+      ]
+    },
+    {
+      "category": "MODEL_IO_NODE",
+      "value": "semantic_segmentation",
+      "match": "CONTAINS",
+      "evidence_paths": [
+        "src/main/java/qupath/ext/instanseg/core/InstanSegModel.java"
+      ]
+    },
+    {
+      "category": "MEASUREMENT_NAME",
+      "value": "Logit: ",
+      "match": "PREFIX",
+      "evidence_paths": [
+        "src/main/java/qupath/ext/instanseg/core/InstanSegOutputToObjectConverter.java"
+      ]
+    },
+    {
+      "category": "MEASUREMENT_NAME",
+      "value": "Embedding ",
+      "match": "PREFIX",
+      "evidence_paths": [
+        "src/main/java/qupath/ext/instanseg/core/InstanSegOutputToObjectConverter.java"
+      ]
+    },
+    {
+      "category": "FILE_NAME",
+      "value": "instanseg.pt",
+      "match": "CONTAINS",
+      "evidence_paths": [
+        "src/main/java/qupath/ext/instanseg/core/InstanSegModel.java"
+      ]
+    },
+    {
+      "category": "FILE_NAME",
+      "value": "rdf.yaml",
+      "match": "CONTAINS",
+      "evidence_paths": [
+        "src/main/java/qupath/ext/instanseg/core/InstanSegModel.java"
+      ]
+    }
+  ]
+}
