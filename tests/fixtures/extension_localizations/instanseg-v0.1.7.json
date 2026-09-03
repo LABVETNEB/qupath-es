@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "component_id": "instanseg",
+  "revision": "v0.1.7",
+  "source_bundle_path": "src/main/resources/qupath/ext/instanseg/ui/strings.properties",
+  "dist_bundle": "dist/strings_es.properties",
+  "expected_keys": 97,
+  "expected_key_sha256": "84407af23fbcb938f05ed4e736ebbe63ae75c85295c2e091e3c3ba035a8029e1",
+  "expected_source_signature_sha256": "d728553095cc0f48f99e302fd355cc0a619bd11329299ea8d78c4d35d723ad24",
+  "expected_state_counts": {
+    "DRAFT": 94,
+    "KEEP_EN": 3
+  },
+  "expected_keep_en_keys": [
+    "title",
+    "extension.qupath.version",
+    "ui.processing.pane"
+  ],
+  "expected_row_metadata": {
+    "batch": "INSTANSEG-ES-v0.1.7",
+    "reviewer": "ChatGPT",
+    "rev_date": "2026-09-03",
+    "qupath_ver": "0.7.0",
+    "issues": ""
+  }
+}
