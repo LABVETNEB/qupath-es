@@ -38,6 +38,10 @@
       "type": "string",
       "pattern": "^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
     },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9A-F]{64}$"
+    },
     "nullableString": {
       "type": [
         "string",
@@ -56,6 +60,16 @@
         }
       ]
     },
+    "nullableSha256": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/sha256"
+        }
+      ]
+    },
     "localizationState": {
       "type": "object",
       "additionalProperties": false,
@@ -65,6 +79,7 @@
         "revision",
         "source_of_truth",
         "dist_bundle",
+        "dist_sha256",
         "translation_status",
         "validation_status",
         "distribution_status"
@@ -85,6 +100,9 @@
         },
         "dist_bundle": {
           "$ref": "#/$defs/nullableRepoPath"
+        },
+        "dist_sha256": {
+          "$ref": "#/$defs/nullableSha256"
         },
         "translation_status": {
           "enum": [
@@ -128,6 +146,9 @@
               "dist_bundle": {
                 "type": "null"
               },
+              "dist_sha256": {
+                "type": "null"
+              },
               "validation_status": {
                 "const": "NOT_APPLICABLE"
               },
@@ -159,6 +180,9 @@
                 "type": "string",
                 "minLength": 1,
                 "pattern": "^(components|versions)/"
+              },
+              "dist_sha256": {
+                "$ref": "#/$defs/sha256"
               }
             }
           }
