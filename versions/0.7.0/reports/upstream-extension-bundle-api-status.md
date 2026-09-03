@@ -6,11 +6,13 @@ PR6 no implementa Java dentro de `qupath-es`. Su destino es **`qupath/qupath`**.
 
 ## Estado
 
-- Estado: **`DISCUSSION_REQUIRED`**.
+- Estado: **`UPSTREAM_ISSUE_OPEN`**.
 - Implementación upstream: **no iniciada**.
 - Repositorio upstream: `qupath/qupath`.
 - `main` observado: `67cbf619996582f8737550080cd05c6e52b37b13`.
 - `QuPathResources.java` observado: blob `6143911c4eff5eccf72567d1d34858a461644738`.
+- Issue upstream: <https://github.com/qupath/qupath/issues/2190>.
+- Estado del issue upstream: **OPEN**.
 - PR upstream: ninguno todavía.
 - Fork de QuPath: ninguno.
 - Patch de QuPath: ninguno.
@@ -24,7 +26,7 @@ Además, el propio mantenedor Pete Bankhead remitió una consulta de traducción
 - <https://forum.image.sc/t/qupath-internationalize-multi-language-support/77468>
 - referencia GitHub: <https://github.com/qupath/qupath/issues/1609#issuecomment-2316693891>
 
-No se abrió un issue GitHub duplicado. La sesión actual tampoco dispone de una integración autenticada con image.sc/Discourse para publicar en nombre de LABVETNEB. Por tanto, el siguiente gate es **publicar la propuesta técnica en la discusión existente y obtener dirección del equipo Core**.
+Después de verificar que no existía un issue o PR técnico equivalente, LABVETNEB publicó la propuesta técnica upstream como **qupath/qupath#2190**: <https://github.com/qupath/qupath/issues/2190>. El issue enlaza la discusión internacional previa y solicita dirección del equipo Core antes de preparar el cambio Java.
 
 ## Problema reproducido sobre `main`
 
@@ -71,7 +73,7 @@ PR6 no debe:
 
 ## Gate siguiente
 
-**`POST_TECHNICAL_PROPOSAL_TO_EXISTING_FORUM_DISCUSSION`**.
+**`AWAIT_MAINTAINER_DIRECTION_ON_ISSUE_2190`**.
 
 Sólo después de una respuesta del equipo Core que acepte la dirección general —o indique una API alternativa equivalente— debe empezar el código de `qupath/qupath`.
 
