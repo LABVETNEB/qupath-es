@@ -1,0 +1,67 @@
+key	en	es	state	batch	reviewer	rev_date	qupath_ver	issues	notes
+name	DL Pixel Classifier	DL Pixel Classifier	KEEP_EN	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+description	Deep learning pixel classifier for QuPath supporting multi-channel and multi-bit-depth images.	Clasificador de píxeles mediante aprendizaje profundo para QuPath compatible con imágenes multicanal y con múltiples profundidades de bits.	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+menu.training	Train DL Pixel Classifier...	Entrenar DL Pixel Classifier...	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+menu.inference	Apply DL Pixel Classifier...	Aplicar DL Pixel Classifier...	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+menu.manageModels	Manage Classifiers...	Gestionar clasificadores...	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+menu.toggleOverlay	Toggle Prediction Overlay	Alternar superposición de predicción	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+menu.removeOverlay	Remove Classification Overlay	Eliminar superposición de clasificación	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+menu.setupEnvironment	Setup DL Environment...	Configurar entorno DL...	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+menu.rebuildEnvironment	Rebuild DL Environment...	Reconstruir entorno DL...	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+menu.pythonConsole	Python Console	Consola de Python	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.title	DL Pixel Classifier - Environment Setup	DL Pixel Classifier - Configuración del entorno	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.description	This extension requires a Python environment with PyTorch and related deep learning libraries.	Esta extensión requiere un entorno de Python con PyTorch y bibliotecas relacionadas de aprendizaje profundo.	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.downloadWarning	First-time setup will download approximately 2-4 GB of data. This requires an internet connection.	La configuración inicial descargará aproximadamente 2-4 GB de datos. Se requiere una conexión a Internet.	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.meteredWarning	If you are on a metered connection, be aware this will use significant data.	Si utiliza una conexión de uso medido, tenga en cuenta que esto consumirá una cantidad significativa de datos.	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.onnxOption	ONNX export support (~200 MB)	Compatibilidad con exportación ONNX (~200 MB)	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.onnxDescription	Allows exporting trained models to ONNX format for deployment outside QuPath.	Permite exportar modelos entrenados al formato ONNX para utilizarlos fuera de QuPath.	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.envLocation	Environment location:	Ubicación del entorno:	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.beginSetup	Begin Setup	Iniciar configuración	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.inProgress	Setting up Python environment...	Configurando el entorno de Python...	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.complete	Environment setup complete!	¡Configuración del entorno completada!	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.completeDetail	The DL Pixel Classifier is ready to use.\nTraining and inference options are now available in the Extensions menu.	DL Pixel Classifier está listo para usar.\nLas opciones de entrenamiento e inferencia ya están disponibles en el menú Extensiones.	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.failed	Environment setup failed	Error al configurar el entorno	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+setup.retry	Retry	Reintentar	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+dialog.training.title	Train DL Pixel Classifier	Entrenar DL Pixel Classifier	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+dialog.inference.title	Apply DL Pixel Classifier	Aplicar DL Pixel Classifier	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+dialog.models.title	Manage Classifiers	Gestionar clasificadores	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+dialog.channels.title	Channel Configuration	Configuración de canales	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+dialog.progress.title	Classification Progress	Progreso de la clasificación	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.classes	Classification Classes	Clases de clasificación	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.annotationClasses	Use annotations with these classes:	Usar anotaciones con estas clases:	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.modelType	Model Architecture	Arquitectura del modelo	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.epochs	Training Epochs	Épocas de entrenamiento	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.batchSize	Batch Size	Tamaño del lote	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.tileSize	Tile Size	Tamaño del mosaico	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.overlap	Tile Overlap %	Solapamiento de mosaicos %	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.learningRate	Learning Rate	Tasa de aprendizaje	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.transferLearning	Transfer Learning	Aprendizaje por transferencia	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.freezeLayers	Freeze Layers	Congelar capas	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.augmentation	Data Augmentation	Aumento de datos	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.start	Start Training	Iniciar entrenamiento	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+training.validation	Validation Split %	División de validación %	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+inference.classifier	Select Classifier	Seleccionar clasificador	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+inference.outputType	Output Type	Tipo de salida	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+inference.measurements	Add Measurements	Añadir mediciones	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+inference.objects	Create Objects	Crear objetos	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+inference.overlay	Classification Overlay	Superposición de clasificación	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+inference.minObjectSize	Min Object Size (um)	Tamaño mínimo de objeto (um)	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+inference.holeFilling	Hole Filling (um)	Relleno de huecos (um)	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+inference.smoothing	Boundary Smoothing	Suavizado de contornos	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+channels.available	Available Channels	Canales disponibles	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+channels.selected	Selected Channels	Canales seleccionados	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+channels.normalization	Normalization Strategy	Estrategia de normalización	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+channels.minMax	Min-Max	Min-Max	KEEP_EN	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+channels.percentile	Percentile (99th)	Percentil (99.º)	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+channels.zScore	Z-Score	Z-Score	KEEP_EN	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+channels.fixed	Fixed Range	Rango fijo	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+progress.training	Training classifier...	Entrenando clasificador...	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+progress.inference	Applying classifier...	Aplicando clasificador...	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+progress.tiles	Processing tiles...	Procesando mosaicos...	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+progress.exporting	Exporting training data...	Exportando datos de entrenamiento...	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+progress.importing	Importing results...	Importando resultados...	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+error.noAnnotations	No annotations found for training. Please create annotations with the specified classes.	No se encontraron anotaciones para el entrenamiento. Cree anotaciones con las clases especificadas.	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+error.backendUnavailable	DL classification backend not available. Use Setup DL Environment to install.	El backend de clasificación DL no está disponible. Utilice Configurar entorno DL para instalarlo.	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+error.noClassifier	No classifier selected. Please train or load a classifier first.	No se seleccionó ningún clasificador. Entrene o cargue primero un clasificador.	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+error.noImage	No image is currently open.	No hay ninguna imagen abierta actualmente.	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
+error.channelMismatch	Channel mismatch: classifier expects {0} channels but image has {1}.	Incompatibilidad de canales: el clasificador espera {0} canales, pero la imagen tiene {1}.	DRAFT	DLPIXEL-ES-v0.8.5	ChatGPT	2026-09-03	0.7.0		
