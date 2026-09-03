@@ -3,7 +3,7 @@
   "record_type": "UPSTREAM_CHANGE_STATUS",
   "roadmap_pr": 6,
   "title": "QuPath extension ResourceBundle API",
-  "status": "DISCUSSION_REQUIRED",
+  "status": "UPSTREAM_ISSUE_OPEN",
   "implementation_status": "NOT_STARTED",
   "upstream_repository": "qupath/qupath",
   "upstream_default_branch": "main",
@@ -23,8 +23,8 @@
     "existing_discussion_url": "https://forum.image.sc/t/qupath-internationalize-multi-language-support/77468",
     "existing_discussion_discovered_via_issue": "https://github.com/qupath/qupath/issues/1609",
     "maintainer_reference_comment": "https://github.com/qupath/qupath/issues/1609#issuecomment-2316693891",
-    "labvetneb_post_status": "NOT_POSTED",
-    "reason_not_posted": "No authenticated image.sc/Discourse integration is available in the current execution environment; creating a duplicate GitHub issue would contradict the maintainer's explicit routing to the existing forum discussion."
+    "labvetneb_post_status": "POSTED_VIA_GITHUB_ISSUE",
+    "reason_not_posted": null
   },
   "duplicate_search": {
     "github_issue_queries": [
@@ -69,9 +69,12 @@
   "acceptance_gate_before_code": {
     "required": true,
     "condition": "A QuPath core maintainer confirms the preferred API shape or provides equivalent implementation direction in the existing internationalization discussion or another upstream channel.",
-    "next_action": "POST_TECHNICAL_PROPOSAL_TO_EXISTING_FORUM_DISCUSSION"
+    "next_action": "AWAIT_MAINTAINER_DIRECTION_ON_ISSUE_2190"
   },
-  "upstream_issue_url": null,
+  "upstream_issue_url": "https://github.com/qupath/qupath/issues/2190",
+  "upstream_issue_number": 2190,
+  "upstream_issue_state": "OPEN",
+  "upstream_issue_author": "LABVETNEB",
   "upstream_pr_url": null,
   "source_audit": "versions/0.7.0/reports/ecosystem-repository-architecture-audit.md"
 }
