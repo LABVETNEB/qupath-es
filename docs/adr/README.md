@@ -9,6 +9,7 @@ Los ADRs registran decisiones estructurales que no deben cambiar de forma implí
 | [ADR-0003](0003-no-vendoring-satellite-forks.md) | Aceptado | No vendorizar código upstream; forks satélite sólo si son necesarios |
 | [ADR-0004](0004-language-axis.md) | Aceptado | Separar el estado lingüístico por `(component_id, locale)` |
 | [ADR-0005](0005-reproducible-release-artifacts.md) | Aceptado | Construir paquetes de release reproducibles y verificables desde blobs Git |
+| [ADR-0006](0006-tag-gated-release-publication.md) | Aceptado | Publicar sólo desde tags contenidos en `main`, con provenance attestation verificable |
 
 ## Regla de mantenimiento
 
