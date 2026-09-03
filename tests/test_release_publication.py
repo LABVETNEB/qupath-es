@@ -39,6 +39,16 @@ def git_text(root: Path, *args: str) -> str:
     return result.stdout.decode("utf-8", errors="strict").strip()
 
 
+def git_bytes(root: Path, repo_path: str) -> bytes:
+    result = subprocess.run(
+        ["git", "-C", str(root), "show", f"HEAD:{repo_path}"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=True,
+    )
+    return result.stdout
+
+
 def run_git(root: Path, *args: str) -> None:
     subprocess.run(
         ["git", "-C", str(root), *args],
@@ -56,8 +66,9 @@ class ReleasePublicationTests(unittest.TestCase):
 
     def test_new_release_files_are_strict_utf8_without_bom_and_use_lf(self):
         for path in (WORKFLOW, GUARD, RELEASING_DOC, ADR, ADR_INDEX):
-            with self.subTest(path=path):
-                raw = path.read_bytes()
+            repo_path = path.relative_to(ROOT).as_posix()
+            with self.subTest(path=repo_path):
+                raw = git_bytes(ROOT, repo_path)
                 self.assertFalse(raw.startswith(b"\xef\xbb\xbf"))
                 raw.decode("utf-8", errors="strict")
                 self.assertNotIn(b"\r", raw)
