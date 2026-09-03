@@ -329,9 +329,12 @@ class UpstreamWatchTests(unittest.TestCase):
 
         result = upstream_watch.watch_component(manifest, api)
 
-        self.assertEqual(result["status"], upstream_watch.STATUS_DRIFT)
+        self.assertEqual(result["status"], upstream_watch.STATUS_UNKNOWN)
+        self.assertIsNone(result["relevant_drift"])
+        self.assertEqual(result["action"], "INVESTIGATE")
         self.assertFalse(result["analysis_complete"])
         self.assertTrue(result["warnings"])
+        self.assertIn("truncated", result["error"])
 
     def test_summary_counts_status_and_relevant_drift_independently(self) -> None:
         results = [
