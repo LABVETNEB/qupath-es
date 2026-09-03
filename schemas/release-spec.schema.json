@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "qupath-es reproducible release specification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "qupath_version",
+    "locale",
+    "artifact_basename",
+    "payload"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "qupath_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+][A-Za-z0-9.-]+)?$"
+    },
+    "locale": {
+      "$ref": "#/$defs/locale"
+    },
+    "artifact_basename": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "payload": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/payloadEntry"
+      }
+    }
+  },
+  "$defs": {
+    "locale": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+    },
+    "componentId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "nullableComponentId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "repoPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._/-]+$"
+    },
+    "payloadEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "role",
+        "component_id"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/repoPath"
+        },
+        "role": {
+          "enum": [
+            "DOCUMENTATION",
+            "LICENSE",
+            "NOTICE",
+            "RUNTIME",
+            "TOOL",
+            "METADATA",
+            "CANONICAL_BASE",
+            "LOCALIZATION_SOURCE",
+            "LOCALIZATION_BUNDLE"
+          ]
+        },
+        "component_id": {
+          "$ref": "#/$defs/nullableComponentId"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "role": {
+                "const": "LOCALIZATION_BUNDLE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "component_id": {
+                "$ref": "#/$defs/componentId"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

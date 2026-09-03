@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "qupath_version": "0.7.0",
+  "locale": "es",
+  "artifact_basename": "qupath-es-0.7.0-es",
+  "payload": [
+    {
+      "path": "README.md",
+      "role": "DOCUMENTATION",
+      "component_id": null
+    },
+    {
+      "path": "LICENSE",
+      "role": "LICENSE",
+      "component_id": null
+    },
+    {
+      "path": "NOTICE.md",
+      "role": "NOTICE",
+      "component_id": null
+    },
+    {
+      "path": "docs/QUICK_START.md",
+      "role": "DOCUMENTATION",
+      "component_id": null
+    },
+    {
+      "path": "docs/INSTALLATION.md",
+      "role": "DOCUMENTATION",
+      "component_id": null
+    },
+    {
+      "path": "docs/REPAIR.md",
+      "role": "DOCUMENTATION",
+      "component_id": null
+    },
+    {
+      "path": "docs/TROUBLESHOOTING.md",
+      "role": "DOCUMENTATION",
+      "component_id": null
+    },
+    {
+      "path": "docs/UNINSTALL.md",
+      "role": "DOCUMENTATION",
+      "component_id": null
+    },
+    {
+      "path": "docs/UPDATING_QUPATH_ES.md",
+      "role": "DOCUMENTATION",
+      "component_id": null
+    },
+    {
+      "path": "runtime/update-qupath-es.ps1",
+      "role": "RUNTIME",
+      "component_id": null
+    },
+    {
+      "path": "runtime/probe-locale-capability.groovy",
+      "role": "RUNTIME",
+      "component_id": null
+    },
+    {
+      "path": "tools/properties_audit.py",
+      "role": "TOOL",
+      "component_id": null
+    },
+    {
+      "path": "tools/qupath_version_migrator.py",
+      "role": "TOOL",
+      "component_id": null
+    },
+    {
+      "path": "tools/translation_generator.py",
+      "role": "TOOL",
+      "component_id": null
+    },
+    {
+      "path": "tools/translation_validator.py",
+      "role": "TOOL",
+      "component_id": null
+    },
+    {
+      "path": "versions/supported-versions.json",
+      "role": "METADATA",
+      "component_id": null
+    },
+    {
+      "path": "versions/0.7.0/base/MANIFEST.MF",
+      "role": "CANONICAL_BASE",
+      "component_id": null
+    },
+    {
+      "path": "versions/0.7.0/base/qupath-gui-strings.properties",
+      "role": "CANONICAL_BASE",
+      "component_id": null
+    },
+    {
+      "path": "versions/0.7.0/base/qupath-gui-strings_en.properties",
+      "role": "CANONICAL_BASE",
+      "component_id": null
+    },
+    {
+      "path": "versions/0.7.0/dist/qupath-gui-strings_es.properties",
+      "role": "LOCALIZATION_BUNDLE",
+      "component_id": "qupath-core"
+    },
+    {
+      "path": "versions/0.7.0/fingerprint.json",
+      "role": "METADATA",
+      "component_id": null
+    },
+    {
+      "path": "versions/0.7.0/target-version.json",
+      "role": "METADATA",
+      "component_id": null
+    },
+    {
+      "path": "versions/0.7.0/work/translation.tsv",
+      "role": "LOCALIZATION_SOURCE",
+      "component_id": null
+    },
+    {
+      "path": "versions/0.7.0/runtime/qupath-es-startup.groovy",
+      "role": "RUNTIME",
+      "component_id": null
+    },
+    {
+      "path": "versions/0.7.0/runtime/setup-es-preferences.groovy",
+      "role": "RUNTIME",
+      "component_id": null
+    }
+  ]
+}

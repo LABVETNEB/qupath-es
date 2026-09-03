@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "qupath-es release manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "release_tag",
+    "source_repository",
+    "source_commit",
+    "source_date_epoch",
+    "qupath_version",
+    "locale",
+    "artifact",
+    "sbom",
+    "checksums_filename",
+    "payload"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "release_tag": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+    },
+    "source_repository": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "source_date_epoch": {
+      "type": "integer"
+    },
+    "qupath_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+][A-Za-z0-9.-]+)?$"
+    },
+    "locale": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+    },
+    "artifact": {
+      "$ref": "#/$defs/outputFile"
+    },
+    "sbom": {
+      "$ref": "#/$defs/sbomFile"
+    },
+    "checksums_filename": {
+      "$ref": "#/$defs/filename"
+    },
+    "payload": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/payloadFile"
+      }
+    }
+  },
+  "$defs": {
+    "filename": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9A-F]{64}$"
+    },
+    "nullableComponentId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "role": {
+      "enum": [
+        "DOCUMENTATION",
+        "LICENSE",
+        "NOTICE",
+        "RUNTIME",
+        "TOOL",
+        "METADATA",
+        "CANONICAL_BASE",
+        "LOCALIZATION_SOURCE",
+        "LOCALIZATION_BUNDLE"
+      ]
+    },
+    "outputFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "filename",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "filename": {
+          "$ref": "#/$defs/filename"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer"
+        }
+      }
+    },
+    "sbomFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "filename",
+        "format",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "filename": {
+          "$ref": "#/$defs/filename"
+        },
+        "format": {
+          "const": "SPDX-2.3-json"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer"
+        }
+      }
+    },
+    "payloadFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_path",
+        "archive_path",
+        "role",
+        "component_id",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "source_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "archive_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "$ref": "#/$defs/role"
+        },
+        "component_id": {
+          "$ref": "#/$defs/nullableComponentId"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
