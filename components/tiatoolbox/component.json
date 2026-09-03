@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "component_id": "tiatoolbox",
+  "repository": "TissueImageAnalytics/tiatoolbox-qupath-extension",
+  "manifest_role": "COMPONENT_MANIFEST",
+  "audit_policy": {
+    "relevant_paths": [
+      "settings.gradle.kts",
+      "build.gradle.kts",
+      "gradle/libs.versions.toml",
+      "src/main/java/**",
+      "src/main/resources/**",
+      "src/main/groovy/**",
+      "src/main/python/**",
+      "src/main/scripts/**"
+    ],
+    "bundle_paths": [
+      "src/main/resources/qupath/ext/tiatoolbox/ui/strings.properties"
+    ],
+    "protected_identifier_categories": [
+      "JAVA_CLASS",
+      "JAVA_PACKAGE",
+      "METHOD",
+      "VARIABLE",
+      "INTERNAL_ENUM",
+      "FILE_NAME",
+      "PATH",
+      "SERIALIZED_KEY",
+      "CONFIGURATION_KEY",
+      "CLI_ARGUMENT",
+      "CLI_FLAG",
+      "MODEL_IDENTIFIER",
+      "CHECKPOINT",
+      "ENGINE",
+      "MODEL_ARCHITECTURE",
+      "MEASUREMENT_NAME",
+      "PATHCLASS",
+      "PARAMETER_KEY",
+      "FUNCTION_NAME",
+      "SCRIPT_COMMAND",
+      "IMPORT",
+      "URL",
+      "HASH",
+      "UUID",
+      "ARTIFACT_NAME",
+      "FILE_EXTENSION",
+      "TENSOR_NAME",
+      "MODEL_IO_NODE",
+      "MODEL_WEIGHT"
+    ],
+    "explicit_protected_identifiers": [],
+    "explicit_identifier_inventory_status": "NOT_ENUMERATED_IN_INITIAL_AUDIT"
+  },
+  "fork_policy": {
+    "strategy": "SATELLITE_ONLY_IF_REQUIRED",
+    "repository": null,
+    "patches_live_in_qupath_es": true,
+    "source_code_vendored_here": false
+  },
+  "initial_audit": {
+    "upstream_commit": "cb942b774c5b1f7340cfbb036687e0724adaaedd",
+    "snapshot": "audits/cb942b774c5b1f7340cfbb036687e0724adaaedd.json"
+  }
+}

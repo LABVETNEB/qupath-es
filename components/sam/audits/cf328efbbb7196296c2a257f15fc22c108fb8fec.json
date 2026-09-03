@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "snapshot_type": "UPSTREAM_COMPONENT_AUDIT",
+  "component_id": "sam",
+  "repository": "ksugar/qupath-extension-sam",
+  "default_branch": "main",
+  "upstream_commit": "cf328efbbb7196296c2a257f15fc22c108fb8fec",
+  "upstream_commit_date": "2026-02-15T15:42:53Z",
+  "audited_at": "2026-09-03T02:46:12+00:00",
+  "latest_release_or_tag": "v0.9.1",
+  "qupath_compatibility": {
+    "declared_api_version": "0.6.0",
+    "verified_against_0_7_0_at_runtime": "NOT_VERIFIED",
+    "bundled_in_qupath_0_7_0_install": null
+  },
+  "resource_bundle_status": {
+    "has_resource_bundle": false,
+    "bundles": [],
+    "total_bundle_keys": 0
+  },
+  "parameterlist_status": {
+    "files_matching_ParameterList": 0,
+    "assessment": "NONE_FOUND"
+  },
+  "pathclass_status": {
+    "files_matching_PathClass": 8
+  },
+  "hardcoded_ui_status": "FULLY_HARDCODED",
+  "translation_mechanism": {
+    "resolution": "NO_RESOURCE_BUNDLE",
+    "reachable_by_external_localization_directory": false,
+    "display_category_aware": false
+  },
+  "localization_strategy_class": "TRANSLATABLE_ONLY_AFTER_STRING_EXTERNALISATION",
+  "fork_required": true,
+  "patch_required": true,
+  "audit_status": "AUDITED",
+  "translation_status": "NOT_STARTED",
+  "validation_status": "NOT_APPLICABLE",
+  "distribution_status": "UNSUPPORTED",
+  "unknowns": [
+    "Comportamiento en tiempo de ejecucion sobre QuPath 0.7.0 no verificado por ejecucion (auditoria estatica)",
+    "Reparto visible/interno de las constantes de cadena hardcoded no enumerado fichero a fichero",
+    "Nombres de mediciones y literales PathClass no enumerados fichero a fichero"
+  ],
+  "source_report": {
+    "path": "versions/0.7.0/reports/ecosystem-repository-architecture-audit.json",
+    "repository_head": "120eb53b1c48571cdb828fbb985ed260c728b163",
+    "audit_generated_at": "2026-09-03T02:51:59+00:00"
+  }
+}
